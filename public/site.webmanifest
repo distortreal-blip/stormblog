@@ -1,0 +1,21 @@
+{
+  "name": "Storm Cloud Blog",
+  "short_name": "Storm Blog",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090b10",
+  "theme_color": "#090b10",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "/favicon.svg?v=20260410",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon.ico?v=20260410",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

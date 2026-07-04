@@ -1,95 +1,44 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
-<!doctype html>
-<html lang="ru">
-	<head>
-		<BaseHead title={`О блоге — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
-		<style>
-			.about-hero {
-				margin-bottom: 2rem;
-				padding: 2rem;
-				border: 1px solid var(--border);
-				border-radius: 14px;
-				background: linear-gradient(145deg, rgba(34, 211, 238, 0.06), rgba(37, 99, 235, 0.04));
-			}
+<BaseLayout title="О блоге" description={SITE_DESCRIPTION}>
+	<section class="hero-panel fade-in">
+		<span class="section-kicker">О проекте</span>
+		<h1 class="hero-title">О блоге Storm Cloud</h1>
+		<p class="hero-subtitle">
+			Практический блог о VPS, серверах, облаках и инфраструктуре. Без воды и лишней теории — только то,
+			что помогает быстрее запускать проекты, безопаснее администрировать серверы и не переплачивать за
+			ресурсы.
+		</p>
+	</section>
 
-			.about-hero h1 {
-				margin-bottom: 0.75rem;
-			}
+	<div class="about-grid content-section">
+		<section class="about-card">
+			<h2>О чём пишем</h2>
+			<p>
+				Выбор VPS, сравнение с обычным хостингом, первые шаги после запуска сервера, безопасность,
+				DevOps-практики, почасовая аренда и инфраструктура для разработчиков.
+			</p>
+		</section>
 
-			.about-hero p {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
+		<section class="about-card">
+			<h2>Для кого</h2>
+			<p>
+				Для разработчиков, фрилансеров, владельцев небольших проектов и всех, кто хочет понимать
+				серверную часть без погружения в академические учебники.
+			</p>
+		</section>
 
-			.about-grid {
-				display: grid;
-				gap: 1rem;
-			}
-
-			.about-card {
-				padding: 1.25rem 1.35rem;
-				border: 1px solid var(--border);
-				border-radius: 12px;
-				background: var(--bg-card);
-			}
-
-			.about-card h2 {
-				margin-bottom: 0.5rem;
-				font-size: 1.1rem;
-				color: var(--accent);
-			}
-
-			.about-card p:last-child {
-				margin-bottom: 0;
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<div class="about-hero">
-				<h1>О блоге Storm Cloud</h1>
-				<p>
-					Это практический блог о VPS, серверах, облаках и инфраструктуре. Без воды и лишней теории —
-					только то, что помогает быстрее запускать проекты, безопаснее администрировать серверы и
-					не переплачивать за ресурсы.
-				</p>
-			</div>
-
-			<div class="about-grid">
-				<section class="about-card">
-					<h2>О чём пишем</h2>
-					<p>
-						Выбор VPS, сравнение с обычным хостингом, первые шаги после запуска сервера, безопасность,
-						DevOps-практики, почасовая аренда и инфраструктура для разработчиков.
-					</p>
-				</section>
-
-				<section class="about-card">
-					<h2>Для кого</h2>
-					<p>
-						Для разработчиков, фрилансеров, владельцев небольших проектов и всех, кто хочет понимать
-						серверную часть без погружения в академические учебники.
-					</p>
-				</section>
-
-				<section class="about-card">
-					<h2>StormNet Cloud</h2>
-					<p>
-						Блог связан с сервисом <a href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">StormNet Cloud</a>.
-						Если нужен VPS для тестов, проекта или продакшена — можно
-						<a href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">арендовать сервер</a>
-						на основном сайте.
-					</p>
-				</section>
-			</div>
-		</main>
-		<Footer />
-	</body>
-</html>
+		<section class="about-card">
+			<h2>StormNet Cloud</h2>
+			<p>
+				Блог связан с сервисом <a href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">StormNet Cloud</a>.
+				Если нужен VPS для тестов, проекта или продакшена — можно
+				<a href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">арендовать сервер</a>
+				на основном сайте.
+			</p>
+		</section>
+	</div>
+</BaseLayout>

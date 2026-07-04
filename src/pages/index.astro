@@ -1,9 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 const posts = (await getCollection('blog'))
@@ -11,194 +9,44 @@ const posts = (await getCollection('blog'))
 	.slice(0, 3);
 ---
 
-<!doctype html>
-<html lang="ru">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			.hero {
-				padding: 2.5rem 0 1rem;
-				text-align: center;
-			}
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<section class="hero-panel fade-in">
+		<span class="section-kicker">Storm Cloud Blog</span>
+		<h1 class="hero-title">Практика про VPS, серверы и облака</h1>
+		<p class="hero-subtitle">{SITE_DESCRIPTION}</p>
+		<div class="hero-actions">
+			<a class="auth-btn" href="/blog">Читать статьи</a>
+			<a class="choose-btn" href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">
+				Арендовать VPS
+			</a>
+		</div>
+		<div class="hero-tags">
+			<span class="hero-tag">VPS</span>
+			<span class="hero-tag">DevOps</span>
+			<span class="hero-tag">Безопасность</span>
+			<span class="hero-tag">Облака</span>
+			<span class="hero-tag">Инфраструктура</span>
+			<span class="hero-tag">Почасовая аренда</span>
+		</div>
+	</section>
 
-			.hero-badge {
-				display: inline-block;
-				margin-bottom: 1rem;
-				padding: 0.35rem 0.85rem;
-				border: 1px solid var(--border);
-				border-radius: 999px;
-				background: var(--accent-glow);
-				color: var(--accent);
-				font-size: 0.8rem;
-				font-weight: 700;
-				letter-spacing: 0.04em;
-				text-transform: uppercase;
-			}
-
-			.hero h1 {
-				margin-bottom: 0.75rem;
-				font-size: clamp(2rem, 5vw, 2.75rem);
-			}
-
-			.hero p {
-				max-width: 36rem;
-				margin: 0 auto 1.5rem;
-				color: rgb(var(--gray));
-				font-size: 1.05rem;
-			}
-
-			.hero-actions {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: center;
-				gap: 0.75rem;
-			}
-
-			.btn {
-				display: inline-flex;
-				align-items: center;
-				padding: 0.65rem 1.25rem;
-				border-radius: 999px;
-				font-weight: 700;
-				font-size: 0.95rem;
-				transition:
-					background 0.2s ease,
-					color 0.2s ease,
-					border-color 0.2s ease;
-			}
-
-			.btn-primary {
-				background: linear-gradient(135deg, #0891b2, #2563eb);
-				color: #ecfeff;
-			}
-
-			.btn-primary:hover {
-				color: #fff;
-				filter: brightness(1.08);
-			}
-
-			.btn-secondary {
-				border: 1px solid var(--border);
-				background: var(--bg-card);
-				color: rgb(var(--gray-dark));
-			}
-
-			.btn-secondary:hover {
-				border-color: rgba(34, 211, 238, 0.35);
-				color: var(--accent);
-			}
-
-			.section-title {
-				margin: 2.5rem 0 1.25rem;
-				font-size: 1.35rem;
-			}
-
-			.post-list {
-				display: grid;
-				gap: 1rem;
-				list-style: none;
-				margin: 0;
-				padding: 0;
-			}
-
-			.post-card {
-				border: 1px solid var(--border);
-				border-radius: 12px;
-				background: var(--bg-card);
-				transition:
-					border-color 0.2s ease,
-					box-shadow 0.2s ease;
-			}
-
-			.post-card:hover {
-				border-color: rgba(34, 211, 238, 0.35);
-				box-shadow: var(--box-shadow);
-			}
-
-			.post-card a {
-				display: block;
-				padding: 1.25rem 1.35rem;
-				text-decoration: none;
-			}
-
-			.post-card h3 {
-				margin: 0 0 0.5rem;
-				color: rgb(var(--black));
-				font-size: 1.15rem;
-				transition: color 0.2s ease;
-			}
-
-			.post-card:hover h3 {
-				color: var(--accent);
-			}
-
-			.post-card p {
-				margin: 0 0 0.75rem;
-				color: rgb(var(--gray));
-				font-size: 0.95rem;
-				line-height: 1.6;
-			}
-
-			.post-card time {
-				color: rgb(var(--gray));
-				font-size: 0.85rem;
-			}
-
-			.topics {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.5rem;
-				margin-top: 2rem;
-			}
-
-			.topic {
-				padding: 0.35rem 0.75rem;
-				border: 1px solid var(--border);
-				border-radius: 999px;
-				background: rgba(15, 23, 42, 0.6);
-				color: rgb(var(--gray));
-				font-size: 0.82rem;
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section class="hero">
-				<span class="hero-badge">Storm Cloud Blog</span>
-				<h1>Практика про VPS, серверы и облака</h1>
-				<p>{SITE_DESCRIPTION}</p>
-				<div class="hero-actions">
-					<a class="btn btn-primary" href="/blog">Читать статьи</a>
-					<a class="btn btn-secondary" href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">
-						Арендовать VPS
-					</a>
-				</div>
-				<div class="topics">
-					<span class="topic">VPS</span>
-					<span class="topic">DevOps</span>
-					<span class="topic">Безопасность</span>
-					<span class="topic">Облака</span>
-					<span class="topic">Инфраструктура</span>
-					<span class="topic">Почасовая аренда</span>
-				</div>
-			</section>
-
-			<h2 class="section-title">Последние статьи</h2>
-			<ul class="post-list">
-				{
-					posts.map((post) => (
-						<li class="post-card">
-							<a href={`/blog/${post.id}/`}>
-								<h3>{post.data.title}</h3>
-								<p>{post.data.description}</p>
+	<section class="content-section">
+		<h2 class="section-heading">Последние статьи</h2>
+		<p class="section-lead">Инструкции и разборы без лишней теории</p>
+		<ul class="blog-grid">
+			{
+				posts.map((post) => (
+					<li class="blog-card">
+						<a href={`/blog/${post.id}/`}>
+							<h3 class="blog-card__title">{post.data.title}</h3>
+							<p class="blog-card__excerpt">{post.data.description}</p>
+							<p class="blog-card__date">
 								<FormattedDate date={post.data.pubDate} />
-							</a>
-						</li>
-					))
-				}
-			</ul>
-		</main>
-		<Footer />
-	</body>
-</html>
+							</p>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</BaseLayout>

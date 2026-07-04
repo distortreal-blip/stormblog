@@ -1,35 +1,15 @@
 ---
-import SocialLinks from './SocialLinks.astro';
+import { INSTAGRAM_URL, MAIN_SITE_URL, TIKTOK_URL } from '../consts';
 
 const today = new Date();
 ---
 
-<footer>
-	<p class="copyright">&copy; {today.getFullYear()} Storm Cloud Blog. Все права защищены.</p>
-	<p class="tagline">VPS, облака и инфраструктура для разработчиков</p>
-	<SocialLinks />
+<footer class="site-footer" role="contentinfo">
+	<span class="site-footer__left">Storm Cloud Blog</span>
+	<div class="site-footer__links">
+		<a href={MAIN_SITE_URL} target="_blank" rel="noopener noreferrer">StormNet Cloud</a>
+		<a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram</a>
+		<a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer">TikTok</a>
+	</div>
+	<span class="site-footer__right">{today.getFullYear()}</span>
 </footer>
-<style>
-	footer {
-		padding: 2.5em 1em 4em;
-		border-top: 1px solid var(--border);
-		background: var(--bg-elevated);
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-
-	.copyright {
-		margin: 0 0 0.35em;
-		font-size: 0.95rem;
-		color: rgb(var(--gray-dark));
-	}
-
-	.tagline {
-		margin: 0 0 1.25em;
-		font-size: 0.85rem;
-	}
-
-	footer :global(.social-links) {
-		justify-content: center;
-	}
-</style>

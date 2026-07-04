@@ -1,92 +1,33 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import BaseLayout from './BaseLayout.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate } = Astro.props;
 ---
 
-<html lang="ru">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-
-			.title {
-				margin-bottom: 2em;
-				padding: 1.5em 0 0;
-				text-align: left;
-				line-height: 1.2;
-			}
-
-			.title h1 {
-				margin: 0 0 0.75em;
-				font-size: clamp(1.75rem, 4vw, 2.35rem);
-			}
-
-			.lead {
-				margin: 0 0 1em;
-				color: rgb(var(--gray));
-				font-size: 1.05rem;
-				line-height: 1.65;
-			}
-
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-				font-size: 0.9rem;
-			}
-
-			.last-updated-on {
-				font-style: italic;
-			}
-
-			.title hr {
-				margin-top: 1.25em;
-			}
-		</style>
-	</head>
-
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Обновлено <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<p class="lead">{description}</p>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
-</html>
+<BaseLayout title={title} description={description} type="article">
+	<article class="prose-wrap">
+		<header class="article-header">
+			<p class="article-header__date">
+				<FormattedDate date={pubDate} />
+				{
+					updatedDate && (
+						<span>
+							{' '}
+							· Обновлено <FormattedDate date={updatedDate} />
+						</span>
+					)
+				}
+			</p>
+			<h1>{title}</h1>
+			<p class="article-header__lead">{description}</p>
+			<hr />
+		</header>
+		<div class="article-body">
+			<slot />
+		</div>
+	</article>
+</BaseLayout>
