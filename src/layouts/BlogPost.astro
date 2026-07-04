@@ -1,4 +1,5 @@
 ---
+import { getImage } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import ArticleCover from '../components/ArticleCover.astro';
 import ArticleNav from '../components/ArticleNav.astro';
@@ -30,13 +31,16 @@ const headings = extractHeadings(post.body ?? '');
 const { prev, next } = getAdjacentPosts(post, allPosts);
 const related = getRelatedPosts(post, allPosts);
 const articleUrl = new URL(getPostPath(post.id), Astro.site).href;
-const ogImage = heroImage
-	? new URL(heroImage.src, Astro.site).href
+const optimizedCover = heroImage
+	? await getImage({ src: heroImage, width: 1200, height: 630 })
+	: null;
+const ogImage = optimizedCover
+	? new URL(optimizedCover.src, Astro.site).href
 	: `${Astro.site}favicon.svg`;
 
 const breadcrumbs = [
 	{ label: 'Главная', href: '/' },
-	{ label: 'Статьи', href: '/blog' },
+	{ label: 'Статьи', href: '/blog/' },
 	{ label: title },
 ];
 ---
