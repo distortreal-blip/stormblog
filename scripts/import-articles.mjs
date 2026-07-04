@@ -43,6 +43,12 @@ function findMdFile(folderPath) {
 	return fs.readdirSync(folderPath).find((file) => file.endsWith('.md'));
 }
 
+function findCoverFile(folderPath) {
+	return fs
+		.readdirSync(folderPath)
+		.find((file) => /\.(webp|jpe?g|png|avif)$/i.test(file));
+}
+
 function cleanBody(raw) {
 	let body = raw.replace(/\r\n/g, '\n').trim();
 	body = body.replace(/^#\s+.*\n+/, '');
@@ -85,16 +91,24 @@ for (const article of articles) {
 
 	fs.mkdirSync(outDir, { recursive: true });
 
+	const coverSource = findCoverFile(folderPath);
+	let heroImageLine = '';
+
+	if (coverSource) {
+		fs.copyFileSync(path.join(folderPath, coverSource), path.join(outDir, 'cover.webp'));
+		heroImageLine = 'heroImage: ./cover.webp\n';
+	}
+
 	const frontmatter = `---
 title: ${JSON.stringify(title)}
 description: ${JSON.stringify(description)}
 pubDate: ${article.pubDate}
 category: ${article.category}
----
+${heroImageLine}---
 
 ${body}
 `;
 
 	fs.writeFileSync(path.join(outDir, 'index.md'), frontmatter, 'utf8');
-	console.log(`Wrote ${article.slug}`);
+	console.log(`Wrote ${article.slug}${coverSource ? ' + cover.webp' : ''}`);
 }

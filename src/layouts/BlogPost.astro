@@ -30,6 +30,9 @@ const headings = extractHeadings(post.body ?? '');
 const { prev, next } = getAdjacentPosts(post, allPosts);
 const related = getRelatedPosts(post, allPosts);
 const articleUrl = new URL(getPostPath(post.id), Astro.site).href;
+const ogImage = heroImage
+	? new URL(heroImage.src, Astro.site).href
+	: `${Astro.site}favicon.svg`;
 
 const breadcrumbs = [
 	{ label: 'Главная', href: '/' },
@@ -50,7 +53,7 @@ const breadcrumbs = [
 		updatedDate,
 		category,
 		url: articleUrl,
-		image: `${Astro.site}favicon.svg`,
+		image: ogImage,
 	}}
 	breadcrumbs={breadcrumbs}
 >
