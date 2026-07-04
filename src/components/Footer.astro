@@ -1,15 +1,25 @@
 ---
-import { INSTAGRAM_URL, MAIN_SITE_URL, TIKTOK_URL } from '../consts';
+import { MAIN_SITE_URL } from '../consts';
 
-const today = new Date();
+const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer" role="contentinfo">
-	<span class="site-footer__left">Storm Cloud Blog</span>
-	<div class="site-footer__links">
-		<a href={MAIN_SITE_URL} target="_blank" rel="noopener noreferrer">StormNet Cloud</a>
-		<a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram</a>
-		<a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer">TikTok</a>
+	<div class="site-footer__grid">
+		<div>
+			<p class="site-footer__brand">Storm Cloud</p>
+			<p class="site-footer__tagline">
+				Практичные статьи о VPS, DevOps и облачной инфраструктуре.
+			</p>
+		</div>
+		<nav class="site-footer__nav" aria-label="Навигация в подвале">
+			<a href="/">Главная</a>
+			<a href="/blog">Статьи</a>
+			<a href="/about">О проекте</a>
+			<a href={MAIN_SITE_URL} target="_blank" rel="noopener noreferrer">Перейти на StormNet Cloud</a>
+		</nav>
 	</div>
-	<span class="site-footer__right">{today.getFullYear()}</span>
+	<div class="site-footer__bottom">
+		<span>© {year} Storm Cloud</span>
+	</div>
 </footer>

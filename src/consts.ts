@@ -3,7 +3,7 @@
 
 export const SITE_TITLE = 'Storm Cloud Блог';
 export const SITE_DESCRIPTION =
-	'Практичные статьи о VPS, серверах, облаках и инфраструктуре без лишней теории.';
+	'Практические руководства, обзоры и инструкции о VPS, серверах, DevOps и облачной инфраструктуре.';
 export const SITE_KEYWORDS =
 	'VPS, аренда сервера, облачный сервер, DevOps, инфраструктура, безопасность сервера, почасовая аренда VPS, Storm Cloud';
 export const SITE_URL = 'https://stormblog.pages.dev';

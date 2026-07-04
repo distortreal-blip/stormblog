@@ -1,33 +1,99 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import ArticleCover from '../components/ArticleCover.astro';
+import ArticleNav from '../components/ArticleNav.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
+import RelatedArticles from '../components/RelatedArticles.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 import BaseLayout from './BaseLayout.astro';
+import type { BlogPost } from '../utils/blog';
+import {
+	extractHeadings,
+	formatReadingTime,
+	getAdjacentPosts,
+	getPostPath,
+	getReadingTimeMinutes,
+	getRelatedPosts,
+} from '../utils/blog';
 
-type Props = CollectionEntry<'blog'>['data'];
+interface Props {
+	post: CollectionEntry<'blog'>;
+	allPosts: BlogPost[];
+}
 
-const { title, description, pubDate, updatedDate } = Astro.props;
+const { post, allPosts } = Astro.props;
+const { title, description, pubDate, updatedDate, category, heroImage } = post.data;
+const readingTime = formatReadingTime(getReadingTimeMinutes(post.body ?? ''));
+const headings = extractHeadings(post.body ?? '');
+const { prev, next } = getAdjacentPosts(post, allPosts);
+const related = getRelatedPosts(post, allPosts);
+const articleUrl = new URL(getPostPath(post.id), Astro.site).href;
+
+const breadcrumbs = [
+	{ label: 'Главная', href: '/' },
+	{ label: 'Статьи', href: '/blog' },
+	{ label: title },
+];
 ---
 
-<BaseLayout title={title} description={description} type="article">
-	<article class="prose-wrap">
-		<header class="article-header">
-			<p class="article-header__date">
-				<FormattedDate date={pubDate} />
-				{
-					updatedDate && (
-						<span>
-							{' '}
-							· Обновлено <FormattedDate date={updatedDate} />
-						</span>
-					)
-				}
-			</p>
-			<h1>{title}</h1>
-			<p class="article-header__lead">{description}</p>
-			<hr />
-		</header>
-		<div class="article-body">
-			<slot />
+<BaseLayout
+	title={title}
+	description={description}
+	type="article"
+	showReadingProgress={true}
+	article={{
+		title,
+		description,
+		pubDate,
+		updatedDate,
+		category,
+		url: articleUrl,
+		image: `${Astro.site}favicon.svg`,
+	}}
+	breadcrumbs={breadcrumbs}
+>
+	<ReadingProgress slot="progress" />
+
+	<div class="article-shell">
+		<Breadcrumbs items={breadcrumbs} />
+
+		<ArticleCover id={post.id} category={category} title={title} heroImage={heroImage} variant="hero" />
+
+		<div class="article-layout">
+			<TableOfContents headings={headings} />
+
+			<article class="article-content">
+				<header class="article-header">
+					<div class="article-header__meta">
+						<span class="article-header__category">{category}</span>
+						<span>·</span>
+						<span>{readingTime}</span>
+						<span>·</span>
+						<FormattedDate date={pubDate} />
+						{
+							updatedDate && (
+								<>
+									<span>·</span>
+									<span>
+										Обновлено <FormattedDate date={updatedDate} />
+									</span>
+								</>
+							)
+						}
+					</div>
+					<h1 class="article-header__title">{title}</h1>
+					<p class="article-header__lead">{description}</p>
+				</header>
+
+				<div class="article-body">
+					<slot />
+				</div>
+
+				<ArticleNav prevPost={prev} nextPost={next} />
+				<RelatedArticles posts={related} />
+			</article>
 		</div>
-	</article>
+	</div>
 </BaseLayout>

@@ -1,5 +1,5 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
+import BaseHead, { type ArticleMeta, type BreadcrumbItem } from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 
@@ -7,35 +7,38 @@ interface Props {
 	title: string;
 	description: string;
 	type?: 'website' | 'article';
+	article?: ArticleMeta;
+	breadcrumbs?: BreadcrumbItem[];
+	showReadingProgress?: boolean;
 }
 
-const { title, description, type = 'website' } = Astro.props;
+const { title, description, type = 'website', article, breadcrumbs, showReadingProgress = false } =
+	Astro.props;
 ---
 
 <!doctype html>
 <html lang="ru">
 	<head>
-		<BaseHead title={title} description={description} type={type} />
+		<BaseHead
+			title={title}
+			description={description}
+			type={type}
+			article={article}
+			breadcrumbs={breadcrumbs}
+		/>
 		<slot name="head" />
 	</head>
 	<body>
-		<svg class="svg-defs-hidden" aria-hidden="true">
-			<defs>
-				<linearGradient id="storm-icon-pearl" x1="0%" y1="0%" x2="100%" y2="100%">
-					<stop offset="0%" stop-color="#e0eafc"></stop>
-					<stop offset="48%" stop-color="#e0c3fc"></stop>
-					<stop offset="100%" stop-color="#f9f9f9"></stop>
-				</linearGradient>
-			</defs>
-		</svg>
 		<div class="site-shell">
 			<div class="page">
 				<Header />
 				<main class="main-content">
+					<slot name="before" />
 					<slot />
 				</main>
 				<Footer />
 			</div>
 		</div>
+		{showReadingProgress && <slot name="progress" />}
 	</body>
 </html>

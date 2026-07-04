@@ -1,36 +1,26 @@
 ---
 import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { SITE_DESCRIPTION } from '../../consts';
+import { sortPostsByDate } from '../../utils/blog';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = sortPostsByDate(await getCollection('blog'));
 ---
 
-<BaseLayout title="Блог" description={SITE_DESCRIPTION}>
-	<section class="hero-panel fade-in">
-		<span class="section-kicker">Статьи</span>
-		<h1 class="hero-title">Блог</h1>
-		<p class="hero-subtitle">Статьи о VPS, серверах, облаках и инфраструктуре</p>
+<BaseLayout title="Статьи" description={SITE_DESCRIPTION}>
+	<section class="hero">
+		<h1 class="hero__title">Все статьи</h1>
+		<p class="hero__subtitle">
+			Практические материалы о VPS, серверах, DevOps и облачной инфраструктуре.
+		</p>
 	</section>
 
-	<section class="content-section">
-		<ul class="blog-grid">
-			{
-				posts.map((post) => (
-					<li class="blog-card">
-						<a href={`/blog/${post.id}/`}>
-							<h2 class="blog-card__title">{post.data.title}</h2>
-							<p class="blog-card__excerpt">{post.data.description}</p>
-							<p class="blog-card__date">
-								<FormattedDate date={post.data.pubDate} />
-							</p>
-						</a>
-					</li>
-				))
-			}
+	<section class="section">
+		<ul class="article-grid article-grid--compact">
+			{posts.map((post, index) => (
+				<ArticleCard post={post} featured={index === 0} />
+			))}
 		</ul>
 	</section>
 </BaseLayout>

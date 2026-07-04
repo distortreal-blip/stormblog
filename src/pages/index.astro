@@ -1,52 +1,69 @@
 ---
 import { getCollection } from 'astro:content';
-import FormattedDate from '../components/FormattedDate.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { sortPostsByDate } from '../utils/blog';
 
-const posts = (await getCollection('blog'))
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 3);
+const posts = sortPostsByDate(await getCollection('blog'));
+const [featured, ...rest] = posts;
+const latest = rest.slice(0, 3);
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-	<section class="hero-panel fade-in">
-		<span class="section-kicker">Storm Cloud Blog</span>
-		<h1 class="hero-title">Практика про VPS, серверы и облака</h1>
-		<p class="hero-subtitle">{SITE_DESCRIPTION}</p>
-		<div class="hero-actions">
-			<a class="auth-btn" href="/blog">Читать статьи</a>
-			<a class="choose-btn" href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">
+	<section class="hero">
+		<h1 class="hero__title">Статьи о VPS, серверах и облачной инфраструктуре</h1>
+		<p class="hero__subtitle">
+			Практические руководства, обзоры и инструкции для разработчиков, системных администраторов и
+			всех, кто работает с облачной инфраструктурой.
+		</p>
+		<div class="hero__actions">
+			<a class="btn btn-primary" href="/blog">Все статьи</a>
+			<a class="btn btn-ghost" href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">
 				Арендовать VPS
 			</a>
 		</div>
-		<div class="hero-tags">
-			<span class="hero-tag">VPS</span>
-			<span class="hero-tag">DevOps</span>
-			<span class="hero-tag">Безопасность</span>
-			<span class="hero-tag">Облака</span>
-			<span class="hero-tag">Инфраструктура</span>
-			<span class="hero-tag">Почасовая аренда</span>
+		<div class="hero__topics">
+			<a href="/blog">VPS</a>
+			<span>·</span>
+			<a href="/blog">DevOps</a>
+			<span>·</span>
+			<a href="/blog">Linux</a>
+			<span>·</span>
+			<a href="/blog">Docker</a>
+			<span>·</span>
+			<a href="/blog">Безопасность</a>
+			<span>·</span>
+			<a href="/blog">Облака</a>
 		</div>
 	</section>
 
-	<section class="content-section">
-		<h2 class="section-heading">Последние статьи</h2>
-		<p class="section-lead">Инструкции и разборы без лишней теории</p>
-		<ul class="blog-grid">
-			{
-				posts.map((post) => (
-					<li class="blog-card">
-						<a href={`/blog/${post.id}/`}>
-							<h3 class="blog-card__title">{post.data.title}</h3>
-							<p class="blog-card__excerpt">{post.data.description}</p>
-							<p class="blog-card__date">
-								<FormattedDate date={post.data.pubDate} />
-							</p>
-						</a>
-					</li>
-				))
-			}
-		</ul>
-	</section>
+	{
+		featured && (
+			<section class="section">
+				<div class="section__header">
+					<h2 class="section__title">Новые статьи</h2>
+				</div>
+				<ul class="article-grid">
+					<ArticleCard post={featured} featured />
+				</ul>
+			</section>
+		)
+	}
+
+	{
+		latest.length > 0 && (
+			<section class="section">
+				<div class="section__header">
+					<h2 class="section__title">Последние статьи</h2>
+					<a class="section__link" href="/blog">Смотреть все →</a>
+				</div>
+				<ul class="article-grid article-grid--compact">
+					{latest.map((post) => (
+						<ArticleCard post={post} />
+					))}
+				</ul>
+			</section>
+		)
+	}
 </BaseLayout>

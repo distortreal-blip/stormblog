@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { slugHue } from '../utils/blog';
+
+interface Props {
+	id: string;
+	category: string;
+	title: string;
+	heroImage?: ImageMetadata;
+	variant?: 'card' | 'featured' | 'hero';
+}
+
+const { id, category, title, heroImage, variant = 'card' } = Astro.props;
+const hue = slugHue(id);
+---
+
+<div class={`cover cover--${variant}`} style={`--cover-hue: ${hue}`}>
+	{
+		heroImage ? (
+			<Image src={heroImage} alt="" width={1200} height={630} loading="lazy" />
+		) : (
+			<>
+				<div class="cover__layer cover__gradient"></div>
+				<div class="cover__layer cover__grid"></div>
+				{variant !== 'hero' && <span class="cover__label">{category}</span>}
+			</>
+		)
+	}
+</div>

@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+import ArticleCover from './ArticleCover.astro';
+import {
+	formatReadingTime,
+	getPostPath,
+	getReadingTimeMinutes,
+} from '../utils/blog';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+	featured?: boolean;
+}
+
+const { post, featured = false } = Astro.props;
+const { title, description, pubDate, category, heroImage } = post.data;
+const readingTime = formatReadingTime(getReadingTimeMinutes(post.body ?? ''));
+---
+
+<li class:list={['article-card', { 'article-card--featured': featured }]}>
+	<a class="article-card__link" href={getPostPath(post.id)}>
+		<ArticleCover
+			id={post.id}
+			category={category}
+			title={title}
+			heroImage={heroImage}
+			variant={featured ? 'featured' : 'card'}
+		/>
+		<div class="article-card__body">
+			<div class="article-card__meta">
+				<span class="article-card__category">{category}</span>
+				<span class="article-card__meta-dot">·</span>
+				<span>{readingTime}</span>
+				<span class="article-card__meta-dot">·</span>
+				<FormattedDate date={pubDate} />
+			</div>
+			<h2 class="article-card__title">{title}</h2>
+			<p class="article-card__excerpt">{description}</p>
+		</div>
+	</a>
+</li>

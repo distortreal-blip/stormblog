@@ -1,0 +1,34 @@
+---
+import type { BlogPost } from '../utils/blog';
+import { getPostPath } from '../utils/blog';
+
+interface Props {
+	prevPost?: BlogPost;
+	nextPost?: BlogPost;
+}
+
+const { prevPost, nextPost } = Astro.props;
+---
+
+{
+	(prevPost || nextPost) && (
+		<nav class="article-nav" aria-label="Навигация по статьям">
+			{prevPost ? (
+				<a class="article-nav__item" href={getPostPath(prevPost.id)}>
+					<span class="article-nav__label">Предыдущая</span>
+					<span class="article-nav__title">{prevPost.data.title}</span>
+				</a>
+			) : (
+				<div></div>
+			)}
+			{nextPost ? (
+				<a class="article-nav__item article-nav__item--next" href={getPostPath(nextPost.id)}>
+					<span class="article-nav__label">Следующая</span>
+					<span class="article-nav__title">{nextPost.data.title}</span>
+				</a>
+			) : (
+				<div></div>
+			)}
+		</nav>
+	)
+}

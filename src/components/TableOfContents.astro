@@ -1,0 +1,63 @@
+---
+import type { TocHeading } from '../utils/blog';
+
+interface Props {
+	headings: TocHeading[];
+}
+
+const { headings } = Astro.props;
+---
+
+{
+	headings.length > 0 && (
+		<nav class="toc" aria-label="Содержание">
+			<p class="toc__title">Содержание</p>
+			<ol class="toc__list" id="toc-list">
+				{headings.map((heading) => (
+					<li data-level={heading.level}>
+						<a href={`#${heading.id}`}>{heading.text}</a>
+					</li>
+				))}
+			</ol>
+		</nav>
+	)
+}
+
+<script>
+	function initArticleEnhancements() {
+		const body = document.querySelector('.article-body');
+		const tocLinks = document.querySelectorAll('#toc-list a');
+
+		if (body) {
+			body.querySelectorAll('h2, h3').forEach((heading) => {
+				if (heading.id) return;
+				const text = heading.textContent?.trim() ?? '';
+				heading.id = text
+					.toLowerCase()
+					.replace(/[^\p{L}\p{N}\s-]/gu, '')
+					.replace(/\s+/g, '-');
+			});
+		}
+
+		if (tocLinks.length) {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (!entry.isIntersecting) return;
+						const id = entry.target.getAttribute('id');
+						tocLinks.forEach((link) => {
+							link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+						});
+					});
+				},
+				{ rootMargin: '-20% 0px -70% 0px', threshold: 0 },
+			);
+
+			document.querySelectorAll('.article-body h2, .article-body h3').forEach((heading) => {
+				observer.observe(heading);
+			});
+		}
+	}
+
+	initArticleEnhancements();
+</script>

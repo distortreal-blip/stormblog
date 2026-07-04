@@ -1,44 +1,44 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_DESCRIPTION } from '../consts';
 ---
 
-<BaseLayout title="О блоге" description={SITE_DESCRIPTION}>
-	<section class="hero-panel fade-in">
-		<span class="section-kicker">О проекте</span>
-		<h1 class="hero-title">О блоге Storm Cloud</h1>
-		<p class="hero-subtitle">
-			Практический блог о VPS, серверах, облаках и инфраструктуре. Без воды и лишней теории — только то,
-			что помогает быстрее запускать проекты, безопаснее администрировать серверы и не переплачивать за
-			ресурсы.
+<BaseLayout title="О проекте" description={SITE_DESCRIPTION}>
+	<section class="about-panel">
+		<h1>О проекте</h1>
+		<p class="about-panel__lead">
+			Storm Cloud Blog — практическое медиа о VPS, серверах, облаках и инфраструктуре. Мы публикуем
+			руководства и разборы без лишней теории: только то, что помогает быстрее запускать проекты,
+			безопаснее администрировать серверы и не переплачивать за ресурсы.
 		</p>
+
+		<div class="about-blocks">
+			<section class="about-block">
+				<h2>О чём пишем</h2>
+				<p>
+					Выбор VPS, сравнение с обычным хостингом, первые шаги после запуска сервера, безопасность,
+					DevOps-практики, почасовая аренда и инфраструктура для разработчиков.
+				</p>
+			</section>
+
+			<section class="about-block">
+				<h2>Для кого</h2>
+				<p>
+					Для разработчиков, системных администраторов, фрилансеров и владельцев проектов, которым
+					важна понятная и прикладная информация о серверной части.
+				</p>
+			</section>
+
+			<section class="about-block">
+				<h2>StormNet Cloud</h2>
+				<p>
+					Блог связан с сервисом
+					<a href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">StormNet Cloud</a>.
+					Если нужен VPS для тестов, проекта или продакшена — можно
+					<a href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">арендовать сервер</a>
+					на основном сайте.
+				</p>
+			</section>
+		</div>
 	</section>
-
-	<div class="about-grid content-section">
-		<section class="about-card">
-			<h2>О чём пишем</h2>
-			<p>
-				Выбор VPS, сравнение с обычным хостингом, первые шаги после запуска сервера, безопасность,
-				DevOps-практики, почасовая аренда и инфраструктура для разработчиков.
-			</p>
-		</section>
-
-		<section class="about-card">
-			<h2>Для кого</h2>
-			<p>
-				Для разработчиков, фрилансеров, владельцев небольших проектов и всех, кто хочет понимать
-				серверную часть без погружения в академические учебники.
-			</p>
-		</section>
-
-		<section class="about-card">
-			<h2>StormNet Cloud</h2>
-			<p>
-				Блог связан с сервисом <a href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">StormNet Cloud</a>.
-				Если нужен VPS для тестов, проекта или продакшена — можно
-				<a href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">арендовать сервер</a>
-				на основном сайте.
-			</p>
-		</section>
-	</div>
 </BaseLayout>
