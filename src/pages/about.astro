@@ -1,63 +1,95 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="ru">
+	<head>
+		<BaseHead title={`О блоге — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			.about-hero {
+				margin-bottom: 2rem;
+				padding: 2rem;
+				border: 1px solid var(--border);
+				border-radius: 14px;
+				background: linear-gradient(145deg, rgba(34, 211, 238, 0.06), rgba(37, 99, 235, 0.04));
+			}
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+			.about-hero h1 {
+				margin-bottom: 0.75rem;
+			}
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+			.about-hero p {
+				margin: 0;
+				color: rgb(var(--gray));
+			}
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+			.about-grid {
+				display: grid;
+				gap: 1rem;
+			}
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+			.about-card {
+				padding: 1.25rem 1.35rem;
+				border: 1px solid var(--border);
+				border-radius: 12px;
+				background: var(--bg-card);
+			}
+
+			.about-card h2 {
+				margin-bottom: 0.5rem;
+				font-size: 1.1rem;
+				color: var(--accent);
+			}
+
+			.about-card p:last-child {
+				margin-bottom: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="about-hero">
+				<h1>О блоге Storm Cloud</h1>
+				<p>
+					Это практический блог о VPS, серверах, облаках и инфраструктуре. Без воды и лишней теории —
+					только то, что помогает быстрее запускать проекты, безопаснее администрировать серверы и
+					не переплачивать за ресурсы.
+				</p>
+			</div>
+
+			<div class="about-grid">
+				<section class="about-card">
+					<h2>О чём пишем</h2>
+					<p>
+						Выбор VPS, сравнение с обычным хостингом, первые шаги после запуска сервера, безопасность,
+						DevOps-практики, почасовая аренда и инфраструктура для разработчиков.
+					</p>
+				</section>
+
+				<section class="about-card">
+					<h2>Для кого</h2>
+					<p>
+						Для разработчиков, фрилансеров, владельцев небольших проектов и всех, кто хочет понимать
+						серверную часть без погружения в академические учебники.
+					</p>
+				</section>
+
+				<section class="about-card">
+					<h2>StormNet Cloud</h2>
+					<p>
+						Блог связан с сервисом <a href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">StormNet Cloud</a>.
+						Если нужен VPS для тестов, проекта или продакшена — можно
+						<a href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">арендовать сервер</a>
+						на основном сайте.
+					</p>
+				</section>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
