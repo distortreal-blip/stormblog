@@ -11,7 +11,7 @@ keywords:
   - "woocommerce"
   - "nginx wordpress"
   - "managed wordpress"
-heroImage: ./cover.png
+heroImage: ./cover.webp
 ---
 
 WordPress по-прежнему тянет половину интернета, но в 2026 году вопрос «где его разместить» стал сложнее. Shared-хостинг дешевле и проще, VPS — гибче и быстрее. Разберём, когда какой вариант оправдан, без маркетинговых cliché.

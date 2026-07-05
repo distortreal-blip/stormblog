@@ -11,7 +11,7 @@ keywords:
   - "nginx docker"
   - "container deployment"
   - "linux docker"
-heroImage: ./cover.png
+heroImage: ./cover.webp
 ---
 
 Docker Compose — стандартный способ упаковать приложение с базой данных, кэшем и reverse proxy в один конфиг. На VPS это избавляет от ручной установки PostgreSQL, Redis и nginx по отдельности. Разберём деплой с нуля на чистом Ubuntu-сервере.

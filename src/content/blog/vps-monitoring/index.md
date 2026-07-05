@@ -11,7 +11,7 @@ keywords:
   - "prometheus"
   - "node exporter"
   - "devops monitoring"
-heroImage: ./cover.png
+heroImage: ./cover.webp
 ---
 
 Сервер упал ночью — вы узнали от клиента. Так бывает без мониторинга. Uptime Kuma проверяет доступность сервисов, Grafana показывает метрики CPU и RAM, Telegram-бот шлёт алерт за секунды. Соберём рабочий стек на одном VPS или отдельном monitoring-сервере.

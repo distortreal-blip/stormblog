@@ -10,7 +10,7 @@ keywords:
   - "cursor remote ssh"
   - "ssh config"
   - "dev environment vps"
-heroImage: ./cover.png
+heroImage: ./cover.webp
 ---
 
 Локальная машина с Windows и проект, который должен жить на Linux в production — классический разрыв: «у меня работает» превращается в отладку на сервере через nano и tail -f. Remote SSH в VS Code (и Cursor на той же базе) переносит IDE на VPS: файлы, терминал, отладчик и расширения работают удалённо, а вы видите привычный интерфейс.

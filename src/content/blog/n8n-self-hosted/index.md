@@ -11,7 +11,7 @@ keywords:
   - "n8n docker"
   - "open source automation"
   - "n8n webhook"
-heroImage: ./cover.png
+heroImage: ./cover.webp
 ---
 
 Zapier и Make отлично автоматизируют рутину, пока счёт не переваливает за $50/мес, а webhook с персональными данными уходит через чужой SaaS. n8n — open-source альтернатива с визуальным редактором, 400+ интegrаций и self-host на любом VPS. Один инстанс на cloud-сервере закрывает сценарии от «форма → Telegram» до синхронизации CRM и CI-уведомлений.

@@ -11,7 +11,7 @@ keywords:
   - "github workflow yaml"
   - "deploy на vps"
   - "continuous integration"
-heroImage: ./cover.png
+heroImage: ./cover.webp
 ---
 
 Pet-проект живёт, пока деплой не превращается в ритуал с ручным scp и молитвой «надеюсь, на сервере всё поднимется». GitHub Actions снимает эту боль: push в main — и через три минуты новая версия на VPS. Бесплатные минуты для публичных репозиториев щедрые, для private хватит лимита на небольшой pipeline.

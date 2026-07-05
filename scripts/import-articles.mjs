@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const blogRoot = path.join(__dirname, '../src/content/blog');
@@ -300,7 +301,27 @@ function formatKeywordsYaml(keywords) {
 	return `keywords:\n${keywords.map((keyword) => `  - ${JSON.stringify(keyword)}`).join('\n')}\n`;
 }
 
-function importArticle({ folder, slug, category, pubDate, keywords: fallbackKeywords = [] }, sourceRoot) {
+async function copyCoverImage(folderPath, outDir) {
+	const coverSource = findCoverFile(folderPath);
+	if (!coverSource) return '';
+
+	const sourcePath = path.join(folderPath, coverSource);
+	const ext = path.extname(coverSource).toLowerCase();
+	const webpPath = path.join(outDir, 'cover.webp');
+
+	if (ext === '.webp') {
+		fs.copyFileSync(sourcePath, webpPath);
+	} else {
+		await sharp(sourcePath)
+			.resize(1200, 630, { fit: 'cover', position: 'centre' })
+			.webp({ quality: 82 })
+			.toFile(webpPath);
+	}
+
+	return 'heroImage: ./cover.webp\n';
+}
+
+async function importArticle({ folder, slug, category, pubDate, keywords: fallbackKeywords = [] }, sourceRoot) {
 	const folderPath = path.join(sourceRoot, folder);
 	const mdName = findMdFile(folderPath);
 	if (!mdName) throw new Error(`Missing markdown file in ${folder}`);
@@ -317,14 +338,7 @@ function importArticle({ folder, slug, category, pubDate, keywords: fallbackKeyw
 	fs.mkdirSync(outDir, { recursive: true });
 
 	const coverSource = findCoverFile(folderPath);
-	let heroImageLine = '';
-
-	if (coverSource) {
-		const ext = path.extname(coverSource).toLowerCase();
-		const coverName = ext === '.jpeg' ? 'cover.jpg' : `cover${ext}`;
-		fs.copyFileSync(path.join(folderPath, coverSource), path.join(outDir, coverName));
-		heroImageLine = `heroImage: ./${coverName}\n`;
-	}
+	const heroImageLine = await copyCoverImage(folderPath, outDir);
 
 	const frontmatter = `---
 title: ${JSON.stringify(title)}
@@ -337,7 +351,7 @@ ${body}
 `;
 
 	fs.writeFileSync(path.join(outDir, 'index.md'), frontmatter, 'utf8');
-	console.log(`Wrote ${finalSlug}${coverSource ? ` + ${path.extname(coverSource).slice(1)}` : ''}`);
+	console.log(`Wrote ${finalSlug}${coverSource ? ' + cover.webp' : ''}`);
 }
 
 for (const entry of fs.readdirSync(blogRoot)) {
@@ -347,15 +361,15 @@ for (const entry of fs.readdirSync(blogRoot)) {
 }
 
 for (const article of vpsArticles) {
-	importArticle(article, vpsSourceRoot);
+	await importArticle(article, vpsSourceRoot);
 }
 
 for (const article of itArticles) {
-	importArticle(article, itSourceRoot);
+	await importArticle(article, itSourceRoot);
 }
 
 for (const article of new10Articles) {
-	importArticle(article, new10SourceRoot);
+	await importArticle(article, new10SourceRoot);
 }
 
 console.log(`Done: ${vpsArticles.length + itArticles.length + new10Articles.length} articles`);
