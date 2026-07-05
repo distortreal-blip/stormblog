@@ -9,6 +9,7 @@ const blogRoot = path.join(__dirname, '../src/content/blog');
 const vpsSourceRoot = 'C:/Users/User/Desktop/Статьи';
 const itSourceRoot = 'C:/Users/User/Desktop/Статьи/IT';
 const new10SourceRoot = 'C:/Users/User/Desktop/Статьи/New10';
+const vpsSeoSourceRoot = 'C:/Users/User/Desktop/Статьи/VPS10';
 
 const vpsArticles = [
 	{
@@ -209,6 +210,69 @@ const new10Articles = [
 	},
 ];
 
+const vpsSeoArticles = [
+	{
+		folder: 'Сервер на час когда VPS не нужен на месяц',
+		slug: 'server-na-chas',
+		category: 'Облака',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'Почасовая аренда VPS как работает и кому выгодна',
+		slug: 'pochasovaya-arenda-vps',
+		category: 'Облака',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'Что можно успеть сделать на VPS за 1 час',
+		slug: 'chto-sdelat-na-vps-za-chas',
+		category: 'VPS',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'Дешевый VPS где реально экономия а где ловушка',
+		slug: 'desheviy-vps',
+		category: 'VPS',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'VPS для программиста 10 задач для которых не нужен дорогой сервер',
+		slug: 'vps-dlya-programmista',
+		category: 'VPS',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'VPS для сайта когда обычного хостинга уже не хватает',
+		slug: 'vps-dlya-sayta',
+		category: 'VPS',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'VPS VDS в чем разница простыми словами',
+		slug: 'vps-ili-vds-raznitsa',
+		category: 'VPS',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'Linux VPS для новичка что сделать сразу после запуска',
+		slug: 'linux-vps-dlya-novichka',
+		category: 'Linux',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'VPS в Европе или России что выбрать для проекта',
+		slug: 'vps-evropa-ili-rossiya',
+		category: 'Облака',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'Почему аренда сервера на пару часов выгоднее месячной оплаты',
+		slug: 'arenda-servera-na-paru-chasov',
+		category: 'Облака',
+		pubDate: '2026-07-06',
+	},
+];
+
 function findMdFile(folderPath) {
 	const files = fs.readdirSync(folderPath).filter((file) => file.endsWith('.md'));
 	return files.find((file) => file === 'article.md') ?? files[0];
@@ -372,4 +436,10 @@ for (const article of new10Articles) {
 	await importArticle(article, new10SourceRoot);
 }
 
-console.log(`Done: ${vpsArticles.length + itArticles.length + new10Articles.length} articles`);
+for (const article of vpsSeoArticles) {
+	await importArticle(article, vpsSeoSourceRoot);
+}
+
+console.log(
+	`Done: ${vpsArticles.length + itArticles.length + new10Articles.length + vpsSeoArticles.length} articles`,
+);
