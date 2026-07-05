@@ -1,6 +1,6 @@
-# Storm Cloud Blog — https://stormblog.pages.dev
+# Storm Cloud Blog — https://blog.stormnetcloud.com
 
 User-agent: *
 Allow: /
 
-Sitemap: https://stormblog.pages.dev/sitemap-index.xml
+Sitemap: https://blog.stormnetcloud.com/sitemap-index.xml

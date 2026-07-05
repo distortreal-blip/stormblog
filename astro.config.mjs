@@ -6,7 +6,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://stormblog.pages.dev',
+	site: 'https://blog.stormnetcloud.com',
 	integrations: [
 		mdx(),
 		sitemap({
