@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import ArticleCard from '../components/ArticleCard.astro';
+import CategoryTags from '../components/CategoryTags.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { sortPostsByDate } from '../utils/blog';
@@ -23,19 +24,7 @@ const latest = rest.slice(0, 3);
 				Арендовать VPS
 			</a>
 		</div>
-		<div class="hero__topics">
-			<a href="/blog">VPS</a>
-			<span>·</span>
-			<a href="/blog">DevOps</a>
-			<span>·</span>
-			<a href="/blog">Linux</a>
-			<span>·</span>
-			<a href="/blog">Docker</a>
-			<span>·</span>
-			<a href="/blog">Безопасность</a>
-			<span>·</span>
-			<a href="/blog">Облака</a>
-		</div>
+		<CategoryTags showAll={false} />
 	</section>
 
 	{

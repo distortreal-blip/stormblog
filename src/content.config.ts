@@ -1,8 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-
-const categories = ['VPS', 'DevOps', 'Linux', 'Docker', 'Безопасность', 'Облака', 'Разработка'] as const;
+import { BLOG_CATEGORY_LABELS } from './consts';
 
 const blog = defineCollection({
 	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
@@ -12,7 +11,7 @@ const blog = defineCollection({
 			description: z.string(),
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
-			category: z.enum(categories).default('VPS'),
+			category: z.enum(BLOG_CATEGORY_LABELS).default('VPS'),
 			keywords: z.array(z.string()).optional(),
 			heroImage: z.optional(image()),
 		}),

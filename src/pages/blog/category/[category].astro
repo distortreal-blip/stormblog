@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import CategoryTags from '../../../components/CategoryTags.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { BLOG_CATEGORIES } from '../../../consts';
+import {
+	filterPostsByCategory,
+	getCategoryLabel,
+	sortPostsByDate,
+} from '../../../utils/blog';
+
+export function getStaticPaths() {
+	return BLOG_CATEGORIES.map(({ slug }) => ({
+		params: { category: slug },
+	}));
+}
+
+const { category: categorySlug } = Astro.params;
+const categoryLabel = getCategoryLabel(categorySlug ?? '');
+
+if (!categoryLabel) {
+	return Astro.redirect('/blog/');
+}
+
+const posts = filterPostsByCategory(sortPostsByDate(await getCollection('blog')), categoryLabel);
+---
+
+<BaseLayout
+	title={`${categoryLabel} — Статьи`}
+	description={`Статьи блога Storm Cloud в категории «${categoryLabel}»: практические материалы о VPS, DevOps, разработке и облачной инфраструктуре.`}
+>
+	<section class="hero">
+		<h1 class="hero__title">{categoryLabel}</h1>
+		<p class="hero__subtitle">
+			{posts.length > 0
+				? `${posts.length} ${posts.length === 1 ? 'статья' : posts.length < 5 ? 'статьи' : 'статей'} в категории «${categoryLabel}».`
+				: `Пока нет опубликованных материалов в категории «${categoryLabel}».`}
+		</p>
+		<CategoryTags active={categorySlug} />
+	</section>
+
+	<section class="section">
+		{
+			posts.length > 0 ? (
+				<ul class="article-grid article-grid--compact">
+					{posts.map((post, index) => (
+						<ArticleCard post={post} featured={index === 0} />
+					))}
+				</ul>
+			) : (
+				<div class="empty-state">
+					<p>Статьи в этой категории скоро появятся.</p>
+					<a class="btn btn-primary" href="/blog/">
+						Смотреть все статьи
+					</a>
+				</div>
+			)
+		}
+	</section>
+</BaseLayout>

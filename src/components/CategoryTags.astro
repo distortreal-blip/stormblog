@@ -1,0 +1,34 @@
+---
+import { BLOG_CATEGORIES } from '../consts';
+import { getCategoryPath } from '../utils/blog';
+
+interface Props {
+	active?: string;
+	showAll?: boolean;
+}
+
+const { active, showAll = true } = Astro.props;
+---
+
+<nav class="category-tags" aria-label="Фильтр по категориям">
+	{
+		showAll && (
+			<a class:list={['category-tag', { 'category-tag--active': !active }]} href="/blog/">
+				Все
+			</a>
+		)
+	}
+	{
+		BLOG_CATEGORIES.map((category, index) => (
+			<>
+				{(showAll || index > 0) && <span class="category-tags__dot">·</span>}
+				<a
+					class:list={['category-tag', { 'category-tag--active': active === category.slug }]}
+					href={getCategoryPath(category.slug)}
+				>
+					{category.label}
+				</a>
+			</>
+		))
+	}
+</nav>

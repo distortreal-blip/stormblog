@@ -1,11 +1,37 @@
 import type { CollectionEntry } from 'astro:content';
+import {
+	BLOG_CATEGORIES,
+	type BlogCategoryLabel,
+	type BlogCategorySlug,
+} from '../consts';
 
 export type BlogPost = CollectionEntry<'blog'>;
 
-export const TOPICS = ['VPS', 'DevOps', 'Linux', 'Docker', 'Безопасность', 'Облака'] as const;
-
 export function sortPostsByDate(posts: BlogPost[]) {
 	return [...posts].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+}
+
+export function getCategorySlug(label: BlogCategoryLabel): BlogCategorySlug | undefined {
+	return BLOG_CATEGORIES.find((category) => category.label === label)?.slug;
+}
+
+export function getCategoryLabel(slug: string): BlogCategoryLabel | undefined {
+	return BLOG_CATEGORIES.find((category) => category.slug === slug)?.label;
+}
+
+export function getCategoryPath(slug: BlogCategorySlug) {
+	return `/blog/category/${slug}/`;
+}
+
+export function filterPostsByCategory(posts: BlogPost[], label: BlogCategoryLabel) {
+	return posts.filter((post) => post.data.category === label);
+}
+
+export function getCategoryCounts(posts: BlogPost[]) {
+	return BLOG_CATEGORIES.map((category) => ({
+		...category,
+		count: posts.filter((post) => post.data.category === category.label).length,
+	}));
 }
 
 export function getReadingTimeMinutes(body: string) {
