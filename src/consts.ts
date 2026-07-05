@@ -19,12 +19,12 @@ export const SITE_AUTHOR_URL = `${SITE_URL}/author/`;
 export const SITE_ORG_NAME = 'Storm Cloud';
 export const SITE_ORG_URL = MAIN_SITE_URL;
 
-/** Giscus: включите Discussions в GitHub-репо и заполните ID на https://giscus.app */
-export const GISCUS_ENABLED = false;
+/** Giscus: https://giscus.app */
+export const GISCUS_ENABLED = true;
 export const GISCUS_REPO = 'distortreal-blip/stormblog';
-export const GISCUS_REPO_ID = '';
-export const GISCUS_CATEGORY = 'Announcements';
-export const GISCUS_CATEGORY_ID = '';
+export const GISCUS_REPO_ID = 'R_kgDOTNttPg';
+export const GISCUS_CATEGORY = 'General';
+export const GISCUS_CATEGORY_ID = 'DIC_kwDOTNttPs4DAiGi';
 
 export const BLOG_CATEGORIES = [
 	{ slug: 'vps', label: 'VPS' },
