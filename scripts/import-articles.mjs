@@ -330,9 +330,19 @@ function parseSource(raw) {
 			const yaml = content.slice(3, end).trim();
 			const titleMatch = yaml.match(/^title:\s*(.+)$/m);
 			const descMatch = yaml.match(/^description:\s*(.+)$/m);
+			const keywordsMatch = yaml.match(/^keywords:\s*(.+)$/m);
 			if (titleMatch) sourceTitle = titleMatch[1].replace(/^["']|["']$/g, '').trim();
 			if (descMatch) sourceDescription = descMatch[1].replace(/^["']|["']$/g, '').trim();
-			sourceKeywords = parseKeywordsBlock(yaml);
+			if (keywordsMatch) {
+				const rawKeywords = keywordsMatch[1].replace(/^["']|["']$/g, '').trim();
+				if (rawKeywords && !rawKeywords.startsWith('-')) {
+					sourceKeywords = rawKeywords
+						.split(',')
+						.map((keyword) => keyword.trim())
+						.filter(Boolean);
+				}
+			}
+			if (!sourceKeywords.length) sourceKeywords = parseKeywordsBlock(yaml);
 			content = content.slice(end + 4).trim();
 		}
 	}
