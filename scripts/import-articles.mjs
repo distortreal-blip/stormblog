@@ -7,6 +7,7 @@ const blogRoot = path.join(__dirname, '../src/content/blog');
 
 const vpsSourceRoot = 'C:/Users/User/Desktop/Статьи';
 const itSourceRoot = 'C:/Users/User/Desktop/Статьи/IT';
+const new10SourceRoot = 'C:/Users/User/Desktop/Статьи/New10';
 
 const vpsArticles = [
 	{
@@ -144,8 +145,72 @@ const itArticles = [
 	},
 ];
 
+const new10Articles = [
+	{
+		folder: 'Как развернуть Telegram-бота на VPS за 30 минут',
+		slug: 'telegram-bot-vps',
+		category: 'VPS',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'WordPress на VPS или хостинг что выбрать в 2026',
+		slug: 'wordpress-vps-2026',
+		category: 'VPS',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'Docker Compose на VPS первый проект с нуля',
+		slug: 'docker-compose-vps',
+		category: 'Docker',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'Мониторинг VPS Uptime Kuma Grafana и алерты в Telegram',
+		slug: 'vps-monitoring',
+		category: 'DevOps',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'Как уменьшить расходы на VPS и облако 12 рабочих способов',
+		slug: 'reduce-vps-costs',
+		category: 'Облака',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'Ollama на своём VPS локальные LLM без ChatGPT',
+		slug: 'ollama-vps',
+		category: 'Разработка',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'MCP для разработчиков что это и зачем подключать к Cursor',
+		slug: 'mcp-for-developers',
+		category: 'Разработка',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'GitHub Actions с нуля CI CD для pet-проекта',
+		slug: 'github-actions-cicd',
+		category: 'DevOps',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'VS Code SSH Remote разработка прямо на VPS',
+		slug: 'vscode-ssh-vps',
+		category: 'Разработка',
+		pubDate: '2026-07-06',
+	},
+	{
+		folder: 'n8n на своём VPS автоматизация без Zapier',
+		slug: 'n8n-self-hosted',
+		category: 'Облака',
+		pubDate: '2026-07-06',
+	},
+];
+
 function findMdFile(folderPath) {
-	return fs.readdirSync(folderPath).find((file) => file.endsWith('.md'));
+	const files = fs.readdirSync(folderPath).filter((file) => file.endsWith('.md'));
+	return files.find((file) => file === 'article.md') ?? files[0];
 }
 
 function findCoverFile(folderPath) {
@@ -255,8 +320,10 @@ function importArticle({ folder, slug, category, pubDate, keywords: fallbackKeyw
 	let heroImageLine = '';
 
 	if (coverSource) {
-		fs.copyFileSync(path.join(folderPath, coverSource), path.join(outDir, 'cover.webp'));
-		heroImageLine = 'heroImage: ./cover.webp\n';
+		const ext = path.extname(coverSource).toLowerCase();
+		const coverName = ext === '.jpeg' ? 'cover.jpg' : `cover${ext}`;
+		fs.copyFileSync(path.join(folderPath, coverSource), path.join(outDir, coverName));
+		heroImageLine = `heroImage: ./${coverName}\n`;
 	}
 
 	const frontmatter = `---
@@ -270,7 +337,7 @@ ${body}
 `;
 
 	fs.writeFileSync(path.join(outDir, 'index.md'), frontmatter, 'utf8');
-	console.log(`Wrote ${finalSlug}${coverSource ? ' + cover.webp' : ''}`);
+	console.log(`Wrote ${finalSlug}${coverSource ? ` + ${path.extname(coverSource).slice(1)}` : ''}`);
 }
 
 for (const entry of fs.readdirSync(blogRoot)) {
@@ -287,4 +354,8 @@ for (const article of itArticles) {
 	importArticle(article, itSourceRoot);
 }
 
-console.log(`Done: ${vpsArticles.length + itArticles.length} articles`);
+for (const article of new10Articles) {
+	importArticle(article, new10SourceRoot);
+}
+
+console.log(`Done: ${vpsArticles.length + itArticles.length + new10Articles.length} articles`);
