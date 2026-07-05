@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import GuideCard from '../components/GuideCard.astro';
 import { GUIDES } from '../data/seo';
 ---
 
@@ -25,12 +26,7 @@ import { GUIDES } from '../data/seo';
 		</div>
 		<ul class="guides-grid">
 			{GUIDES.map((guide) => (
-				<li class="guide-card">
-					<a href={`/blog/guide/${guide.slug}/`}>
-						<h3>{guide.title}</h3>
-						<p>{guide.description}</p>
-					</a>
-				</li>
+				<GuideCard guide={guide} />
 			))}
 		</ul>
 	</section>

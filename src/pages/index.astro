@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import ArticleCard from '../components/ArticleCard.astro';
 import CategoryTags from '../components/CategoryTags.astro';
+import GuideCard from '../components/GuideCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { GUIDES } from '../data/seo';
@@ -64,12 +65,7 @@ const latest = rest.slice(0, 3);
 		</div>
 		<ul class="guides-grid">
 			{GUIDES.map((guide) => (
-				<li class="guide-card">
-					<a href={`/blog/guide/${guide.slug}/`}>
-						<h3>{guide.title}</h3>
-						<p>{guide.description}</p>
-					</a>
-				</li>
+				<GuideCard guide={guide} />
 			))}
 		</ul>
 	</section>
