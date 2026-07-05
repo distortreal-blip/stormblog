@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+	MAIN_SITE_URL,
+	SITE_AUTHOR_NAME,
+	SITE_DESCRIPTION,
+	SITE_ORG_NAME,
+	SITE_ORG_URL,
+	SITE_URL,
+} from '../../consts';
+---
+
+<BaseLayout
+	title="Редакция Storm Cloud"
+	description="Команда экспертов Storm Cloud: практические материалы о VPS, DevOps, разработке и облачной инфраструктуре."
+>
+	<section class="about-panel author-page">
+		<h1>{SITE_AUTHOR_NAME}</h1>
+		<p class="about-panel__lead">
+			Мы готовим практические материалы для разработчиков, администраторов и владельцев проектов. В
+			статьях — проверенные сценарии, без воды и с фокусом на реальные задачи: VPS, Linux, Docker,
+			CI/CD, карьера в IT и инструменты с ИИ.
+		</p>
+
+		<div class="about-blocks">
+			<section class="about-block">
+				<h2>Экспертиза</h2>
+				<p>
+					Облачная инфраструктура, виртуальные серверы, почасовая аренда, безопасность, деплой
+					приложений и автоматизация.
+				</p>
+			</section>
+			<section class="about-block">
+				<h2>Как готовим материалы</h2>
+				<p>
+					Каждая статья проходит редакторскую проверку, обновляется при изменении технологий и
+					содержит практические рекомендации, а не пересказ документации.
+				</p>
+			</section>
+			<section class="about-block">
+				<h2>StormNet Cloud</h2>
+				<p>
+					Блог связан с
+					<a href={MAIN_SITE_URL} target="_blank" rel="noopener noreferrer">{SITE_ORG_NAME}</a>.
+					Нужен VPS для тестов или продакшена —
+					<a href={MAIN_SITE_URL} target="_blank" rel="noopener noreferrer">арендуйте сервер</a>
+					с почасовой оплатой.
+				</p>
+			</section>
+		</div>
+	</section>
+
+	<script type="application/ld+json" set:html={JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Organization',
+		name: SITE_AUTHOR_NAME,
+		url: `${SITE_URL}/author/`,
+		parentOrganization: {
+			'@type': 'Organization',
+			name: SITE_ORG_NAME,
+			url: SITE_ORG_URL,
+		},
+		description: SITE_DESCRIPTION,
+	})} />
+</BaseLayout>

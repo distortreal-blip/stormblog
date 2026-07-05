@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { MAIN_SITE_URL } from '../../consts';
+---
+
+<BaseLayout title="JSON Formatter" description="Форматирование и проверка JSON онлайн.">
+	<section class="tool-page">
+		<h1>JSON Formatter</h1>
+		<p class="tool-page__lead">Проверка синтаксиса и красивое форматирование JSON.</p>
+		<div class="tool-panel">
+			<label for="json-input">JSON</label>
+			<textarea id="json-input" class="tool-textarea" rows="10" placeholder='{"hello":"world"}'></textarea>
+			<div class="tool-row">
+				<button type="button" class="btn btn-primary" id="json-format">Форматировать</button>
+				<button type="button" class="btn btn-ghost" id="json-minify">Минифицировать</button>
+			</div>
+			<p id="json-status" class="tool-result"></p>
+		</div>
+		<p class="tool-cta"><a href={MAIN_SITE_URL}>StormNet Cloud</a> — VPS для API и backend.</p>
+	</section>
+	<script>
+		const input = document.getElementById('json-input');
+		const status = document.getElementById('json-status');
+
+		function processJson(spaces) {
+			if (!input || !status) return;
+			try {
+				const parsed = JSON.parse(input.value);
+				input.value = JSON.stringify(parsed, null, spaces);
+				status.textContent = 'JSON корректен';
+			} catch (error) {
+				status.textContent = error instanceof Error ? error.message : 'Ошибка JSON';
+			}
+		}
+
+		document.getElementById('json-format')?.addEventListener('click', () => processJson(2));
+		document.getElementById('json-minify')?.addEventListener('click', () => processJson(0));
+	</script>
+</BaseLayout>

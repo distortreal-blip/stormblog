@@ -56,7 +56,7 @@ export function getAdjacentPosts(current: BlogPost, posts: BlogPost[]) {
 	};
 }
 
-export function getRelatedPosts(current: BlogPost, posts: BlogPost[], limit = 3) {
+export function getRelatedPosts(current: BlogPost, posts: BlogPost[], limit = 6) {
 	return sortPostsByDate(posts)
 		.filter((post) => post.id !== current.id)
 		.sort((a, b) => {
@@ -67,6 +67,23 @@ export function getRelatedPosts(current: BlogPost, posts: BlogPost[], limit = 3)
 			return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
 		})
 		.slice(0, limit);
+}
+
+export function getPostsBySlugs(posts: BlogPost[], slugs: string[]) {
+	const map = new Map(posts.map((post) => [post.id, post]));
+	return slugs.map((slug) => map.get(slug)).filter((post): post is BlogPost => Boolean(post));
+}
+
+export function getRecommendedPosts(current: BlogPost, posts: BlogPost[], manualSlugs: string[] = [], limit = 6) {
+	const manual = getPostsBySlugs(posts, manualSlugs).filter((post) => post.id !== current.id);
+	const auto = getRelatedPosts(
+		current,
+		posts.filter((post) => !manual.some((item) => item.id === post.id)),
+		limit,
+	);
+	const combined = [...manual, ...auto];
+	const unique = new Map(combined.map((post) => [post.id, post]));
+	return [...unique.values()].slice(0, limit);
 }
 
 export function slugHue(id: string) {

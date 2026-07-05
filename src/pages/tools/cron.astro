@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { MAIN_SITE_URL } from '../../consts';
+---
+
+<BaseLayout title="Cron Expression Parser" description="Расшифровка cron-выражений онлайн. Storm Cloud Blog.">
+	<section class="tool-page">
+		<h1>Cron Expression Parser</h1>
+		<p class="tool-page__lead">Введите cron-выражение и получите понятное описание расписания.</p>
+		<div class="tool-panel">
+			<label for="cron-input">Cron</label>
+			<input id="cron-input" class="tool-input" placeholder="0 2 * * *" value="0 2 * * *" />
+			<p id="cron-result" class="tool-result"></p>
+		</div>
+		<p class="tool-cta">
+			Автоматизируйте задачи на VPS — <a href={MAIN_SITE_URL}>StormNet Cloud</a>.
+		</p>
+	</section>
+	<script>
+		const input = document.getElementById('cron-input');
+		const result = document.getElementById('cron-result');
+
+		const labels = ['минуту', 'час', 'день месяца', 'месяц', 'день недели'];
+
+		function describePart(value, label) {
+			if (value === '*') return `каждую ${label}`;
+			if (value.startsWith('*/')) return `каждые ${value.slice(2)} (${label})`;
+			return `${label}: ${value}`;
+		}
+
+		function parseCron() {
+			if (!input || !result) return;
+			const parts = input.value.trim().split(/\s+/);
+			if (parts.length < 5) {
+				result.textContent = 'Нужно минимум 5 полей: мин час день месяц день_недели';
+				return;
+			}
+			result.textContent = parts.slice(0, 5).map((part, index) => describePart(part, labels[index])).join(' · ');
+		}
+
+		input?.addEventListener('input', parseCron);
+		parseCron();
+	</script>
+</BaseLayout>

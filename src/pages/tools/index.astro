@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { MAIN_SITE_URL } from '../../consts';
+---
+
+<BaseLayout
+	title="Инструменты для разработчиков"
+	description="Бесплатные онлайн-инструменты: UUID, Cron, Base64, JSON и генератор паролей. Storm Cloud Blog."
+>
+	<section class="hero">
+		<h1 class="hero__title">Инструменты для разработчиков</h1>
+		<p class="hero__subtitle">
+			Бесплатные утилиты для ежедневной работы. Работают в браузере, без регистрации. Нужен VPS для
+			деплоя — <a href={MAIN_SITE_URL}>арендуйте сервер на StormNet Cloud</a>.
+		</p>
+	</section>
+
+	<section class="section">
+		<ul class="tools-grid">
+			<li class="tool-card">
+				<a href="/tools/uuid/">
+					<h2>UUID Generator</h2>
+					<p>Генерация UUID v4 для API, баз данных и тестов.</p>
+				</a>
+			</li>
+			<li class="tool-card">
+				<a href="/tools/cron/">
+					<h2>Cron Expression</h2>
+					<p>Расшифровка cron-выражений на понятный русский язык.</p>
+				</a>
+			</li>
+			<li class="tool-card">
+				<a href="/tools/base64/">
+					<h2>Base64 Encoder</h2>
+					<p>Кодирование и декодирование текста в Base64.</p>
+				</a>
+			</li>
+			<li class="tool-card">
+				<a href="/tools/json/">
+					<h2>JSON Formatter</h2>
+					<p>Форматирование и проверка JSON.</p>
+				</a>
+			</li>
+			<li class="tool-card">
+				<a href="/tools/password/">
+					<h2>Password Generator</h2>
+					<p>Безопасные пароли для серверов и сервисов.</p>
+				</a>
+			</li>
+		</ul>
+	</section>
+</BaseLayout>

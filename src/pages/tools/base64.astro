@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { MAIN_SITE_URL } from '../../consts';
+---
+
+<BaseLayout title="Base64 Encoder / Decoder" description="Кодирование и декодирование Base64 онлайн.">
+	<section class="tool-page">
+		<h1>Base64 Encoder / Decoder</h1>
+		<p class="tool-page__lead">Кодируйте и декодируйте текст в Base64 прямо в браузере.</p>
+		<div class="tool-panel">
+			<label for="base64-input">Текст</label>
+			<textarea id="base64-input" class="tool-textarea" rows="6" placeholder="Введите текст"></textarea>
+			<div class="tool-row">
+				<button type="button" class="btn btn-primary" id="base64-encode">Encode</button>
+				<button type="button" class="btn btn-ghost" id="base64-decode">Decode</button>
+			</div>
+			<label for="base64-output">Результат</label>
+			<textarea id="base64-output" class="tool-textarea" rows="6" readonly></textarea>
+		</div>
+		<p class="tool-cta"><a href={MAIN_SITE_URL}>Арендуйте VPS на StormNet Cloud</a> для своих сервисов.</p>
+	</section>
+	<script>
+		const input = document.getElementById('base64-input');
+		const output = document.getElementById('base64-output');
+
+		document.getElementById('base64-encode')?.addEventListener('click', () => {
+			if (!input || !output) return;
+			output.value = btoa(unescape(encodeURIComponent(input.value)));
+		});
+
+		document.getElementById('base64-decode')?.addEventListener('click', () => {
+			if (!input || !output) return;
+			try {
+				output.value = decodeURIComponent(escape(atob(input.value.trim())));
+			} catch {
+				output.value = 'Ошибка декодирования';
+			}
+		});
+	</script>
+</BaseLayout>

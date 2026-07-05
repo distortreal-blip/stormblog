@@ -1,0 +1,25 @@
+---
+import type { BlogPost } from '../utils/blog';
+import { getPostPath } from '../utils/blog';
+
+interface Props {
+	posts: BlogPost[];
+}
+
+const { posts } = Astro.props;
+---
+
+{
+	posts.length > 0 && (
+		<section class="recommended-reading">
+			<h2 class="recommended-reading__title">Рекомендуем прочитать</h2>
+			<ul class="recommended-reading__list">
+				{posts.map((post) => (
+					<li>
+						<a href={getPostPath(post.id)}>{post.data.title}</a>
+					</li>
+				))}
+			</ul>
+		</section>
+	)
+}

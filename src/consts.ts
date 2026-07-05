@@ -14,6 +14,18 @@ export const TELEGRAM_URL = 'https://t.me/stormnetofficial';
 export const OG_IMAGE = `${SITE_URL}/favicon.svg`;
 export const YANDEX_METRIKA_ID = 110407455;
 
+export const SITE_AUTHOR_NAME = 'Редакция Storm Cloud';
+export const SITE_AUTHOR_URL = `${SITE_URL}/author/`;
+export const SITE_ORG_NAME = 'Storm Cloud';
+export const SITE_ORG_URL = MAIN_SITE_URL;
+
+/** Giscus: включите Discussions в GitHub-репо и заполните ID на https://giscus.app */
+export const GISCUS_ENABLED = false;
+export const GISCUS_REPO = 'distortreal-blip/stormblog';
+export const GISCUS_REPO_ID = '';
+export const GISCUS_CATEGORY = 'Announcements';
+export const GISCUS_CATEGORY_ID = '';
+
 export const BLOG_CATEGORIES = [
 	{ slug: 'vps', label: 'VPS' },
 	{ slug: 'devops', label: 'DevOps' },

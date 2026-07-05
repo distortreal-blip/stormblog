@@ -1,0 +1,70 @@
+---
+import {
+	GISCUS_CATEGORY,
+	GISCUS_CATEGORY_ID,
+	GISCUS_ENABLED,
+	GISCUS_REPO,
+	GISCUS_REPO_ID,
+} from '../consts';
+
+interface Props {
+	term: string;
+}
+
+const { term } = Astro.props;
+const isConfigured = GISCUS_ENABLED && GISCUS_REPO_ID && GISCUS_CATEGORY_ID;
+---
+
+{
+	isConfigured && (
+		<section class="comments">
+			<h2 class="comments__title">Комментарии</h2>
+			<div class="giscus" id="giscus-root" data-term={term}></div>
+			<script
+				is:inline
+				define:vars={{
+					repo: GISCUS_REPO,
+					repoId: GISCUS_REPO_ID,
+					category: GISCUS_CATEGORY,
+					categoryId: GISCUS_CATEGORY_ID,
+					term,
+				}}
+			>
+				const container = document.getElementById('giscus-root');
+				if (!container) {
+					throw new Error('Giscus container not found');
+				}
+
+				const script = document.createElement('script');
+				script.src = 'https://giscus.app/client.js';
+				script.setAttribute('data-repo', repo);
+				script.setAttribute('data-repo-id', repoId);
+				script.setAttribute('data-category', category);
+				script.setAttribute('data-category-id', categoryId);
+				script.setAttribute('data-mapping', 'specific');
+				script.setAttribute('data-term', term);
+				script.setAttribute('data-strict', '0');
+				script.setAttribute('data-reactions-enabled', '1');
+				script.setAttribute('data-emit-metadata', '0');
+				script.setAttribute('data-input-position', 'top');
+				script.setAttribute('data-theme', 'noborder_dark');
+				script.setAttribute('data-lang', 'ru');
+				script.crossOrigin = 'anonymous';
+				script.async = true;
+				container.appendChild(script);
+			</script>
+		</section>
+	)
+}
+
+{
+	!isConfigured && (
+		<section class="comments comments--placeholder">
+			<h2 class="comments__title">Комментарии</h2>
+			<p>
+				Обсуждение скоро будет доступно. Пока пишите в
+				<a href="https://t.me/stormnetofficial" target="_blank" rel="noopener noreferrer">Telegram</a>.
+			</p>
+		</section>
+	)
+}

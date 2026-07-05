@@ -4,6 +4,7 @@ import ArticleCard from '../../components/ArticleCard.astro';
 import CategoryTags from '../../components/CategoryTags.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION } from '../../consts';
+import { GUIDES } from '../../data/seo';
 import { sortPostsByDate } from '../../utils/blog';
 
 const posts = sortPostsByDate(await getCollection('blog'));
@@ -16,6 +17,22 @@ const posts = sortPostsByDate(await getCollection('blog'));
 			Практические материалы о VPS, серверах, DevOps, разработке и облачной инфраструктуре.
 		</p>
 		<CategoryTags />
+	</section>
+
+	<section class="section">
+		<div class="section__header">
+			<h2 class="section__title">Подборки и гиды</h2>
+		</div>
+		<ul class="guides-grid">
+			{GUIDES.map((guide) => (
+				<li class="guide-card">
+					<a href={`/blog/guide/${guide.slug}/`}>
+						<h3>{guide.title}</h3>
+						<p>{guide.description}</p>
+					</a>
+				</li>
+			))}
+		</ul>
 	</section>
 
 	<section class="section">

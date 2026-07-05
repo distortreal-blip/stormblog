@@ -9,16 +9,18 @@ interface Props {
 	title: string;
 	heroImage?: ImageMetadata;
 	variant?: 'card' | 'featured' | 'hero';
+	imageAlt?: string;
 }
 
-const { id, category, title, heroImage, variant = 'card' } = Astro.props;
+const { id, category, title, heroImage, variant = 'card', imageAlt } = Astro.props;
+const alt = imageAlt ?? title;
 const hue = slugHue(id);
 ---
 
 <div class={`cover cover--${variant}`} style={`--cover-hue: ${hue}`}>
 	{
 		heroImage ? (
-			<Image src={heroImage} alt="" width={1200} height={630} loading="lazy" />
+			<Image src={heroImage} alt={alt} title={title} width={1200} height={630} loading="lazy" />
 		) : (
 			<>
 				<div class="cover__layer cover__gradient"></div>

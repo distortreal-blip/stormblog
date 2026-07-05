@@ -1078,3 +1078,172 @@ img {
 .about-block a:hover {
 	color: var(--accent-hover);
 }
+
+.article-author {
+	margin-top: 12px;
+	font-size: 13px;
+	color: var(--text-tertiary);
+}
+
+.article-author__link {
+	color: var(--accent);
+	font-weight: 500;
+}
+
+.recommended-reading,
+.article-faq,
+.comments {
+	margin-top: 48px;
+	padding-top: 32px;
+	border-top: 1px solid var(--border);
+}
+
+.recommended-reading__title,
+.article-faq__title,
+.comments__title {
+	margin: 0 0 16px;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.recommended-reading__list {
+	margin: 0;
+	padding-left: 1.2rem;
+	color: var(--text-secondary);
+}
+
+.recommended-reading__list a {
+	color: var(--accent);
+}
+
+.article-faq__list {
+	display: grid;
+	gap: 12px;
+}
+
+.article-faq__item {
+	padding: 14px 16px;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	background: var(--surface);
+}
+
+.article-faq__item summary {
+	cursor: pointer;
+	font-weight: 500;
+	color: var(--text);
+}
+
+.article-faq__item p {
+	margin: 12px 0 0;
+	color: var(--text-secondary);
+	line-height: 1.6;
+}
+
+.comments--placeholder p {
+	color: var(--text-secondary);
+}
+
+.guide-kicker {
+	margin: 0 0 8px;
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--accent);
+}
+
+.guides-grid,
+.tools-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 16px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.guide-card,
+.tool-card {
+	border: 1px solid var(--border);
+	border-radius: var(--radius-card);
+	background: var(--surface);
+}
+
+.guide-card a,
+.tool-card a {
+	display: block;
+	padding: 20px;
+}
+
+.guide-card h3,
+.tool-card h2 {
+	margin: 0 0 8px;
+	font-size: 1rem;
+	color: var(--text);
+}
+
+.guide-card p,
+.tool-card p {
+	margin: 0;
+	font-size: 14px;
+	color: var(--text-secondary);
+	line-height: 1.55;
+}
+
+.tool-page {
+	max-width: 760px;
+	padding: 48px 0 0;
+}
+
+.tool-page h1 {
+	margin: 0 0 12px;
+}
+
+.tool-page__lead {
+	margin: 0 0 24px;
+	color: var(--text-secondary);
+}
+
+.tool-panel {
+	display: grid;
+	gap: 12px;
+	padding: 24px;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-card);
+	background: var(--surface);
+}
+
+.tool-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.tool-input,
+.tool-textarea {
+	width: 100%;
+	padding: 12px 14px;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	background: #0a0a0a;
+	color: var(--text);
+	font: inherit;
+}
+
+.tool-result,
+.tool-cta {
+	color: var(--text-secondary);
+	font-size: 14px;
+}
+
+.section__meta {
+	font-size: 13px;
+	color: var(--text-tertiary);
+}
+
+@media (max-width: 900px) {
+	.guides-grid,
+	.tools-grid {
+		grid-template-columns: 1fr;
+	}
+}

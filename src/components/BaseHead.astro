@@ -4,11 +4,16 @@ import type { ImageMetadata } from 'astro';
 import {
 	MAIN_SITE_URL,
 	OG_IMAGE,
+	SITE_AUTHOR_NAME,
+	SITE_AUTHOR_URL,
 	SITE_DESCRIPTION,
 	SITE_KEYWORDS,
+	SITE_ORG_NAME,
+	SITE_ORG_URL,
 	SITE_TITLE,
 	SITE_URL,
 } from '../consts';
+import type { FaqItem } from '../data/seo';
 
 export interface BreadcrumbItem {
 	label: string;
@@ -24,6 +29,7 @@ export interface ArticleMeta {
 	url: string;
 	image?: string;
 	keywords?: string[];
+	faq?: FaqItem[];
 }
 
 interface Props {
@@ -41,6 +47,7 @@ const { title, description, type = 'website', keywords, article, breadcrumbs = [
 const fullTitle = title === SITE_TITLE ? title : `${title} — ${SITE_TITLE}`;
 const ogImage = article?.image ?? OG_IMAGE;
 const pageKeywords = (article?.keywords ?? keywords)?.join(', ') ?? SITE_KEYWORDS;
+const authorName = SITE_AUTHOR_NAME;
 ---
 
 <meta charset="utf-8" />
@@ -58,7 +65,7 @@ const pageKeywords = (article?.keywords ?? keywords)?.join(', ') ?? SITE_KEYWORD
 <meta name="description" content={description} />
 <meta name="keywords" content={pageKeywords} />
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-<meta name="author" content="Storm Cloud" />
+<meta name="author" content={authorName} />
 
 <meta property="og:type" content={type} />
 <meta property="og:site_name" content={SITE_TITLE} />
@@ -94,8 +101,8 @@ const pageKeywords = (article?.keywords ?? keywords)?.join(', ') ?? SITE_KEYWORD
 	inLanguage: 'ru-RU',
 	publisher: {
 		'@type': 'Organization',
-		name: 'Storm Cloud',
-		url: MAIN_SITE_URL,
+		name: SITE_ORG_NAME,
+		url: SITE_ORG_URL,
 	},
 })} />
 
@@ -113,23 +120,51 @@ const pageKeywords = (article?.keywords ?? keywords)?.join(', ') ?? SITE_KEYWORD
 					? { dateModified: article.updatedDate.toISOString() }
 					: { dateModified: article.pubDate.toISOString() }),
 				inLanguage: 'ru-RU',
-				mainEntityOfPage: article.url,
-				image: ogImage,
+				mainEntityOfPage: {
+					'@type': 'WebPage',
+					'@id': article.url,
+				},
+				image: {
+					'@type': 'ImageObject',
+					url: ogImage,
+					width: 1200,
+					height: 630,
+				},
 				author: {
 					'@type': 'Organization',
-					name: 'Storm Cloud',
-					url: MAIN_SITE_URL,
+					name: SITE_AUTHOR_NAME,
+					url: SITE_AUTHOR_URL,
 				},
 				publisher: {
 					'@type': 'Organization',
-					name: 'Storm Cloud',
-					url: MAIN_SITE_URL,
+					name: SITE_ORG_NAME,
+					url: SITE_ORG_URL,
 				},
 				articleSection: article.category,
 				...(article.keywords?.length ? { keywords: article.keywords.join(', ') } : {}),
 			})}
 		/>
 	)
+}
+
+{
+	article?.faq?.length ? (
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				'@context': 'https://schema.org',
+				'@type': 'FAQPage',
+				mainEntity: article.faq.map((item) => ({
+					'@type': 'Question',
+					name: item.question,
+					acceptedAnswer: {
+						'@type': 'Answer',
+						text: item.answer,
+					},
+				})),
+			})}
+		/>
+	) : null
 }
 
 {

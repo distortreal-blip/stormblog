@@ -1,6 +1,10 @@
 ---
 import { getImage } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import ArticleAuthor from '../components/ArticleAuthor.astro';
+import ArticleFAQ from '../components/ArticleFAQ.astro';
+import GiscusComments from '../components/GiscusComments.astro';
+import RecommendedReading from '../components/RecommendedReading.astro';
 import ArticleCover from '../components/ArticleCover.astro';
 import ArticleNav from '../components/ArticleNav.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
@@ -17,8 +21,10 @@ import {
 	getAdjacentPosts,
 	getPostPath,
 	getReadingTimeMinutes,
+	getRecommendedPosts,
 	getRelatedPosts,
 } from '../utils/blog';
+import { ARTICLE_FAQ, RECOMMENDED_LINKS } from '../data/seo';
 
 interface Props {
 	post: CollectionEntry<'blog'>;
@@ -30,7 +36,9 @@ const { title, description, pubDate, updatedDate, category, heroImage, keywords 
 const readingTime = formatReadingTime(getReadingTimeMinutes(post.body ?? ''));
 const headings = extractHeadings(post.body ?? '');
 const { prev, next } = getAdjacentPosts(post, allPosts);
-const related = getRelatedPosts(post, allPosts);
+const related = getRelatedPosts(post, allPosts, 6);
+const recommended = getRecommendedPosts(post, allPosts, RECOMMENDED_LINKS[post.id] ?? [], 6);
+const faqItems = ARTICLE_FAQ[post.id] ?? [];
 const articleUrl = new URL(getPostPath(post.id), Astro.site).href;
 const optimizedCover = heroImage
 	? await getImage({ src: heroImage, width: 1200, height: 630 })
@@ -60,6 +68,7 @@ const breadcrumbs = [
 		url: articleUrl,
 		image: ogImage,
 		keywords,
+		faq: faqItems,
 	}}
 	breadcrumbs={breadcrumbs}
 >
@@ -68,7 +77,14 @@ const breadcrumbs = [
 	<div class="article-shell">
 		<Breadcrumbs items={breadcrumbs} />
 
-		<ArticleCover id={post.id} category={category} title={title} heroImage={heroImage} variant="hero" />
+		<ArticleCover
+			id={post.id}
+			category={category}
+			title={title}
+			heroImage={heroImage}
+			variant="hero"
+			imageAlt={title}
+		/>
 
 		<div class="article-layout">
 			<TableOfContents headings={headings} />
@@ -96,14 +112,18 @@ const breadcrumbs = [
 					</div>
 					<h1 class="article-header__title">{title}</h1>
 					<p class="article-header__lead">{description}</p>
+					<ArticleAuthor />
 				</header>
 
 				<div class="article-body">
 					<slot />
 				</div>
 
+				<RecommendedReading posts={recommended} />
+				<ArticleFAQ items={faqItems} />
 				<ArticleNav prevPost={prev} nextPost={next} />
 				<RelatedArticles posts={related} />
+				<GiscusComments term={getPostPath(post.id)} />
 			</article>
 		</div>
 	</div>

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { MAIN_SITE_URL } from '../../consts';
+---
+
+<BaseLayout title="UUID Generator" description="Бесплатный генератор UUID v4 онлайн. Storm Cloud Blog.">
+	<section class="tool-page">
+		<h1>UUID Generator</h1>
+		<p class="tool-page__lead">Генерация UUID v4 для API, баз данных и тестовых данных.</p>
+		<div class="tool-panel">
+			<label for="uuid-output">UUID</label>
+			<div class="tool-row">
+				<input id="uuid-output" class="tool-input" readonly />
+				<button type="button" class="btn btn-primary" id="uuid-generate">Сгенерировать</button>
+				<button type="button" class="btn btn-ghost" id="uuid-copy">Копировать</button>
+			</div>
+		</div>
+		<p class="tool-cta">
+			Нужен сервер для деплоя? <a href={MAIN_SITE_URL}>Арендуйте VPS на StormNet Cloud</a>.
+		</p>
+	</section>
+	<script>
+		const output = document.getElementById('uuid-output');
+		const generateBtn = document.getElementById('uuid-generate');
+		const copyBtn = document.getElementById('uuid-copy');
+
+		function createUuid() {
+			if (!output) return;
+			output.value = crypto.randomUUID();
+		}
+
+		generateBtn?.addEventListener('click', createUuid);
+		copyBtn?.addEventListener('click', async () => {
+			if (!output?.value) return;
+			await navigator.clipboard.writeText(output.value);
+		});
+
+		createUuid();
+	</script>
+</BaseLayout>

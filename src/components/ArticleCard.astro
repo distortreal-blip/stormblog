@@ -26,6 +26,7 @@ const readingTime = formatReadingTime(getReadingTimeMinutes(post.body ?? ''));
 			title={title}
 			heroImage={heroImage}
 			variant={featured ? 'featured' : 'card'}
+			imageAlt={title}
 		/>
 		<div class="article-card__body">
 			<div class="article-card__meta">

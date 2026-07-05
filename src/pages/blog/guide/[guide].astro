@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { GUIDES, getGuide } from '../../../data/seo';
+import { getPostsBySlugs } from '../../../utils/blog';
+
+export function getStaticPaths() {
+	return GUIDES.map((guide) => ({
+		params: { guide: guide.slug },
+	}));
+}
+
+const { guide: guideSlug } = Astro.params;
+const guide = getGuide(guideSlug ?? '');
+
+if (!guide) {
+	return Astro.redirect('/blog/');
+}
+
+const allPosts = await getCollection('blog');
+const posts = getPostsBySlugs(allPosts, guide.articleSlugs);
+---
+
+<BaseLayout title={guide.title} description={guide.description} keywords={guide.keywords}>
+	<section class="hero">
+		<p class="guide-kicker">Topic Cluster · Pillar Page</p>
+		<h1 class="hero__title">{guide.title}</h1>
+		<p class="hero__subtitle">{guide.intro}</p>
+		<div class="hero__actions">
+			<a class="btn btn-primary" href="/blog/">Все статьи</a>
+			<a class="btn btn-ghost" href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">
+				Арендовать VPS
+			</a>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="section__header">
+			<h2 class="section__title">Статьи в этом разделе</h2>
+			<span class="section__meta">{posts.length} материалов</span>
+		</div>
+		<ul class="article-grid article-grid--compact">
+			{posts.map((post, index) => (
+				<ArticleCard post={post} featured={index === 0} />
+			))}
+		</ul>
+	</section>
+</BaseLayout>

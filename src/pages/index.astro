@@ -4,6 +4,7 @@ import ArticleCard from '../components/ArticleCard.astro';
 import CategoryTags from '../components/CategoryTags.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { GUIDES } from '../data/seo';
 import { sortPostsByDate } from '../utils/blog';
 
 const posts = sortPostsByDate(await getCollection('blog'));
@@ -55,4 +56,21 @@ const latest = rest.slice(0, 3);
 			</section>
 		)
 	}
+
+	<section class="section">
+		<div class="section__header">
+			<h2 class="section__title">Подборки и гиды</h2>
+			<a class="section__link" href="/blog">Все статьи →</a>
+		</div>
+		<ul class="guides-grid">
+			{GUIDES.map((guide) => (
+				<li class="guide-card">
+					<a href={`/blog/guide/${guide.slug}/`}>
+						<h3>{guide.title}</h3>
+						<p>{guide.description}</p>
+					</a>
+				</li>
+			))}
+		</ul>
+	</section>
 </BaseLayout>
