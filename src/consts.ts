@@ -5,7 +5,7 @@ export const SITE_TITLE = 'Storm Cloud Блог';
 export const SITE_DESCRIPTION =
 	'Практические руководства, обзоры и инструкции о VPS, серверах, DevOps и облачной инфраструктуре.';
 export const SITE_KEYWORDS =
-	'VPS, аренда сервера, облачный сервер, DevOps, инфраструктура, безопасность сервера, почасовая аренда VPS, Storm Cloud';
+	'VPS, аренда сервера, облачный сервер, DevOps, инфраструктура, безопасность сервера, почасовая аренда VPS, Storm Cloud, программирование, junior разработчик, pet project, искусственный интеллект, Cursor, ChatGPT, Claude, Linux, Docker, настройка сервера, облачная инфраструктура, IT блог, разработка';
 export const SITE_URL = 'https://blog.stormnetcloud.com';
 export const MAIN_SITE_URL = 'https://stormnetcloud.com/';
 export const INSTAGRAM_URL = 'https://www.instagram.com/stormnet_cloud';

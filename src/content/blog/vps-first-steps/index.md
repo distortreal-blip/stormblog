@@ -3,6 +3,13 @@ title: "Что сделать сразу после запуска VPS"
 description: "Вы запустили VPS. Получили IP-адрес, логин, пароль или SSH-ключ. Кажется, что можно сразу устанавливать сайт, запускать Docker или переносить приложение."
 pubDate: 2026-07-04
 category: DevOps
+keywords:
+  - "настройка VPS"
+  - "первый запуск VPS"
+  - "безопасность VPS"
+  - "SSH"
+  - "firewall"
+  - "DevOps"
 heroImage: ./cover.webp
 ---
 

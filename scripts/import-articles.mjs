@@ -14,30 +14,70 @@ const vpsArticles = [
 		slug: 'hourly-vps',
 		category: 'Облака',
 		pubDate: '2026-07-04',
+		keywords: [
+			'VPS на час',
+			'почасовая аренда VPS',
+			'временный сервер',
+			'тестовый VPS',
+			'аренда VPS',
+			'Storm Cloud',
+		],
 	},
 	{
 		folder: 'Когда сайту пора переезжать с обычного хостинга на VPS',
 		slug: 'hosting-to-vps',
 		category: 'VPS',
 		pubDate: '2026-07-04',
+		keywords: [
+			'переезд на VPS',
+			'хостинг vs VPS',
+			'миграция на VPS',
+			'когда нужен VPS',
+			'VPS',
+			'Storm Cloud',
+		],
 	},
 	{
 		folder: 'Что сделать сразу после запуска VPS',
 		slug: 'vps-first-steps',
 		category: 'DevOps',
 		pubDate: '2026-07-04',
+		keywords: [
+			'настройка VPS',
+			'первый запуск VPS',
+			'безопасность VPS',
+			'SSH',
+			'firewall',
+			'DevOps',
+		],
 	},
 	{
 		folder: '10 ошибок при выборе VPS, которые совершают почти все',
 		slug: 'vps-mistakes',
 		category: 'VPS',
 		pubDate: '2026-07-05',
+		keywords: [
+			'ошибки при выборе VPS',
+			'как выбрать VPS',
+			'VPS для новичков',
+			'аренда VPS',
+			'облачный сервер',
+			'Storm Cloud',
+		],
 	},
 	{
 		folder: 'Как правильно выбрать VPS и не переплатить за лишнее',
 		slug: 'choose-vps',
 		category: 'VPS',
 		pubDate: '2026-07-04',
+		keywords: [
+			'выбор VPS',
+			'сравнение VPS',
+			'аренда VPS',
+			'облачный сервер',
+			'VPS без переплаты',
+			'Storm Cloud',
+		],
 	},
 ];
 
@@ -122,10 +162,37 @@ function slugify(text) {
 		.slice(0, 60);
 }
 
+function parseKeywordsBlock(yaml) {
+	const keywords = [];
+	let inKeywords = false;
+
+	for (const line of yaml.split('\n')) {
+		if (/^keywords:\s*$/.test(line.trim())) {
+			inKeywords = true;
+			continue;
+		}
+
+		if (inKeywords) {
+			const match = line.match(/^\s*-\s+(.+)$/);
+			if (match) {
+				keywords.push(match[1].replace(/^["']|["']$/g, '').trim());
+				continue;
+			}
+
+			if (line.trim() && !/^\s/.test(line)) {
+				break;
+			}
+		}
+	}
+
+	return keywords;
+}
+
 function parseSource(raw) {
 	let content = raw.replace(/\r\n/g, '\n').trim();
 	let sourceTitle = '';
 	let sourceDescription = '';
+	let sourceKeywords = [];
 
 	if (content.startsWith('---')) {
 		const end = content.indexOf('\n---', 3);
@@ -135,6 +202,7 @@ function parseSource(raw) {
 			const descMatch = yaml.match(/^description:\s*(.+)$/m);
 			if (titleMatch) sourceTitle = titleMatch[1].replace(/^["']|["']$/g, '').trim();
 			if (descMatch) sourceDescription = descMatch[1].replace(/^["']|["']$/g, '').trim();
+			sourceKeywords = parseKeywordsBlock(yaml);
 			content = content.slice(end + 4).trim();
 		}
 	}
@@ -144,7 +212,7 @@ function parseSource(raw) {
 	content = content.replace(/^#\s+.*\n+/, '');
 	content = content.replace(/^#\s+Итог/gm, '## Итог');
 
-	return { title, description: sourceDescription, body: content.trim() };
+	return { title, description: sourceDescription, keywords: sourceKeywords, body: content.trim() };
 }
 
 function makeDescription(body) {
@@ -162,15 +230,22 @@ function makeDescription(body) {
 	return (paragraph ?? body.slice(0, 160)).replace(/\s+/g, ' ').slice(0, 180).trim();
 }
 
-function importArticle({ folder, slug, category, pubDate }, sourceRoot) {
+function formatKeywordsYaml(keywords) {
+	if (!keywords.length) return '';
+	return `keywords:\n${keywords.map((keyword) => `  - ${JSON.stringify(keyword)}`).join('\n')}\n`;
+}
+
+function importArticle({ folder, slug, category, pubDate, keywords: fallbackKeywords = [] }, sourceRoot) {
 	const folderPath = path.join(sourceRoot, folder);
 	const mdName = findMdFile(folderPath);
 	if (!mdName) throw new Error(`Missing markdown file in ${folder}`);
 
 	const raw = fs.readFileSync(path.join(folderPath, mdName), 'utf8');
-	const { title: parsedTitle, description: parsedDescription, body } = parseSource(raw);
+	const { title: parsedTitle, description: parsedDescription, keywords: parsedKeywords, body } =
+		parseSource(raw);
 	const title = parsedTitle || folder;
 	const description = parsedDescription || makeDescription(body);
+	const keywords = parsedKeywords.length ? parsedKeywords : fallbackKeywords;
 	const finalSlug = slug ?? slugify(title);
 	const outDir = path.join(blogRoot, finalSlug);
 
@@ -189,7 +264,7 @@ title: ${JSON.stringify(title)}
 description: ${JSON.stringify(description)}
 pubDate: ${pubDate}
 category: ${category}
-${heroImageLine}---
+${formatKeywordsYaml(keywords)}${heroImageLine}---
 
 ${body}
 `;

@@ -13,6 +13,7 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			category: z.enum(categories).default('VPS'),
+			keywords: z.array(z.string()).optional(),
 			heroImage: z.optional(image()),
 		}),
 });

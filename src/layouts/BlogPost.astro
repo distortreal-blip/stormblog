@@ -25,7 +25,7 @@ interface Props {
 }
 
 const { post, allPosts } = Astro.props;
-const { title, description, pubDate, updatedDate, category, heroImage } = post.data;
+const { title, description, pubDate, updatedDate, category, heroImage, keywords } = post.data;
 const readingTime = formatReadingTime(getReadingTimeMinutes(post.body ?? ''));
 const headings = extractHeadings(post.body ?? '');
 const { prev, next } = getAdjacentPosts(post, allPosts);
@@ -58,6 +58,7 @@ const breadcrumbs = [
 		category,
 		url: articleUrl,
 		image: ogImage,
+		keywords,
 	}}
 	breadcrumbs={breadcrumbs}
 >

@@ -3,6 +3,13 @@ title: "Cursor, Claude Code или ChatGPT: что выбрать програм
 description: "Сравниваем Cursor, Claude Code и ChatGPT. Для каких задач подходит каждый инструмент, чем они отличаются и какой выбрать разработчику."
 pubDate: 2026-07-05
 category: Разработка
+keywords:
+  - "Cursor"
+  - "Claude Code"
+  - "ChatGPT"
+  - "AI IDE"
+  - "программирование с ИИ"
+  - "AI coding"
 heroImage: ./cover.webp
 ---
 
