@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { GUIDES } from '../data/seo';
+---
+
+<BaseLayout
+	title="Страница не найдена"
+	description="Запрашиваемая страница не существует. Перейдите к статьям, подборкам или инструментам Storm Cloud Blog."
+>
+	<section class="hero not-found">
+		<p class="not-found__code">404</p>
+		<h1 class="hero__title">Страница не найдена</h1>
+		<p class="hero__subtitle">
+			Возможно, ссылка устарела или адрес введён с ошибкой. Выберите один из разделов ниже.
+		</p>
+		<div class="hero__actions">
+			<a class="btn btn-primary" href="/">На главную</a>
+			<a class="btn btn-ghost" href="/blog/">Все статьи</a>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="section__header">
+			<h2 class="section__title">Популярные подборки</h2>
+		</div>
+		<ul class="guides-grid">
+			{GUIDES.map((guide) => (
+				<li class="guide-card">
+					<a href={`/blog/guide/${guide.slug}/`}>
+						<h3>{guide.title}</h3>
+						<p>{guide.description}</p>
+					</a>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section class="section">
+		<div class="section__header">
+			<h2 class="section__title">Ещё полезное</h2>
+		</div>
+		<ul class="not-found__links">
+			<li><a href="/tools/">Инструменты для разработчиков</a></li>
+			<li><a href="/author/">Редакция Storm Cloud</a></li>
+			<li><a href="/about/">О проекте</a></li>
+		</ul>
+	</section>
+</BaseLayout>

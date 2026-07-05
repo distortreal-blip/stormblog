@@ -1247,3 +1247,24 @@ img {
 		grid-template-columns: 1fr;
 	}
 }
+
+.not-found__code {
+	margin: 0 0 8px;
+	font-size: 14px;
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	color: var(--accent);
+}
+
+.not-found__links {
+	display: grid;
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.not-found__links a {
+	color: var(--accent);
+	font-weight: 500;
+}

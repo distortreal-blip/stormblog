@@ -11,7 +11,8 @@ export const MAIN_SITE_URL = 'https://stormnetcloud.com/';
 export const INSTAGRAM_URL = 'https://www.instagram.com/stormnet_cloud';
 export const TIKTOK_URL = 'https://www.tiktok.com/@stormnetcloud';
 export const TELEGRAM_URL = 'https://t.me/stormnetofficial';
-export const OG_IMAGE = `${SITE_URL}/favicon.svg`;
+export const OG_IMAGE = `${SITE_URL}/og-default.jpg`;
+export const INDEXNOW_KEY = 'stormblogindexnow2026';
 export const YANDEX_METRIKA_ID = 110407455;
 
 export const SITE_AUTHOR_NAME = 'Редакция Storm Cloud';
