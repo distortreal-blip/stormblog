@@ -3,31 +3,41 @@ import { getCollection } from 'astro:content';
 import ArticleCard from '../components/ArticleCard.astro';
 import CategoryTags from '../components/CategoryTags.astro';
 import GuideCard from '../components/GuideCard.astro';
+import TopicOfMonth from '../components/TopicOfMonth.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { GUIDES } from '../data/seo';
+import { SITE_DESCRIPTION, SITE_TITLE, TOPIC_OF_MONTH } from '../consts';
 import { sortPostsByDate } from '../utils/blog';
 
-const posts = sortPostsByDate(await getCollection('blog'));
-const [featured, ...rest] = posts;
+const allPosts = sortPostsByDate(await getCollection('blog'));
+const topicPost = allPosts.find((post) => post.id === TOPIC_OF_MONTH.slug);
+const listPosts = topicPost
+	? allPosts.filter((post) => post.id !== TOPIC_OF_MONTH.slug)
+	: allPosts;
+const [featured, ...rest] = listPosts;
 const latest = rest.slice(0, 3);
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-	<section class="hero">
-		<h1 class="hero__title">Статьи о VPS, серверах и облачной инфраструктуре</h1>
-		<p class="hero__subtitle">
-			Практические руководства, обзоры и инструкции для разработчиков, системных администраторов и
-			всех, кто работает с облачной инфраструктурой.
-		</p>
-		<div class="hero__actions">
-			<a class="btn btn-primary" href="/blog">Все статьи</a>
-			<a class="btn btn-ghost" href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">
-				Арендовать VPS
-			</a>
+	<div class="hero-shell">
+		<div class="hero-shell__main">
+			<section class="hero">
+				<h1 class="hero__title">Статьи о VPS, серверах и облачной инфраструктуре</h1>
+				<p class="hero__subtitle">
+					Практические руководства, обзоры и инструкции для разработчиков, системных администраторов и
+					всех, кто работает с облачной инфраструктурой.
+				</p>
+				<div class="hero__actions">
+					<a class="btn btn-primary" href="/blog">Все статьи</a>
+					<a class="btn btn-ghost" href="https://stormnetcloud.com/" target="_blank" rel="noopener noreferrer">
+						Арендовать VPS
+					</a>
+				</div>
+				<CategoryTags showAll={false} />
+			</section>
 		</div>
-		<CategoryTags showAll={false} />
-	</section>
+		{topicPost && <TopicOfMonth post={topicPost} />}
+	</div>
 
 	{
 		featured && (

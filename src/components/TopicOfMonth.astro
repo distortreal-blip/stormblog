@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { TOPIC_OF_MONTH } from '../consts';
+import { formatReadingTime, getPostPath, getReadingTimeMinutes } from '../utils/blog';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, category, heroImage } = post.data;
+const href = getPostPath(post.id);
+const readingTime = formatReadingTime(getReadingTimeMinutes(post.body ?? ''));
+---
+
+<aside class="topic-month" aria-label="Тема месяца">
+	<div class="topic-month__glow" aria-hidden="true"></div>
+	<div class="topic-month__header">
+		<span class="topic-month__badge">
+			<span class="topic-month__fire" aria-hidden="true">🔥</span>
+			{TOPIC_OF_MONTH.label}
+		</span>
+		<span class="topic-month__date">{TOPIC_OF_MONTH.monthLabel}</span>
+	</div>
+
+	<a class="topic-month__link" href={href}>
+		{
+			heroImage && (
+				<div class="topic-month__cover">
+					<Image src={heroImage} alt={title} width={640} height={360} loading="eager" />
+					<div class="topic-month__cover-shine" aria-hidden="true"></div>
+				</div>
+			)
+		}
+		<div class="topic-month__body">
+			<span class="topic-month__category">{category}</span>
+			<h2 class="topic-month__title">{title}</h2>
+			<p class="topic-month__desc">{description}</p>
+			<span class="topic-month__meta">{readingTime} · Читать гайд →</span>
+		</div>
+	</a>
+</aside>

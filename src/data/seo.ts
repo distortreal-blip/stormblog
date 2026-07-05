@@ -125,6 +125,28 @@ export const ARTICLE_FAQ: Record<string, FaqItem[]> = {
 			answer: 'Когда не хватает root-доступа, нужен Docker, Redis, нестандартный софт или сайт упирается в лимиты хостинга.',
 		},
 	],
+	'razvernut-sayt-na-vps-2026': [
+		{
+			question: 'Сколько времени нужно, чтобы развернуть сайт на VPS?',
+			answer:
+				'Простой статический сайт с Nginx и SSL — 40–60 минут. Приложение с Docker и базой данных — 2–4 часа при первом опыте.',
+		},
+		{
+			question: 'Нужен ли домен для деплоя на VPS?',
+			answer:
+				'Нет, сайт можно открыть по IP. Но для production нужен домен и HTTPS — иначе страдают SEO и доверие пользователей.',
+		},
+		{
+			question: 'Какой VPS выбрать для первого сайта?',
+			answer:
+				'Для лендинга или блога достаточно 1–2 GB RAM. Для WordPress или Docker — от 2–4 GB. Для тестов подойдёт почасовая аренда.',
+		},
+		{
+			question: 'Можно ли развернуть сайт на VPS без Docker?',
+			answer:
+				'Да. Классический путь — Nginx + статика или Nginx как reverse proxy к Node/Python на localhost. Docker упрощает сложные стеки.',
+		},
+	],
 };
 
 /** Ручная перелинковка: slug → список slug для блока «Рекомендуем прочитать» */
@@ -177,6 +199,14 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'vps-evropa-ili-rossiya',
 		'idea-to-service-evening',
 	],
+	'razvernut-sayt-na-vps-2026': [
+		'vps-first-steps',
+		'hosting-to-vps',
+		'docker-compose-vps',
+		'github-actions-cicd',
+		'vps-monitoring',
+		'choose-vps',
+	],
 };
 
 export const GUIDES: GuideConfig[] = [
@@ -211,6 +241,7 @@ export const GUIDES: GuideConfig[] = [
 		intro:
 			'Кластер статей для тех, кто выбирает, настраивает или оптимизирует виртуальный сервер. От первого VPS до почасовой модели и сравнения с хостингом.',
 		articleSlugs: [
+			'razvernut-sayt-na-vps-2026',
 			'choose-vps',
 			'vps-mistakes',
 			'pochasovaya-arenda-vps',

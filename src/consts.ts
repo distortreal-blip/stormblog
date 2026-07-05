@@ -13,6 +13,13 @@ export const TIKTOK_URL = 'https://www.tiktok.com/@stormnetcloud';
 export const TELEGRAM_URL = 'https://t.me/stormnetofficial';
 export const OG_IMAGE = `${SITE_URL}/og-default.jpg`;
 export const INDEXNOW_KEY = 'stormblogindexnow2026';
+
+/** «Тема месяца» на главной — slug статьи из content/blog */
+export const TOPIC_OF_MONTH = {
+	slug: 'razvernut-sayt-na-vps-2026',
+	label: 'Тема месяца',
+	monthLabel: 'Июль 2026',
+} as const;
 export const YANDEX_METRIKA_ID = 110407455;
 
 export const SITE_AUTHOR_NAME = 'Редакция Storm Cloud';
