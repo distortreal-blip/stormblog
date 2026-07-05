@@ -1,0 +1,7 @@
+name = "stormblog"
+pages_build_output_dir = "dist"
+compatibility_date = "2024-09-01"
+
+# Счётчик просмотров: привяжите KV в Cloudflare Dashboard
+# Pages → stormblog → Settings → Functions → KV namespace bindings
+# Variable name: VIEWS

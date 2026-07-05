@@ -5,6 +5,7 @@ import ArticleCover from '../components/ArticleCover.astro';
 import ArticleNav from '../components/ArticleNav.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import ArticleViews from '../components/ArticleViews.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import TableOfContents from '../components/TableOfContents.astro';
@@ -80,6 +81,8 @@ const breadcrumbs = [
 						<span>{readingTime}</span>
 						<span>·</span>
 						<FormattedDate date={pubDate} />
+						<span>·</span>
+						<ArticleViews slug={post.id} />
 						{
 							updatedDate && (
 								<>

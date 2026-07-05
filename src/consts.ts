@@ -12,6 +12,7 @@ export const INSTAGRAM_URL = 'https://www.instagram.com/stormnet_cloud';
 export const TIKTOK_URL = 'https://www.tiktok.com/@stormnetcloud';
 export const TELEGRAM_URL = 'https://t.me/stormnetofficial';
 export const OG_IMAGE = `${SITE_URL}/favicon.svg`;
+export const YANDEX_METRIKA_ID = 110407455;
 
 export const BLOG_CATEGORIES = [
 	{ slug: 'vps', label: 'VPS' },

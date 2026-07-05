@@ -1,0 +1,57 @@
+---
+interface Props {
+	slug: string;
+}
+
+const { slug } = Astro.props;
+---
+
+<span class="article-views" data-slug={slug}>
+	<svg class="article-views__icon" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+		<path
+			fill="currentColor"
+			d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"
+		></path>
+	</svg>
+	<span class="article-views__count" aria-live="polite">—</span>
+</span>
+
+<script>
+	function pluralViews(count: number) {
+		const mod10 = count % 10;
+		const mod100 = count % 100;
+		if (mod100 >= 11 && mod100 <= 19) return 'просмотров';
+		if (mod10 === 1) return 'просмотр';
+		if (mod10 >= 2 && mod10 <= 4) return 'просмотра';
+		return 'просмотров';
+	}
+
+	async function loadViews(element: HTMLElement) {
+		const slug = element.dataset.slug;
+		if (!slug) return;
+
+		const countEl = element.querySelector('.article-views__count');
+		if (!countEl) return;
+
+		try {
+			const sessionKey = `stormblog-viewed-${slug}`;
+			if (!sessionStorage.getItem(sessionKey)) {
+				const increment = await fetch(`/api/views/${slug}`, { method: 'POST' });
+				if (increment.ok) sessionStorage.setItem(sessionKey, '1');
+			}
+
+			const response = await fetch(`/api/views/${slug}`);
+			if (!response.ok) return;
+
+			const data = (await response.json()) as { views?: number };
+			const views = data.views ?? 0;
+			countEl.textContent = `${views.toLocaleString('ru-RU')} ${pluralViews(views)}`;
+		} catch {
+			element.hidden = true;
+		}
+	}
+
+	document.querySelectorAll('.article-views').forEach((element) => {
+		loadViews(element as HTMLElement);
+	});
+</script>
