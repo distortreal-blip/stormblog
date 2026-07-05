@@ -2,7 +2,7 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const categories = ['VPS', 'DevOps', 'Linux', 'Docker', 'Безопасность', 'Облака'] as const;
+const categories = ['VPS', 'DevOps', 'Linux', 'Docker', 'Безопасность', 'Облака', 'Разработка'] as const;
 
 const blog = defineCollection({
 	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
