@@ -21,6 +21,7 @@ export const TOPIC_OF_MONTH = {
 	monthLabel: 'Июль 2026',
 } as const;
 export const YANDEX_METRIKA_ID = 110407455;
+export const BING_WEBMASTER_VERIFY = '66F0A4103B817BCCE9BEFA1AA1BD80C0';
 
 export const SITE_AUTHOR_NAME = 'Редакция Storm Cloud';
 export const SITE_AUTHOR_URL = `${SITE_URL}/author/`;
