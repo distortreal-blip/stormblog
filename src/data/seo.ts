@@ -354,6 +354,110 @@ export const ARTICLE_FAQ: Record<string, FaqItem[]> = {
 			answer: 'k3s — легковесный production-ready кластер на одном VPS. Minikube — для локального обучения, на VPS обычно избыточен.',
 		},
 	],
+	'ubuntu-24-04-pervaya-nastroyka-vps': [
+		{
+			question: 'Ubuntu 22.04 или 24.04 для нового VPS?',
+			answer: 'Ubuntu 24.04 LTS — актуальный LTS с поддержкой до 2029 года. Для новых серверов выбирайте 24.04, если провайдер предлагает.',
+		},
+		{
+			question: 'Нужен ли swap на VPS с 2 ГБ RAM?',
+			answer: 'Рекомендуется 1–2 ГБ swap как страховка от OOM. На 4+ ГБ для лёгких сайтов swap не обязателен, но не мешает.',
+		},
+		{
+			question: 'Можно ли настроить VPS без отключения root?',
+			answer: 'Технически да, но не рекомендуется. Создайте sudo-пользователя и отключите root-login — это базовая гигиена безопасности.',
+		},
+	],
+	'fail2ban-ot-bruteforce-vps': [
+		{
+			question: 'Достаточно ли Fail2ban без UFW?',
+			answer: 'Нет. UFW закрывает порты, Fail2ban реагирует на атаки в логах. Используйте оба слоя вместе.',
+		},
+		{
+			question: 'Fail2ban заблокировал мой IP — что делать?',
+			answer: 'Добавьте IP в ignoreip в jail.local и разбаньте: fail2ban-client set sshd unbanip ВАШ_IP. Подключайтесь с другого IP или через консоль провайдера.',
+		},
+	],
+	'nextjs-deploy-na-vps': [
+		{
+			question: 'Next.js на VPS или Vercel — что выбрать?',
+			answer: 'Vercel проще для старта. VPS — когда нужен полный контроль, свой Redis/PostgreSQL на том же сервере или нет лимитов serverless.',
+		},
+		{
+			question: 'Сколько RAM нужно для Next.js на VPS?',
+			answer: 'Standalone build — от 512 МБ–1 ГБ для pet-проекта. SSR с трафиком — от 2 ГБ. PM2 cluster умножает потребление на число воркеров.',
+		},
+	],
+	'minio-s3-na-vps': [
+		{
+			question: 'MinIO совместим с AWS S3 SDK?',
+			answer: 'Да. Укажите custom endpoint и forcePathStyle — большинство S3-клиентов работают без изменений кода.',
+		},
+		{
+			question: 'Сколько диска нужно для MinIO на VPS?',
+			answer: 'Зависит от объёма файлов и бэкапов. Закладывайте запас 30–50% под рост. Для бэкапов БД 100 ГБ — хороший старт.',
+		},
+	],
+	'rabbitmq-ocheredi-na-vps': [
+		{
+			question: 'RabbitMQ или Redis для очередей на VPS?',
+			answer: 'Redis проще для лёгких задач и маленьких проектов. RabbitMQ — для гарантий доставки, сложной маршрутизации и Laravel Horizon.',
+		},
+		{
+			question: 'Нужно ли открывать RabbitMQ в интернет?',
+			answer: 'Нет. Держите порты 5672 и 15672 на localhost или приватной сети. Доступ через VPN или SSH tunnel.',
+		},
+	],
+	'php-fpm-tuning-vps': [
+		{
+			question: 'Как узнать оптимальный pm.max_children?',
+			answer: 'Измерьте средний RSS PHP-процесса и разделите доступную RAM (минус ОС и MySQL). Не ставьте больше 30–40 на 2 ГБ VPS.',
+		},
+		{
+			question: 'Нужен ли OPcache на production?',
+			answer: 'Обязательно. OPcache снижает нагрузку на CPU в разы, ускоряя PHP без изменений кода.',
+		},
+	],
+	'docker-swarm-na-vps': [
+		{
+			question: 'Docker Swarm ещё актуален в 2026?',
+			answer: 'Да, для 2–5 VPS без команды K8s. Swarm проще Kubernetes, но Docker Inc. фокусируется на Compose — для новых проектов оцените k3s.',
+		},
+		{
+			question: 'Сколько VPS нужно для Swarm?',
+			answer: 'Минимум 1 (dev), для production отказоустойчивости — 2+: manager + worker. Один manager достаточен для малых кластеров.',
+		},
+	],
+	'uptime-kuma-monitoring-vps': [
+		{
+			question: 'Uptime Kuma заменяет Grafana?',
+			answer: 'Нет. Uptime Kuma проверяет доступность URL/портов. Grafana + Prometheus — метрики CPU, RAM, диск. Используйте вместе.',
+		},
+		{
+			question: 'Сколько RAM потребляет Uptime Kuma?',
+			answer: 'Около 150–300 МБ. Подходит даже для VPS с 1 ГБ, но лучше выделить отдельный management-сервер.',
+		},
+	],
+	'gitlab-runner-cicd-vps': [
+		{
+			question: 'Можно ли ставить GitLab Runner на production VPS?',
+			answer: 'Не рекомендуется. Runner выполняет произвольный код из CI — выделите отдельный VPS для сборок.',
+		},
+		{
+			question: 'Docker или shell executor для GitLab Runner?',
+			answer: 'Docker — изоляция и воспроизводимость. Shell — быстрее, но job видит всю систему. Для production — Docker.',
+		},
+	],
+	'crowdsec-zashchita-vps': [
+		{
+			question: 'CrowdSec заменяет Fail2ban?',
+			answer: 'Может дополнить или частично заменить. CrowdSec даёт community blocklist — Fail2ban проще для старта. Многие используют оба.',
+		},
+		{
+			question: 'CrowdSec бесплатен для VPS?',
+			answer: 'Да, open-source. Cloud Console для нескольких серверов — бесплатный tier. Bouncers и сценарии — без лицензии.',
+		},
+	],
 };
 
 /** Ручная перелинковка: slug → список slug для блока «Рекомендуем прочитать» */
@@ -391,12 +495,12 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'desheviy-vps',
 	],
 	'linux-vps-dlya-novichka': [
+		'ubuntu-24-04-pervaya-nastroyka-vps',
 		'vps-first-steps',
 		'docker-compose-vps',
 		'vps-monitoring',
 		'telegram-bot-vps',
 		'hosting-to-vps',
-		'vps-ili-vds-raznitsa',
 	],
 	'ollama-vps': [
 		'ai-for-programmers-daily',
@@ -455,12 +559,12 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'vps-first-steps',
 	],
 	'grafana-prometheus-vps': [
+		'uptime-kuma-monitoring-vps',
 		'vps-monitoring',
 		'docker-compose-vps',
 		'nginx-logi-i-oshibki',
 		'backup-vps-3-2-1',
 		'postgresql-tuning-vps',
-		'redis-kesh-vps',
 	],
 	'terraform-vps-infrastruktura': [
 		'ansible-avtomatizaciya-servera',
@@ -535,12 +639,12 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'vps-dlya-sayta',
 	],
 	'zashchita-vps-ot-vzloma': [
+		'fail2ban-ot-bruteforce-vps',
+		'crowdsec-zashchita-vps',
 		'wireguard-vpn-na-vps',
+		'ubuntu-24-04-pervaya-nastroyka-vps',
 		'linux-vps-dlya-novichka',
-		'vps-first-steps',
 		'backup-vps-3-2-1',
-		'nginx-logi-i-oshibki',
-		'ssl-letsencrypt-vps',
 	],
 	'docker-multi-stage-builds': [
 		'docker-compose-vps',
@@ -573,6 +677,86 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'ansible-avtomatizaciya-servera',
 		'grafana-prometheus-vps',
 		'github-actions-cicd',
+	],
+	'ubuntu-24-04-pervaya-nastroyka-vps': [
+		'linux-vps-dlya-novichka',
+		'vps-first-steps',
+		'razvernut-sayt-na-vps-2026',
+		'zashchita-vps-ot-vzloma',
+		'fail2ban-ot-bruteforce-vps',
+		'vscode-ssh-vps',
+	],
+	'fail2ban-ot-bruteforce-vps': [
+		'zashchita-vps-ot-vzloma',
+		'crowdsec-zashchita-vps',
+		'ubuntu-24-04-pervaya-nastroyka-vps',
+		'linux-vps-dlya-novichka',
+		'nginx-logi-i-oshibki',
+		'wireguard-vpn-na-vps',
+	],
+	'nextjs-deploy-na-vps': [
+		'nodejs-pm2-deploy',
+		'nginx-ili-caddy',
+		'ssl-letsencrypt-vps',
+		'redis-kesh-vps',
+		'github-actions-cicd',
+		'razvernut-sayt-na-vps-2026',
+	],
+	'minio-s3-na-vps': [
+		'backup-vps-3-2-1',
+		'docker-compose-vps',
+		'laravel-na-vps',
+		'wireguard-vpn-na-vps',
+		'ssl-letsencrypt-vps',
+		'terraform-vps-infrastruktura',
+	],
+	'rabbitmq-ocheredi-na-vps': [
+		'laravel-na-vps',
+		'redis-kesh-vps',
+		'docker-compose-vps',
+		'nodejs-pm2-deploy',
+		'fastapi-deploy-vps',
+		'systemd-linux-servisy',
+	],
+	'php-fpm-tuning-vps': [
+		'laravel-na-vps',
+		'wordpress-vps-2026',
+		'nginx-ili-caddy',
+		'redis-kesh-vps',
+		'mysql-ili-postgresql-vps',
+		'nginx-logi-i-oshibki',
+	],
+	'docker-swarm-na-vps': [
+		'docker-compose-vps',
+		'kubernetes-minikube-vps',
+		'docker-multi-stage-builds',
+		'terraform-vps-infrastruktura',
+		'wireguard-vpn-na-vps',
+		'ssl-letsencrypt-vps',
+	],
+	'uptime-kuma-monitoring-vps': [
+		'grafana-prometheus-vps',
+		'vps-monitoring',
+		'nginx-logi-i-oshibki',
+		'backup-vps-3-2-1',
+		'cloudflare-i-vps',
+		'razvernut-sayt-na-vps-2026',
+	],
+	'gitlab-runner-cicd-vps': [
+		'github-actions-cicd',
+		'docker-multi-stage-builds',
+		'nextjs-deploy-na-vps',
+		'nodejs-pm2-deploy',
+		'ansible-avtomatizaciya-servera',
+		'terraform-vps-infrastruktura',
+	],
+	'crowdsec-zashchita-vps': [
+		'fail2ban-ot-bruteforce-vps',
+		'zashchita-vps-ot-vzloma',
+		'ubuntu-24-04-pervaya-nastroyka-vps',
+		'cloudflare-i-vps',
+		'nginx-logi-i-oshibki',
+		'wireguard-vpn-na-vps',
 	],
 };
 
@@ -609,6 +793,7 @@ export const GUIDES: GuideConfig[] = [
 			'Кластер статей для тех, кто выбирает, настраивает или оптимизирует виртуальный сервер. От развёртывания сайта до SSL, Cloudflare и Minecraft-сервера.',
 		articleSlugs: [
 			'razvernut-sayt-na-vps-2026',
+			'ubuntu-24-04-pervaya-nastroyka-vps',
 			'ssl-letsencrypt-vps',
 			'nginx-ili-caddy',
 			'cloudflare-i-vps',
@@ -642,25 +827,34 @@ export const GUIDES: GuideConfig[] = [
 			'Статьи для разработчиков и админов: от Docker и Nginx до Terraform, Kubernetes, Grafana и автоматизации деплоя.',
 		articleSlugs: [
 			'docker-compose-vps',
+			'docker-swarm-na-vps',
 			'docker-multi-stage-builds',
 			'nginx-ili-caddy',
 			'nginx-logi-i-oshibki',
 			'ssl-letsencrypt-vps',
 			'systemd-linux-servisy',
 			'github-actions-cicd',
+			'gitlab-runner-cicd-vps',
 			'ansible-avtomatizaciya-servera',
 			'terraform-vps-infrastruktura',
 			'kubernetes-minikube-vps',
 			'nodejs-pm2-deploy',
+			'nextjs-deploy-na-vps',
 			'laravel-na-vps',
+			'php-fpm-tuning-vps',
 			'fastapi-deploy-vps',
 			'redis-kesh-vps',
+			'minio-s3-na-vps',
+			'rabbitmq-ocheredi-na-vps',
 			'postgresql-tuning-vps',
 			'mysql-ili-postgresql-vps',
 			'grafana-prometheus-vps',
+			'uptime-kuma-monitoring-vps',
 			'vps-monitoring',
 			'backup-vps-3-2-1',
 			'zashchita-vps-ot-vzloma',
+			'fail2ban-ot-bruteforce-vps',
+			'crowdsec-zashchita-vps',
 			'wireguard-vpn-na-vps',
 			'telegram-bot-vps',
 			'n8n-self-hosted',
