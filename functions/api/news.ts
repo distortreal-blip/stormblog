@@ -95,6 +95,17 @@ function parseDate(value: string) {
 	return Number.isNaN(time) ? 0 : time;
 }
 
+function normalizeUrl(url: string) {
+	try {
+		const parsed = new URL(url);
+		parsed.search = '';
+		parsed.hash = '';
+		return parsed.href.replace(/\/$/, '');
+	} catch {
+		return url.split('?')[0]?.split('#')[0] ?? url;
+	}
+}
+
 export const onRequest: PagesFunction = async () => {
 	try {
 		const results = await Promise.all(
