@@ -47,7 +47,7 @@ body {
 	font-size: 16px;
 	line-height: 1.7;
 	color: var(--text-secondary);
-	background: var(--bg);
+	background: transparent;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -66,12 +66,14 @@ img {
 .site-shell {
 	width: min(var(--max-width), calc(100% - 48px));
 	margin: 0 auto;
+	position: relative;
 }
 
 .page {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	position: relative;
 }
 
 .main-content {

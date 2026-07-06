@@ -2,6 +2,7 @@
 import BaseHead, { type ArticleMeta, type BreadcrumbItem } from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import LavaLampBackground from '../components/LavaLampBackground.astro';
 import YandexMetrika from '../components/YandexMetrika.astro';
 
 import type { ItemListMeta } from '../data/seo';
@@ -44,6 +45,7 @@ const {
 		<slot name="head" />
 	</head>
 	<body>
+		<LavaLampBackground />
 		<div class="site-shell">
 			<div class="page">
 				<Header />
