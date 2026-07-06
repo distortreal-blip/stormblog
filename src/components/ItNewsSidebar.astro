@@ -1,0 +1,93 @@
+---
+---
+
+<aside class="it-news-sidebar" aria-label="IT-новости из RSS">
+	<div class="it-news-sidebar__head">
+		<h2 class="it-news-sidebar__title">IT-новости</h2>
+		<span class="it-news-sidebar__badge">RSS</span>
+	</div>
+	<ul class="it-news-sidebar__list" data-it-news-list>
+		<li class="it-news-sidebar__state">Загрузка…</li>
+	</ul>
+	<p class="it-news-sidebar__note">Источники: Хабр, DevOps, IXBT</p>
+</aside>
+
+<script>
+	function formatRelativeTime(dateString: string) {
+		if (!dateString) return '';
+		const date = new Date(dateString);
+		if (Number.isNaN(date.getTime())) return '';
+
+		const diffMs = Date.now() - date.getTime();
+		const minutes = Math.floor(diffMs / 60_000);
+		if (minutes < 1) return 'только что';
+		if (minutes < 60) return `${minutes} мин назад`;
+
+		const hours = Math.floor(minutes / 60);
+		if (hours < 24) return `${hours} ч назад`;
+
+		const days = Math.floor(hours / 24);
+		if (days < 7) return `${days} дн назад`;
+
+		return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+	}
+
+	function escapeHtml(text: string) {
+		return text
+			.replace(/&/g, '&amp;')
+			.replace(/</g, '&lt;')
+			.replace(/>/g, '&gt;')
+			.replace(/"/g, '&quot;');
+	}
+
+	function truncate(text: string, max = 88) {
+		if (text.length <= max) return text;
+		return `${text.slice(0, max).trimEnd()}…`;
+	}
+
+	async function loadItNews(list: HTMLUListElement) {
+		try {
+			const response = await fetch('/api/news');
+			if (!response.ok) throw new Error('bad response');
+
+			const data = (await response.json()) as {
+				items?: Array<{
+					title: string;
+					url: string;
+					source: string;
+					publishedAt: string;
+				}>;
+			};
+
+			const items = data.items ?? [];
+			if (items.length === 0) {
+				list.innerHTML = '<li class="it-news-sidebar__state">Новости временно недоступны</li>';
+				return;
+			}
+
+			list.innerHTML = items
+				.map((item) => {
+					const time = formatRelativeTime(item.publishedAt);
+					const title = escapeHtml(truncate(item.title));
+					const source = escapeHtml(item.source);
+					const url = escapeHtml(item.url);
+					return `<li class="it-news-sidebar__item">
+						<a class="it-news-sidebar__link" href="${url}" target="_blank" rel="noopener noreferrer nofollow">
+							<span class="it-news-sidebar__item-title">${title}</span>
+							<span class="it-news-sidebar__meta">
+								<span class="it-news-sidebar__source">${source}</span>
+								${time ? `<span class="it-news-sidebar__time">${time}</span>` : ''}
+							</span>
+						</a>
+					</li>`;
+				})
+				.join('');
+		} catch {
+			list.innerHTML = '<li class="it-news-sidebar__state">Не удалось загрузить ленту</li>';
+		}
+	}
+
+	document.querySelectorAll('[data-it-news-list]').forEach((element) => {
+		loadItNews(element as HTMLUListElement);
+	});
+</script>

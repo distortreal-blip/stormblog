@@ -13,6 +13,7 @@ import ArticleViews from '../components/ArticleViews.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import TableOfContents from '../components/TableOfContents.astro';
+import ItNewsSidebar from '../components/ItNewsSidebar.astro';
 import BaseLayout from './BaseLayout.astro';
 import type { BlogPost } from '../utils/blog';
 import {
@@ -86,8 +87,10 @@ const breadcrumbs = [
 			imageAlt={title}
 		/>
 
-		<div class="article-layout">
-			<TableOfContents headings={headings} />
+		<div class="article-layout article-layout--with-news">
+			<div class="article-layout__left">
+				<TableOfContents headings={headings} />
+			</div>
 
 			<article class="article-content">
 				<header class="article-header">
@@ -125,6 +128,8 @@ const breadcrumbs = [
 				<RelatedArticles posts={related} />
 				<GiscusComments term={getPostPath(post.id)} />
 			</article>
+
+			<ItNewsSidebar />
 		</div>
 	</div>
 </BaseLayout>
