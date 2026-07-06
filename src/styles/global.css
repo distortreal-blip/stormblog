@@ -30,7 +30,7 @@
 
 html {
 	min-height: 100%;
-	background: var(--bg);
+	background: #020202;
 	scroll-behavior: smooth;
 }
 
@@ -67,6 +67,7 @@ img {
 	width: min(var(--max-width), calc(100% - 48px));
 	margin: 0 auto;
 	position: relative;
+	z-index: 1;
 }
 
 .page {
@@ -1744,5 +1745,164 @@ img {
 
 	.topic-month-shell {
 		max-width: 520px;
+	}
+}
+
+/* Lava lamp background */
+.lava-bg {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	overflow: hidden;
+	pointer-events: none;
+	background: #020202;
+}
+
+.lava-bg__base {
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(ellipse 130% 90% at 50% 110%, #141414 0%, #060606 45%, #020202 100%);
+}
+
+.lava-bg__blob {
+	position: absolute;
+	border-radius: 50%;
+	filter: blur(64px);
+	will-change: transform, border-radius;
+}
+
+.lava-bg__blob--1 {
+	width: 46vmin;
+	height: 46vmin;
+	top: 6%;
+	left: 8%;
+	background: radial-gradient(circle at 30% 30%, #3a3a3a 0%, #242424 42%, #101010 100%);
+	opacity: 0.85;
+	animation: lava-drift-1 26s ease-in-out infinite;
+}
+
+.lava-bg__blob--2 {
+	width: 56vmin;
+	height: 56vmin;
+	top: 38%;
+	right: 2%;
+	background: radial-gradient(circle at 40% 35%, #444 0%, #2a2a2a 48%, #121212 100%);
+	opacity: 0.75;
+	animation: lava-drift-2 32s ease-in-out infinite;
+}
+
+.lava-bg__blob--3 {
+	width: 40vmin;
+	height: 52vmin;
+	bottom: 6%;
+	left: 22%;
+	border-radius: 46% 54% 52% 48% / 48% 42% 58% 52%;
+	background: radial-gradient(circle at 50% 40%, #383838 0%, #222 55%, #0e0e0e 100%);
+	opacity: 0.8;
+	animation: lava-drift-3 22s ease-in-out infinite;
+}
+
+.lava-bg__blob--4 {
+	width: 32vmin;
+	height: 38vmin;
+	top: 18%;
+	right: 28%;
+	border-radius: 52% 48% 45% 55% / 55% 45% 55% 45%;
+	background: radial-gradient(circle at 45% 55%, #353535 0%, #1e1e1e 60%, #0c0c0c 100%);
+	opacity: 0.7;
+	animation: lava-drift-4 18s ease-in-out infinite;
+}
+
+.lava-bg__blob--5 {
+	width: 62vmin;
+	height: 42vmin;
+	bottom: 14%;
+	right: 16%;
+	border-radius: 58% 42% 50% 50% / 42% 58% 42% 58%;
+	background: radial-gradient(circle at 60% 40%, #323232 0%, #1a1a1a 52%, #080808 100%);
+	opacity: 0.65;
+	animation: lava-drift-5 30s ease-in-out infinite;
+}
+
+.lava-bg__vignette {
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(ellipse 95% 80% at 50% 50%, transparent 50%, rgba(0, 0, 0, 0.35) 100%);
+}
+
+@keyframes lava-drift-1 {
+	0%,
+	100% {
+		transform: translate(0, 0) scale(1) rotate(0deg);
+		border-radius: 50%;
+	}
+	33% {
+		transform: translate(9vw, 14vh) scale(1.12) rotate(10deg);
+		border-radius: 48% 52% 54% 46% / 52% 46% 54% 48%;
+	}
+	66% {
+		transform: translate(-5vw, 8vh) scale(0.92) rotate(-8deg);
+		border-radius: 54% 46% 48% 52% / 46% 54% 46% 54%;
+	}
+}
+
+@keyframes lava-drift-2 {
+	0%,
+	100% {
+		transform: translate(0, 0) scale(1);
+		border-radius: 50%;
+	}
+	40% {
+		transform: translate(-12vw, -10vh) scale(1.15);
+		border-radius: 46% 54% 50% 50% / 54% 46% 54% 46%;
+	}
+	70% {
+		transform: translate(6vw, 12vh) scale(0.88);
+		border-radius: 52% 48% 46% 54% / 48% 52% 48% 52%;
+	}
+}
+
+@keyframes lava-drift-3 {
+	0%,
+	100% {
+		transform: translate(0, 0) scale(1) rotate(0deg);
+	}
+	50% {
+		transform: translate(14vw, -16vh) scale(1.18) rotate(14deg);
+	}
+}
+
+@keyframes lava-drift-4 {
+	0%,
+	100% {
+		transform: translate(0, 0) scale(1);
+	}
+	25% {
+		transform: translate(-7vw, 10vh) scale(1.12);
+	}
+	75% {
+		transform: translate(8vw, -6vh) scale(0.86);
+	}
+}
+
+@keyframes lava-drift-5 {
+	0%,
+	100% {
+		transform: translate(0, 0) scale(1) rotate(0deg);
+		border-radius: 58% 42% 50% 50% / 42% 58% 42% 58%;
+	}
+	45% {
+		transform: translate(-10vw, 8vh) scale(1.08) rotate(-12deg);
+		border-radius: 44% 56% 52% 48% / 56% 44% 56% 44%;
+	}
+	80% {
+		transform: translate(7vw, -11vh) scale(0.94) rotate(9deg);
+		border-radius: 50% 50% 44% 56% / 48% 52% 48% 52%;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.lava-bg__blob {
+		animation: none;
 	}
 }
