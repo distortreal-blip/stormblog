@@ -132,8 +132,9 @@ export const onRequest: PagesFunction = async () => {
 		const items = results
 			.flat()
 			.filter((item) => {
-				if (seen.has(item.url)) return false;
-				seen.add(item.url);
+				const key = normalizeUrl(item.url);
+				if (seen.has(key)) return false;
+				seen.add(key);
 				return true;
 			})
 			.sort((a, b) => parseDate(b.publishedAt) - parseDate(a.publishedAt))

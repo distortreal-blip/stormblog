@@ -30,7 +30,7 @@
 
 html {
 	min-height: 100%;
-	background: #010101;
+	background: #0a0a0a;
 	scroll-behavior: smooth;
 }
 
@@ -1749,8 +1749,8 @@ img {
 	}
 }
 
-/* Lava lamp background — fixed to viewport, does not scroll with page */
-.lava-bg {
+/* Topographic lines — fixed to viewport */
+.topo-bg {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -1760,156 +1760,12 @@ img {
 	z-index: 0;
 	overflow: hidden;
 	pointer-events: none;
-	background: #010101;
+	background: #0a0a0a;
 	transform: translateZ(0);
-	-webkit-transform: translateZ(0);
 }
 
-.lava-bg__base {
-	position: absolute;
-	inset: 0;
-	background: radial-gradient(ellipse 120% 85% at 50% 100%, #0c0c0c 0%, #050505 50%, #010101 100%);
-}
-
-.lava-bg__blob {
-	position: absolute;
-	border-radius: 50%;
-	filter: blur(72px);
-	will-change: transform, border-radius;
-}
-
-.lava-bg__blob--1 {
-	width: 46vmin;
-	height: 46vmin;
-	top: 6%;
-	left: 8%;
-	background: radial-gradient(circle at 30% 30%, #222 0%, #161616 45%, #080808 100%);
-	opacity: 0.55;
-	animation: lava-drift-1 38s ease-in-out infinite;
-}
-
-.lava-bg__blob--2 {
-	width: 56vmin;
-	height: 56vmin;
-	top: 38%;
-	right: 2%;
-	background: radial-gradient(circle at 40% 35%, #262626 0%, #181818 50%, #090909 100%);
-	opacity: 0.48;
-	animation: lava-drift-2 44s ease-in-out infinite;
-}
-
-.lava-bg__blob--3 {
-	width: 40vmin;
-	height: 52vmin;
-	bottom: 6%;
-	left: 22%;
-	border-radius: 46% 54% 52% 48% / 48% 42% 58% 52%;
-	background: radial-gradient(circle at 50% 40%, #1f1f1f 0%, #131313 55%, #070707 100%);
-	opacity: 0.52;
-	animation: lava-drift-3 34s ease-in-out infinite;
-}
-
-.lava-bg__blob--4 {
-	width: 32vmin;
-	height: 38vmin;
-	top: 18%;
-	right: 28%;
-	border-radius: 52% 48% 45% 55% / 55% 45% 55% 45%;
-	background: radial-gradient(circle at 45% 55%, #1e1e1e 0%, #121212 60%, #060606 100%);
-	opacity: 0.42;
-	animation: lava-drift-4 28s ease-in-out infinite;
-}
-
-.lava-bg__blob--5 {
-	width: 62vmin;
-	height: 42vmin;
-	bottom: 14%;
-	right: 16%;
-	border-radius: 58% 42% 50% 50% / 42% 58% 42% 58%;
-	background: radial-gradient(circle at 60% 40%, #1a1a1a 0%, #101010 52%, #050505 100%);
-	opacity: 0.4;
-	animation: lava-drift-5 40s ease-in-out infinite;
-}
-
-.lava-bg__vignette {
-	position: absolute;
-	inset: 0;
-	background: radial-gradient(ellipse 95% 80% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.55) 100%);
-}
-
-@keyframes lava-drift-1 {
-	0%,
-	100% {
-		transform: translate(0, 0) scale(1) rotate(0deg);
-		border-radius: 50%;
-	}
-	33% {
-		transform: translate(5vw, 8vh) scale(1.06) rotate(6deg);
-		border-radius: 48% 52% 54% 46% / 52% 46% 54% 48%;
-	}
-	66% {
-		transform: translate(-5vw, 8vh) scale(0.92) rotate(-8deg);
-		border-radius: 54% 46% 48% 52% / 46% 54% 46% 54%;
-	}
-}
-
-@keyframes lava-drift-2 {
-	0%,
-	100% {
-		transform: translate(0, 0) scale(1);
-		border-radius: 50%;
-	}
-	40% {
-		transform: translate(-7vw, -6vh) scale(1.08);
-		border-radius: 46% 54% 50% 50% / 54% 46% 54% 46%;
-	}
-	70% {
-		transform: translate(6vw, 12vh) scale(0.88);
-		border-radius: 52% 48% 46% 54% / 48% 52% 48% 52%;
-	}
-}
-
-@keyframes lava-drift-3 {
-	0%,
-	100% {
-		transform: translate(0, 0) scale(1) rotate(0deg);
-	}
-	50% {
-		transform: translate(8vw, -9vh) scale(1.1) rotate(8deg);
-	}
-}
-
-@keyframes lava-drift-4 {
-	0%,
-	100% {
-		transform: translate(0, 0) scale(1);
-	}
-	25% {
-		transform: translate(-7vw, 10vh) scale(1.12);
-	}
-	75% {
-		transform: translate(8vw, -6vh) scale(0.86);
-	}
-}
-
-@keyframes lava-drift-5 {
-	0%,
-	100% {
-		transform: translate(0, 0) scale(1) rotate(0deg);
-		border-radius: 58% 42% 50% 50% / 42% 58% 42% 58%;
-	}
-	45% {
-		transform: translate(-10vw, 8vh) scale(1.08) rotate(-12deg);
-		border-radius: 44% 56% 52% 48% / 56% 44% 56% 44%;
-	}
-	80% {
-		transform: translate(7vw, -11vh) scale(0.94) rotate(9deg);
-		border-radius: 50% 50% 44% 56% / 48% 52% 48% 52%;
-	}
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.lava-bg__blob {
-		animation: none;
-	}
+.topo-bg__svg {
+	display: block;
+	width: 100%;
+	height: 100%;
 }
