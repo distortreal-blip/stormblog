@@ -88,9 +88,9 @@ const breadcrumbs = [
 		/>
 
 		<div class="article-layout article-layout--with-news">
-			<div class="article-layout__left">
+			<aside class="article-sidebar article-sidebar--left">
 				<TableOfContents headings={headings} />
-			</div>
+			</aside>
 
 			<article class="article-content">
 				<header class="article-header">
@@ -129,7 +129,9 @@ const breadcrumbs = [
 				<GiscusComments term={getPostPath(post.id)} />
 			</article>
 
-			<ItNewsSidebar />
+			<aside class="article-sidebar article-sidebar--right">
+				<ItNewsSidebar />
+			</aside>
 		</div>
 	</div>
 </BaseLayout>
