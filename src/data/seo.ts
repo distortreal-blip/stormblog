@@ -558,6 +558,106 @@ export const ARTICLE_FAQ: Record<string, FaqItem[]> = {
 			answer: 'journalctl --vacuum-size=500M или --vacuum-time=30d. Настройте SystemMaxUse в journald.conf для автоматики.',
 		},
 	],
+	'restic-backup-vps': [
+		{
+			question: 'Restic или rsync для бэкапов VPS?',
+			answer: 'Restic — для инкрементальных зашифрованных бэкапов в S3/облако. rsync — для зеркалирования файлов без шифрования и дедупликации.',
+		},
+		{
+			question: 'Куда хранить Restic-репозиторий?',
+			answer: 'Лучше off-site: S3, MinIO на втором VPS или облако провайдера. Локальный диск — только как часть правила 3-2-1, не единственная копия.',
+		},
+	],
+	'haproxy-load-balancer-vps': [
+		{
+			question: 'HAProxy или Nginx для балансировки?',
+			answer: 'HAProxy — специализированный load balancer с продвинутыми health checks. Nginx — универсальный reverse proxy, балансировка проще но менее гибкая.',
+		},
+		{
+			question: 'Нужен ли HAProxy на одном VPS?',
+			answer: 'Нет. HAProxy имеет смысл при 2+ backend-серверах. На одном VPS достаточно Nginx или Caddy.',
+		},
+	],
+	'cloud-init-avtomatizaciya-vps': [
+		{
+			question: 'Поддерживает ли VPS cloud-init?',
+			answer: 'Большинство Ubuntu/Debian образов на VPS провайдерах включают cloud-init. Проверьте: cloud-init status после первого boot.',
+		},
+		{
+			question: 'cloud-init или Ansible?',
+			answer: 'cloud-init — при создании сервера (bootstrap). Ansible — полная конфигурация после. Часто используют вместе.',
+		},
+	],
+	'hugo-static-site-vps': [
+		{
+			question: 'Сколько RAM нужно для Hugo-сайта на VPS?',
+			answer: '512 МБ достаточно — отдаётся только статический HTML через Nginx. БД и runtime не нужны.',
+		},
+		{
+			question: 'Hugo или WordPress на VPS?',
+			answer: 'Hugo — для блога/документации без админки и БД. WordPress — если нужны плагины, комментарии и WYSIWYG-редактор.',
+		},
+	],
+	'rust-deploy-na-vps': [
+		{
+			question: 'Нужен ли Rust на VPS для запуска приложения?',
+			answer: 'Нет. Компилируете release-бинарник на CI или dev-машине — на VPS только исполняемый файл и systemd.',
+		},
+		{
+			question: 'Rust или Go на VPS с 1 ГБ RAM?',
+			answer: 'Оба отлично подходят. Rust — чуть меньше RAM, Go — быстрее compile и проще для команд.',
+		},
+	],
+	'clickhouse-analytics-vps': [
+		{
+			question: 'Можно ли ClickHouse на VPS 2 ГБ?',
+			answer: 'Только для тестов. Production аналитика — от 4 ГБ RAM и SSD. Иначе OOM и медленные запросы.',
+		},
+		{
+			question: 'ClickHouse или PostgreSQL для аналитики?',
+			answer: 'ClickHouse — для миллиардов строк и OLAP-агрегаций. PostgreSQL — для транзакций и умеренной аналитики.',
+		},
+	],
+	'tailscale-vpn-vps': [
+		{
+			question: 'Tailscale или WireGuard на VPS?',
+			answer: 'Tailscale — проще для команды и mesh. WireGuard — полный контроль без стороннего coordination server.',
+		},
+		{
+			question: 'Бесплатен ли Tailscale?',
+			answer: 'Да, для личного использования до 100 устройств. Для enterprise — платные планы. Headscale — self-hosted альтернатива.',
+		},
+	],
+	'loki-grafana-logi-vps': [
+		{
+			question: 'Loki или ELK для логов на VPS?',
+			answer: 'Loki легче — от 1–2 ГБ RAM, нативная интеграция с Grafana. ELK мощнее, но требует 8+ ГБ.',
+		},
+		{
+			question: 'Нужен ли Loki если есть journalctl?',
+			answer: 'journalctl — на одном сервере. Loki — централизация логов с нескольких VPS и Docker в одном Grafana.',
+		},
+	],
+	'flask-deploy-na-vps': [
+		{
+			question: 'Flask или FastAPI для нового API на VPS?',
+			answer: 'FastAPI — для async и автодокументации OpenAPI. Flask — проще, огромная экосистема, синхронный по умолчанию.',
+		},
+		{
+			question: 'Сколько Gunicorn workers для Flask?',
+			answer: 'Формула (2 × CPU) + 1, но на 2 ГБ VPS обычно 2–3 workers. Следите за RAM.',
+		},
+	],
+	'mongodb-na-vps': [
+		{
+			question: 'Сколько RAM нужно MongoDB на VPS?',
+			answer: 'Минимум 2 ГБ для dev. Production — от 4 ГБ. WiredTiger cache — не больше 50% доступной RAM.',
+		},
+		{
+			question: 'MongoDB или PostgreSQL на VPS?',
+			answer: 'MongoDB — гибкая схема, документы, MERN-стек. PostgreSQL — строгая целостность, SQL, сложные JOIN.',
+		},
+	],
 };
 
 /** Ручная перелинковка: slug → список slug для блока «Рекомендуем прочитать» */
@@ -627,12 +727,12 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'grafana-prometheus-vps',
 	],
 	'wireguard-vpn-na-vps': [
+		'tailscale-vpn-vps',
 		'zashchita-vps-ot-vzloma',
 		'linux-vps-dlya-novichka',
 		'vps-first-steps',
 		'cloudflare-i-vps',
 		'ssl-letsencrypt-vps',
-		'vscode-ssh-vps',
 	],
 	'nodejs-pm2-deploy': [
 		'nginx-ili-caddy',
@@ -716,11 +816,11 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'backup-vps-3-2-1',
 	],
 	'backup-vps-3-2-1': [
+		'restic-backup-vps',
 		'zashchita-vps-ot-vzloma',
 		'postgresql-tuning-vps',
 		'mysql-ili-postgresql-vps',
-		'terraform-vps-infrastruktura',
-		'vps-monitoring',
+		'minio-s3-na-vps',
 		'razvernut-sayt-na-vps-2026',
 	],
 	'fastapi-deploy-vps': [
@@ -901,9 +1001,8 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'backup-vps-3-2-1',
 	],
 	'mariadb-optimizaciya-vps': [
-			'mysql-ili-postgresql-vps',
-			'mariadb-optimizaciya-vps',
-			'postgresql-tuning-vps',
+		'mysql-ili-postgresql-vps',
+		'postgresql-tuning-vps',
 		'php-fpm-tuning-vps',
 		'wordpress-vps-2026',
 		'redis-kesh-vps',
@@ -936,10 +1035,90 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 	'journalctl-logi-linux-vps': [
 		'systemd-linux-servisy',
 		'nginx-logi-i-oshibki',
+		'loki-grafana-logi-vps',
 		'ubuntu-24-04-pervaya-nastroyka-vps',
-		'fail2ban-ot-bruteforce-vps',
 		'grafana-prometheus-vps',
 		'zashchita-vps-ot-vzloma',
+	],
+	'restic-backup-vps': [
+		'backup-vps-3-2-1',
+		'minio-s3-na-vps',
+		'postgresql-tuning-vps',
+		'mariadb-optimizaciya-vps',
+		'terraform-vps-infrastruktura',
+		'zashchita-vps-ot-vzloma',
+	],
+	'haproxy-load-balancer-vps': [
+		'nginx-ili-caddy',
+		'traefik-reverse-proxy-vps',
+		'cloudflare-i-vps',
+		'k3s-klaster-na-vps',
+		'docker-swarm-na-vps',
+		'grafana-prometheus-vps',
+	],
+	'cloud-init-avtomatizaciya-vps': [
+		'ubuntu-24-04-pervaya-nastroyka-vps',
+		'ansible-avtomatizaciya-servera',
+		'terraform-vps-infrastruktura',
+		'linux-vps-dlya-novichka',
+		'vps-first-steps',
+		'gitlab-runner-cicd-vps',
+	],
+	'hugo-static-site-vps': [
+		'razvernut-sayt-na-vps-2026',
+		'nginx-ili-caddy',
+		'ssl-letsencrypt-vps',
+		'cloudflare-i-vps',
+		'github-actions-cicd',
+		'choose-vps',
+	],
+	'rust-deploy-na-vps': [
+		'go-golang-deploy-vps',
+		'docker-multi-stage-builds',
+		'systemd-linux-servisy',
+		'nginx-ili-caddy',
+		'loki-grafana-logi-vps',
+		'grafana-prometheus-vps',
+	],
+	'clickhouse-analytics-vps': [
+		'loki-grafana-logi-vps',
+		'grafana-prometheus-vps',
+		'postgresql-tuning-vps',
+		'nginx-logi-i-oshibki',
+		'docker-compose-vps',
+		'backup-vps-3-2-1',
+	],
+	'tailscale-vpn-vps': [
+		'wireguard-vpn-na-vps',
+		'zashchita-vps-ot-vzloma',
+		'portainer-docker-vps',
+		'ubuntu-24-04-pervaya-nastroyka-vps',
+		'fail2ban-ot-bruteforce-vps',
+		'vscode-ssh-vps',
+	],
+	'loki-grafana-logi-vps': [
+		'grafana-prometheus-vps',
+		'journalctl-logi-linux-vps',
+		'nginx-logi-i-oshibki',
+		'uptime-kuma-monitoring-vps',
+		'clickhouse-analytics-vps',
+		'docker-compose-vps',
+	],
+	'flask-deploy-na-vps': [
+		'fastapi-deploy-vps',
+		'django-deploy-na-vps',
+		'postgresql-tuning-vps',
+		'nginx-ili-caddy',
+		'systemd-linux-servisy',
+		'redis-kesh-vps',
+	],
+	'mongodb-na-vps': [
+		'mysql-ili-postgresql-vps',
+		'nodejs-pm2-deploy',
+		'redis-kesh-vps',
+		'backup-vps-3-2-1',
+		'restic-backup-vps',
+		'docker-compose-vps',
 	],
 };
 
@@ -977,6 +1156,7 @@ export const GUIDES: GuideConfig[] = [
 		articleSlugs: [
 			'razvernut-sayt-na-vps-2026',
 			'ubuntu-24-04-pervaya-nastroyka-vps',
+			'cloud-init-avtomatizaciya-vps',
 			'ssl-letsencrypt-vps',
 			'nginx-ili-caddy',
 			'cloudflare-i-vps',
@@ -993,6 +1173,7 @@ export const GUIDES: GuideConfig[] = [
 			'desheviy-vps',
 			'reduce-vps-costs',
 			'vps-evropa-ili-rossiya',
+			'hugo-static-site-vps',
 			'linux-vps-dlya-novichka',
 			'journalctl-logi-linux-vps',
 			'vps-first-steps',
@@ -1030,6 +1211,8 @@ export const GUIDES: GuideConfig[] = [
 			'nextjs-deploy-na-vps',
 			'django-deploy-na-vps',
 			'go-golang-deploy-vps',
+			'rust-deploy-na-vps',
+			'flask-deploy-na-vps',
 			'laravel-na-vps',
 			'php-fpm-tuning-vps',
 			'fastapi-deploy-vps',
@@ -1037,17 +1220,23 @@ export const GUIDES: GuideConfig[] = [
 			'memcached-kesh-vps',
 			'minio-s3-na-vps',
 			'rabbitmq-ocheredi-na-vps',
+			'mongodb-na-vps',
+			'clickhouse-analytics-vps',
 			'postgresql-tuning-vps',
 			'mariadb-optimizaciya-vps',
 			'mysql-ili-postgresql-vps',
 			'grafana-prometheus-vps',
+			'loki-grafana-logi-vps',
 			'uptime-kuma-monitoring-vps',
 			'sentry-self-hosted-vps',
 			'vps-monitoring',
 			'backup-vps-3-2-1',
+			'restic-backup-vps',
+			'haproxy-load-balancer-vps',
 			'zashchita-vps-ot-vzloma',
 			'fail2ban-ot-bruteforce-vps',
 			'crowdsec-zashchita-vps',
+			'tailscale-vpn-vps',
 			'wireguard-vpn-na-vps',
 			'telegram-bot-vps',
 			'n8n-self-hosted',
