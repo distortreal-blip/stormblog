@@ -20,9 +20,28 @@ if (!guide) {
 
 const allPosts = await getCollection('blog');
 const posts = getPostsBySlugs(allPosts, guide.articleSlugs);
+const itemList = {
+	name: guide.title,
+	description: guide.description,
+	items: posts.map((post) => ({
+		name: post.data.title,
+		url: new URL(`/blog/${post.id}/`, Astro.site).href,
+	})),
+};
+const breadcrumbs = [
+	{ label: 'Главная', href: '/' },
+	{ label: 'Блог', href: '/blog/' },
+	{ label: guide.title },
+];
 ---
 
-<BaseLayout title={guide.title} description={guide.description} keywords={guide.keywords}>
+<BaseLayout
+	title={guide.title}
+	description={guide.description}
+	keywords={guide.keywords}
+	itemList={itemList}
+	breadcrumbs={breadcrumbs}
+>
 	<section class="hero">
 		<p class="guide-kicker">Topic Cluster · Pillar Page</p>
 		<h1 class="hero__title">{guide.title}</h1>

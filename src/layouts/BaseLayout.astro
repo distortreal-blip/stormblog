@@ -4,6 +4,8 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import YandexMetrika from '../components/YandexMetrika.astro';
 
+import type { ItemListMeta } from '../data/seo';
+
 interface Props {
 	title: string;
 	description: string;
@@ -11,6 +13,7 @@ interface Props {
 	keywords?: string[];
 	article?: ArticleMeta;
 	breadcrumbs?: BreadcrumbItem[];
+	itemList?: ItemListMeta;
 	showReadingProgress?: boolean;
 }
 
@@ -21,6 +24,7 @@ const {
 	keywords,
 	article,
 	breadcrumbs,
+	itemList,
 	showReadingProgress = false,
 } = Astro.props;
 ---
@@ -35,6 +39,7 @@ const {
 			keywords={keywords}
 			article={article}
 			breadcrumbs={breadcrumbs}
+			itemList={itemList}
 		/>
 		<slot name="head" />
 	</head>
