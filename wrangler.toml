@@ -2,6 +2,14 @@ name = "stormblog"
 pages_build_output_dir = "dist"
 compatibility_date = "2024-09-01"
 
-# Счётчик просмотров: привяжите KV в Cloudflare Dashboard
-# Pages → stormblog → Settings → Functions → KV namespace bindings
-# Variable name: VIEWS
+# KV для счётчика просмотров статей.
+# Dashboard → Functions → KV bindings недоступен, пока есть этот файл —
+# биндинги задаются ТОЛЬКО здесь (см. cloudflare.com/pages/functions/wrangler-configuration).
+#
+# 1. Dashboard → Workers & Pages → KV → Create namespace → имя: stormblog-views
+# 2. Namespace ID вставлен ниже
+# 3. git push в main → Cloudflare подхватит биндинг при деплое
+
+[[kv_namespaces]]
+binding = "VIEWS"
+id = "18b426c0f80d4927b91282e9eca254d3"

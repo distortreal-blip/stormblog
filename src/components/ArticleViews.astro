@@ -41,13 +41,16 @@ const { slug } = Astro.props;
 			}
 
 			const response = await fetch(`/api/views/${slug}`);
-			if (!response.ok) return;
+			if (!response.ok) {
+				countEl.textContent = `0 ${pluralViews(0)}`;
+				return;
+			}
 
 			const data = (await response.json()) as { views?: number };
 			const views = data.views ?? 0;
 			countEl.textContent = `${views.toLocaleString('ru-RU')} ${pluralViews(views)}`;
 		} catch {
-			element.hidden = true;
+			countEl.textContent = `0 ${pluralViews(0)}`;
 		}
 	}
 
