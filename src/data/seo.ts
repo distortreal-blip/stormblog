@@ -458,6 +458,106 @@ export const ARTICLE_FAQ: Record<string, FaqItem[]> = {
 			answer: 'Да, open-source. Cloud Console для нескольких серверов — бесплатный tier. Bouncers и сценарии — без лицензии.',
 		},
 	],
+	'traefik-reverse-proxy-vps': [
+		{
+			question: 'Traefik или Nginx для одного сайта на VPS?',
+			answer: 'Для одного сайта — Nginx или Caddy проще. Traefik окупается при нескольких Docker-сервисах с разными доменами.',
+		},
+		{
+			question: 'Поддерживает ли Traefik автоматический SSL?',
+			answer: 'Да, через ACME (Let\'s Encrypt). Настраивается один раз в static config — сертификаты для новых роутеров создаются автоматически.',
+		},
+	],
+	'django-deploy-na-vps': [
+		{
+			question: 'Gunicorn или uWSGI для Django на VPS?',
+			answer: 'Gunicorn — стандарт de facto, проще в настройке. uWSGI мощнее, но сложнее. Для большинства проектов — Gunicorn.',
+		},
+		{
+			question: 'Сколько RAM нужно для Django на VPS?',
+			answer: 'Минимум 1–2 ГБ: Gunicorn workers + PostgreSQL. Для production с трафиком — от 2–4 ГБ.',
+		},
+	],
+	'go-golang-deploy-vps': [
+		{
+			question: 'Нужен ли Go runtime на VPS?',
+			answer: 'Нет. Go компилируется в статический бинарник — на сервере только исполняемый файл и systemd unit.',
+		},
+		{
+			question: 'Go или Node.js на VPS с 1 ГБ RAM?',
+			answer: 'Go — однозначно. Бинарник потребляет 20–50 МБ против 100+ МБ на Node.js процесс.',
+		},
+	],
+	'coolify-na-vps': [
+		{
+			question: 'Coolify заменяет ручной деплой на VPS?',
+			answer: 'Для большинства solo-проектов — да. Снижает время деплоя с часов до минут. Для нестандартных стеков — ручной Nginx/Docker гибче.',
+		},
+		{
+			question: 'Сколько RAM нужно для Coolify?',
+			answer: 'Минимум 2 ГБ для самого Coolify + 1–2 приложения. Комфортно — 4 ГБ при нескольких проектах.',
+		},
+	],
+	'portainer-docker-vps': [
+		{
+			question: 'Portainer CE бесплатен?',
+			answer: 'Да, Community Edition полностью бесплатен для личного и коммерческого использования.',
+		},
+		{
+			question: 'Безопасно ли открывать Portainer в интернет?',
+			answer: 'Только с HTTPS, сильным паролем и ограничением по IP или VPN. Без защиты — высокий риск компрометации Docker.',
+		},
+	],
+	'mariadb-optimizaciya-vps': [
+		{
+			question: 'MariaDB или PostgreSQL для нового проекта?',
+			answer: 'PostgreSQL — для сложных запросов и JSON. MariaDB — для WordPress и если команда на MySQL-стеке.',
+		},
+		{
+			question: 'Какой innodb_buffer_pool для VPS 2 ГБ?',
+			answer: '512–768 МБ, если на том же VPS работает приложение. На dedicated DB VPS — до 1–1.5 ГБ.',
+		},
+	],
+	'memcached-kesh-vps': [
+		{
+			question: 'Memcached или Redis для WordPress?',
+			answer: 'Оба работают. Memcached — проще для чистого object cache. Redis универсальнее (сессии, очереди).',
+		},
+		{
+			question: 'Можно ли открыть Memcached в интернет?',
+			answer: 'Категорически нет. Порт 11211 без аутентификации — bind только 127.0.0.1.',
+		},
+	],
+	'sentry-self-hosted-vps': [
+		{
+			question: 'Сколько RAM нужно для Sentry self-hosted?',
+			answer: 'Официальный self-hosted — от 4 ГБ RAM. Для маленького VPS рассмотрите GlitchTip или Sentry cloud free tier.',
+		},
+		{
+			question: 'Sentry ловит только backend ошибки?',
+			answer: 'Нет. SDK есть для JavaScript (frontend), Node, Python, Go, PHP и других — ловит ошибки на клиенте и сервере.',
+		},
+	],
+	'k3s-klaster-na-vps': [
+		{
+			question: 'k3s или полный Kubernetes на VPS?',
+			answer: 'k3s — для 1–5 VPS, меньше RAM и проще установка. Полный K8s — для больших кластеров и enterprise.',
+		},
+		{
+			question: 'Можно ли запустить k3s на VPS с 2 ГБ RAM?',
+			answer: 'Да, для 2–3 лёгких подов. Для production с мониторингом и несколькими сервисами — от 4 ГБ.',
+		},
+	],
+	'journalctl-logi-linux-vps': [
+		{
+			question: 'journalctl или /var/log для диагностики?',
+			answer: 'systemd-сервисы — journalctl. Nginx access log — файлы в /var/log/nginx/. Используйте оба.',
+		},
+		{
+			question: 'Как очистить старые логи journalctl?',
+			answer: 'journalctl --vacuum-size=500M или --vacuum-time=30d. Настройте SystemMaxUse в journald.conf для автоматики.',
+		},
+	],
 };
 
 /** Ручная перелинковка: slug → список slug для блока «Рекомендуем прочитать» */
@@ -583,6 +683,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'redis-kesh-vps',
 	],
 	'nginx-ili-caddy': [
+		'traefik-reverse-proxy-vps',
 		'ssl-letsencrypt-vps',
 		'nginx-logi-i-oshibki',
 		'nodejs-pm2-deploy',
@@ -671,6 +772,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'vps-first-steps',
 	],
 	'kubernetes-minikube-vps': [
+		'k3s-klaster-na-vps',
 		'docker-compose-vps',
 		'docker-multi-stage-builds',
 		'terraform-vps-infrastruktura',
@@ -758,6 +860,87 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'nginx-logi-i-oshibki',
 		'wireguard-vpn-na-vps',
 	],
+	'traefik-reverse-proxy-vps': [
+		'nginx-ili-caddy',
+		'docker-compose-vps',
+		'docker-swarm-na-vps',
+		'ssl-letsencrypt-vps',
+		'cloudflare-i-vps',
+		'k3s-klaster-na-vps',
+	],
+	'django-deploy-na-vps': [
+		'fastapi-deploy-vps',
+		'postgresql-tuning-vps',
+		'nginx-ili-caddy',
+		'ssl-letsencrypt-vps',
+		'systemd-linux-servisy',
+		'redis-kesh-vps',
+	],
+	'go-golang-deploy-vps': [
+		'nodejs-pm2-deploy',
+		'docker-multi-stage-builds',
+		'nginx-ili-caddy',
+		'systemd-linux-servisy',
+		'grafana-prometheus-vps',
+		'journalctl-logi-linux-vps',
+	],
+	'coolify-na-vps': [
+		'docker-compose-vps',
+		'portainer-docker-vps',
+		'traefik-reverse-proxy-vps',
+		'ubuntu-24-04-pervaya-nastroyka-vps',
+		'ssl-letsencrypt-vps',
+		'github-actions-cicd',
+	],
+	'portainer-docker-vps': [
+		'docker-compose-vps',
+		'coolify-na-vps',
+		'docker-swarm-na-vps',
+		'grafana-prometheus-vps',
+		'ubuntu-24-04-pervaya-nastroyka-vps',
+		'backup-vps-3-2-1',
+	],
+	'mariadb-optimizaciya-vps': [
+			'mysql-ili-postgresql-vps',
+			'mariadb-optimizaciya-vps',
+			'postgresql-tuning-vps',
+		'php-fpm-tuning-vps',
+		'wordpress-vps-2026',
+		'redis-kesh-vps',
+		'backup-vps-3-2-1',
+	],
+	'memcached-kesh-vps': [
+		'redis-kesh-vps',
+		'mariadb-optimizaciya-vps',
+		'wordpress-vps-2026',
+		'php-fpm-tuning-vps',
+		'laravel-na-vps',
+		'grafana-prometheus-vps',
+	],
+	'sentry-self-hosted-vps': [
+		'grafana-prometheus-vps',
+		'uptime-kuma-monitoring-vps',
+		'docker-compose-vps',
+		'journalctl-logi-linux-vps',
+		'nextjs-deploy-na-vps',
+		'backup-vps-3-2-1',
+	],
+	'k3s-klaster-na-vps': [
+		'kubernetes-minikube-vps',
+		'docker-swarm-na-vps',
+		'traefik-reverse-proxy-vps',
+		'terraform-vps-infrastruktura',
+		'ansible-avtomatizaciya-servera',
+		'grafana-prometheus-vps',
+	],
+	'journalctl-logi-linux-vps': [
+		'systemd-linux-servisy',
+		'nginx-logi-i-oshibki',
+		'ubuntu-24-04-pervaya-nastroyka-vps',
+		'fail2ban-ot-bruteforce-vps',
+		'grafana-prometheus-vps',
+		'zashchita-vps-ot-vzloma',
+	],
 };
 
 export const GUIDES: GuideConfig[] = [
@@ -811,6 +994,7 @@ export const GUIDES: GuideConfig[] = [
 			'reduce-vps-costs',
 			'vps-evropa-ili-rossiya',
 			'linux-vps-dlya-novichka',
+			'journalctl-logi-linux-vps',
 			'vps-first-steps',
 			'chto-sdelat-na-vps-za-chas',
 			'vps-dlya-programmista',
@@ -828,6 +1012,9 @@ export const GUIDES: GuideConfig[] = [
 		articleSlugs: [
 			'docker-compose-vps',
 			'docker-swarm-na-vps',
+			'portainer-docker-vps',
+			'coolify-na-vps',
+			'traefik-reverse-proxy-vps',
 			'docker-multi-stage-builds',
 			'nginx-ili-caddy',
 			'nginx-logi-i-oshibki',
@@ -838,18 +1025,24 @@ export const GUIDES: GuideConfig[] = [
 			'ansible-avtomatizaciya-servera',
 			'terraform-vps-infrastruktura',
 			'kubernetes-minikube-vps',
+			'k3s-klaster-na-vps',
 			'nodejs-pm2-deploy',
 			'nextjs-deploy-na-vps',
+			'django-deploy-na-vps',
+			'go-golang-deploy-vps',
 			'laravel-na-vps',
 			'php-fpm-tuning-vps',
 			'fastapi-deploy-vps',
 			'redis-kesh-vps',
+			'memcached-kesh-vps',
 			'minio-s3-na-vps',
 			'rabbitmq-ocheredi-na-vps',
 			'postgresql-tuning-vps',
+			'mariadb-optimizaciya-vps',
 			'mysql-ili-postgresql-vps',
 			'grafana-prometheus-vps',
 			'uptime-kuma-monitoring-vps',
+			'sentry-self-hosted-vps',
 			'vps-monitoring',
 			'backup-vps-3-2-1',
 			'zashchita-vps-ot-vzloma',
