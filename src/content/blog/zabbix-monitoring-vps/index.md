@@ -1,8 +1,7 @@
 ---
 title: "Zabbix на VPS: enterprise-мониторинг инфраструктуры"
 description: "Развёртывание Zabbix на VPS: агенты, триггеры, оповещения, карты сети. Мониторинг нескольких серверов из одной точки."
-pubDate: 2026-07-12
-updatedDate: 2026-07-13
+pubDate: 2026-07-02
 category: DevOps
 keywords:
   - "Zabbix VPS"

@@ -1,8 +1,7 @@
 ---
 title: "EMQX на VPS: MQTT-брокер для IoT"
 description: "Установка EMQX MQTT broker на VPS: IoT устройства, pub/sub, TLS, WebSocket. Self-hosted альтернатива облачному IoT Hub."
-pubDate: 2026-07-12
-updatedDate: 2026-07-13
+pubDate: 2026-07-02
 category: DevOps
 keywords:
   - "EMQX VPS"

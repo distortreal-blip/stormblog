@@ -1,8 +1,7 @@
 ---
 title: "nftables на VPS: современный firewall вместо iptables"
 description: "Настройка nftables на Linux VPS: базовые правила, SSH, HTTP/HTTPS, rate limit. Замена UFW и iptables в 2026."
-pubDate: 2026-07-13
-updatedDate: 2026-07-13
+pubDate: 2026-07-01
 category: DevOps
 keywords:
   - "nftables VPS"

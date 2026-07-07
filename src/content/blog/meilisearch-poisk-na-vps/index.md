@@ -1,8 +1,7 @@
 ---
 title: "Meilisearch на VPS: мгновенный поиск для сайта и API"
 description: "Meilisearch на VPS: установка, индексация, typo-tolerance, интеграция с Laravel/Django/Next.js. Альтернатива Elasticsearch для малого и среднего проекта."
-pubDate: 2026-07-13
-updatedDate: 2026-07-13
+pubDate: 2026-07-01
 category: DevOps
 keywords:
   - "Meilisearch VPS"

@@ -1,8 +1,7 @@
 ---
 title: "Prometheus Alertmanager на VPS: алерты в Telegram"
 description: "Настройка Alertmanager: правила Prometheus, группировка, silence, Telegram/Slack. Завершение monitoring-стека."
-pubDate: 2026-07-12
-updatedDate: 2026-07-13
+pubDate: 2026-07-02
 category: DevOps
 keywords:
   - "Alertmanager VPS"

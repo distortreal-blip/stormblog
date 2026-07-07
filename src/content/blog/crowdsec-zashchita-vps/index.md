@@ -1,8 +1,7 @@
 ---
 title: "CrowdSec на VPS: коллективная защита от атак"
 description: "Установка CrowdSec на VPS: парсинг логов, community blocklist, bouncer для Nginx/UFW. Современная альтернатива Fail2ban с общей базой угроз."
-pubDate: 2026-07-09
-updatedDate: 2026-07-13
+pubDate: 2026-07-05
 category: Безопасность
 keywords:
   - "CrowdSec VPS"

@@ -1,8 +1,7 @@
 ---
 title: "SSL на VPS: Let's Encrypt, автообновление и типичные ошибки"
 description: "Полный гайд по HTTPS на VPS: Certbot, Nginx, автообновление сертификатов, Mixed Content и HSTS."
-pubDate: 2026-07-08
-updatedDate: 2026-07-13
+pubDate: 2026-07-06
 category: Linux
 keywords:
   - "SSL VPS"

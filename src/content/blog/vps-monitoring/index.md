@@ -2,7 +2,6 @@
 title: "Мониторинг VPS: Uptime Kuma, Grafana и алерты в Telegram"
 description: "Настраиваем мониторинг VPS с нуля: Uptime Kuma для проверки доступности, Grafana для метрик, алерты в Telegram. Практическая схема для одного сервера и небольшой инфраструктуры."
 pubDate: 2026-07-06
-updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "мониторинг vps"

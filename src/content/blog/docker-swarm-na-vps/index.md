@@ -1,8 +1,7 @@
 ---
 title: "Docker Swarm на VPS: оркестрация без Kubernetes"
 description: "Docker Swarm на VPS: когда имеет смысл, создание кластера, сервисы, rolling update, secrets. Альтернатива k3s для 2–3 серверов."
-pubDate: 2026-07-09
-updatedDate: 2026-07-13
+pubDate: 2026-07-05
 category: Docker
 keywords:
   - "Docker Swarm VPS"

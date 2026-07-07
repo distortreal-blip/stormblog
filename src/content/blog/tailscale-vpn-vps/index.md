@@ -1,8 +1,7 @@
 ---
 title: "Tailscale на VPS: mesh VPN без настройки WireGuard"
 description: "Tailscale на VPS: доступ к серверам, subnet router, MagicDNS. Простая альтернатива ручному WireGuard для команды."
-pubDate: 2026-07-11
-updatedDate: 2026-07-13
+pubDate: 2026-07-03
 category: Безопасность
 keywords:
   - "Tailscale VPS"

@@ -1,8 +1,7 @@
 ---
 title: "Nginx или Caddy: какой веб-сервер выбрать на VPS"
 description: "Сравнение Nginx и Caddy для VPS: автоматический SSL, конфиги, производительность, когда что использовать."
-pubDate: 2026-07-08
-updatedDate: 2026-07-13
+pubDate: 2026-07-06
 category: Linux
 keywords:
   - "Nginx vs Caddy"

@@ -1,8 +1,7 @@
 ---
 title: "MongoDB на VPS: установка и production-настройка"
 description: "MongoDB на VPS: установка, аутентификация, репликация, бэкапы, RAM tuning. NoSQL для Node.js и современных приложений."
-pubDate: 2026-07-11
-updatedDate: 2026-07-13
+pubDate: 2026-07-03
 category: DevOps
 keywords:
   - "MongoDB VPS"

@@ -2,7 +2,6 @@
 title: "Правило 3-2-1: стратегия бэкапов на VPS"
 description: "Как не потерять данные на VPS: правило 3-2-1, snapshots, rsync, pg_dump. Автоматизация бэкапов через cron."
 pubDate: 2026-07-07
-updatedDate: 2026-07-13
 category: VPS
 keywords:
   - "бэкап VPS"

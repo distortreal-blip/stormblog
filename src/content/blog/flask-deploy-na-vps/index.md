@@ -1,8 +1,7 @@
 ---
 title: "Flask на VPS: деплой Python microframework"
 description: "Деплой Flask на VPS: Gunicorn, Nginx, venv, systemd, SSL. Лёгкий Python backend для API и небольших приложений."
-pubDate: 2026-07-11
-updatedDate: 2026-07-13
+pubDate: 2026-07-03
 category: Разработка
 keywords:
   - "Flask VPS"

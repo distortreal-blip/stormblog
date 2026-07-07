@@ -1,8 +1,7 @@
 ---
 title: "Certbot DNS challenge на VPS: wildcard SSL-сертификат"
 description: "Let's Encrypt через DNS challenge: wildcard SSL для *.example.com, Cloudflare API, автообновление certbot. Когда HTTP challenge не подходит."
-pubDate: 2026-07-12
-updatedDate: 2026-07-13
+pubDate: 2026-07-02
 category: DevOps
 keywords:
   - "Certbot DNS"

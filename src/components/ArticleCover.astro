@@ -1,45 +1,90 @@
----
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
-import { slugHue } from '../utils/blog';
-
-interface Props {
-	id: string;
-	category: string;
-	title: string;
-	heroImage?: ImageMetadata;
-	variant?: 'card' | 'featured' | 'hero';
-	imageAlt?: string;
-}
-
-const { id, category, title, heroImage, variant = 'card', imageAlt } = Astro.props;
-const alt = imageAlt ?? title;
-const hue = slugHue(id);
-const isHero = variant === 'hero';
----
-
-<div class={`cover cover--${variant}`} style={`--cover-hue: ${hue}`}>
-	{
-		heroImage ? (
-			<figure class="cover__figure">
-				<Image
-					src={heroImage}
-					alt={alt}
-					title={title}
-					width={1200}
-					height={630}
-					loading={isHero ? 'eager' : 'lazy'}
-					decoding={isHero ? 'sync' : 'async'}
-					fetchpriority={isHero ? 'high' : 'auto'}
-				/>
-				{isHero && <figcaption class="cover__caption">{alt}</figcaption>}
-			</figure>
-		) : (
-			<>
-				<div class="cover__layer cover__gradient"></div>
-				<div class="cover__layer cover__grid"></div>
-				{variant !== 'hero' && <span class="cover__label">{category}</span>}
-			</>
-		)
-	}
-</div>
+---
+
+import { Image } from 'astro:assets';
+
+import type { ImageMetadata } from 'astro';
+
+import { slugHue } from '../utils/blog';
+
+
+
+interface Props {
+
+	id: string;
+
+	category: string;
+
+	title: string;
+
+	heroImage?: ImageMetadata;
+
+	variant?: 'card' | 'featured' | 'hero';
+
+	imageAlt?: string;
+
+}
+
+
+
+const { id, category, title, heroImage, variant = 'card', imageAlt } = Astro.props;
+
+const alt = imageAlt ?? title;
+
+const hue = slugHue(id);
+
+const isHero = variant === 'hero';
+
+---
+
+
+
+<div class={`cover cover--${variant}`} style={`--cover-hue: ${hue}`}>
+
+	{
+
+		heroImage ? (
+
+			<figure class="cover__figure">
+
+				<Image
+
+					src={heroImage}
+
+					alt={alt}
+
+					title={title}
+
+					width={1200}
+
+					height={630}
+
+					loading={isHero ? 'eager' : 'lazy'}
+
+					decoding={isHero ? 'sync' : 'async'}
+
+					fetchpriority={isHero ? 'high' : 'auto'}
+
+				/>
+
+				{isHero && <figcaption class="cover__caption">{alt}</figcaption>}
+
+			</figure>
+
+		) : (
+
+			<>
+
+				<div class="cover__layer cover__gradient"></div>
+
+				<div class="cover__layer cover__grid"></div>
+
+				{variant !== 'hero' && <span class="cover__label">{category}</span>}
+
+			</>
+
+		)
+
+	}
+
+</div>
+

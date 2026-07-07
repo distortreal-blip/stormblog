@@ -2,7 +2,6 @@
 title: "Ansible для автоматизации VPS: с нуля до playbook"
 description: "Как автоматизировать настройку VPS через Ansible: inventory, playbook, роли. Один раз описали — разворачиваете серверы за минуты."
 pubDate: 2026-07-07
-updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "Ansible"

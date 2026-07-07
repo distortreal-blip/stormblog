@@ -1,8 +1,7 @@
 ---
 title: "Laravel на VPS: деплой PHP-приложения в production"
 description: "Полный гайд по Laravel на Ubuntu VPS: PHP-FPM, Composer, Nginx, MySQL, очереди и scheduler через cron."
-pubDate: 2026-07-08
-updatedDate: 2026-07-13
+pubDate: 2026-07-06
 category: Разработка
 keywords:
   - "Laravel VPS"

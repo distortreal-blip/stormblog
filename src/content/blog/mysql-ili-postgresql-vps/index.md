@@ -1,8 +1,7 @@
 ---
 title: "MySQL или PostgreSQL на VPS: что выбрать в 2026"
 description: "Сравнение MySQL и PostgreSQL для VPS-проектов: производительность, JSON, экосистема, типичные сценарии."
-pubDate: 2026-07-08
-updatedDate: 2026-07-13
+pubDate: 2026-07-06
 category: VPS
 keywords:
   - "MySQL vs PostgreSQL"

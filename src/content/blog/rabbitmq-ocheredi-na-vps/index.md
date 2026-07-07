@@ -1,8 +1,7 @@
 ---
 title: "RabbitMQ на VPS: очереди задач для приложений"
 description: "Установка RabbitMQ на VPS: exchanges, queues, workers, management UI. Интеграция с Laravel, Node.js и Python. Надёжная доставка сообщений."
-pubDate: 2026-07-09
-updatedDate: 2026-07-13
+pubDate: 2026-07-05
 category: DevOps
 keywords:
   - "RabbitMQ VPS"

@@ -1,8 +1,7 @@
 ---
 title: "HashiCorp Vault на VPS: хранение секретов"
 description: "Vault self-hosted на VPS: API keys, DB passwords, rotation. Централизованные секреты для приложений и CI/CD."
-pubDate: 2026-07-12
-updatedDate: 2026-07-13
+pubDate: 2026-07-02
 category: Безопасность
 keywords:
   - "Vault VPS"

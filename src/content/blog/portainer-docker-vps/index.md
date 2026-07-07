@@ -1,8 +1,7 @@
 ---
 title: "Portainer на VPS: веб-UI для управления Docker"
 description: "Установка Portainer на VPS: стеки, контейнеры, volumes, логи через браузер. Удобное управление Docker без CLI."
-pubDate: 2026-07-10
-updatedDate: 2026-07-13
+pubDate: 2026-07-04
 category: Docker
 keywords:
   - "Portainer VPS"

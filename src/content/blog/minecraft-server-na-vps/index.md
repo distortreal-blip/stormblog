@@ -1,8 +1,7 @@
 ---
 title: "Minecraft-сервер на VPS: настройка для друзей"
 description: "Как поднять Minecraft Java сервер на VPS: выбор RAM, Java, systemd, whitelist и оптимизация TPS."
-pubDate: 2026-07-08
-updatedDate: 2026-07-13
+pubDate: 2026-07-06
 category: Облака
 keywords:
   - "Minecraft сервер VPS"

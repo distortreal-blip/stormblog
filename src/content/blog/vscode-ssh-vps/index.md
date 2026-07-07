@@ -2,7 +2,6 @@
 title: "VS Code SSH Remote: разработка прямо на VPS"
 description: "Как настроить Remote SSH в VS Code и Cursor для разработки на VPS: ключи, конфиг, расширения, port forwarding и отличия от локальной машины. Практический гайд без лишней теории."
 pubDate: 2026-07-06
-updatedDate: 2026-07-13
 category: Разработка
 keywords:
   - "vscode remote ssh"

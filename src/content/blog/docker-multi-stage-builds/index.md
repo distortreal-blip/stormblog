@@ -2,7 +2,6 @@
 title: "Docker multi-stage build: образы в 10 раз меньше"
 description: "Как уменьшить Docker-образ с 1 GB до 50 MB через multi-stage build. Примеры для Node.js и Go на VPS."
 pubDate: 2026-07-07
-updatedDate: 2026-07-13
 category: Docker
 keywords:
   - "Docker multi-stage"

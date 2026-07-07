@@ -1,8 +1,7 @@
 ---
 title: "Grafana и Prometheus на VPS: мониторинг сервера"
 description: "Как поднять Prometheus + Grafana на VPS: метрики CPU, RAM, диск, алерты в Telegram. Docker Compose стек."
-pubDate: 2026-07-08
-updatedDate: 2026-07-13
+pubDate: 2026-07-06
 category: DevOps
 keywords:
   - "Grafana VPS"

@@ -1,8 +1,7 @@
 ---
 title: "Restic на VPS: зашифрованные бэкапы на S3 и диск"
 description: "Настройка Restic на VPS: инкрементальные бэкапы, шифрование, S3/MinIO, cron и восстановление. Практика правила 3-2-1."
-pubDate: 2026-07-11
-updatedDate: 2026-07-13
+pubDate: 2026-07-03
 category: DevOps
 keywords:
   - "Restic VPS"

@@ -1,8 +1,7 @@
 ---
 title: "Traefik на VPS: reverse proxy с автоматическим SSL"
 description: "Настройка Traefik на VPS: маршрутизация, Let's Encrypt, Docker labels, middleware. Альтернатива Nginx и Caddy для микросервисов."
-pubDate: 2026-07-10
-updatedDate: 2026-07-13
+pubDate: 2026-07-04
 category: DevOps
 keywords:
   - "Traefik VPS"

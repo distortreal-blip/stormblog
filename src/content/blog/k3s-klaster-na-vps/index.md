@@ -1,8 +1,7 @@
 ---
 title: "k3s на VPS: легковесный Kubernetes за 10 минут"
 description: "Установка k3s на VPS: поды, сервисы, Ingress, Helm. Production-ready Kubernetes без тяжёлого K8s для 1–3 серверов."
-pubDate: 2026-07-10
-updatedDate: 2026-07-13
+pubDate: 2026-07-04
 category: Облака
 keywords:
   - "k3s VPS"

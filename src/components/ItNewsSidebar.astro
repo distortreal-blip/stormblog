@@ -1,14 +1,12 @@
 ---
 ---
 
-<aside class="it-news-sidebar" aria-label="IT-новости из RSS">
+<aside class="it-news-sidebar" aria-label="IT-новости из RSS" data-nosnippet>
 	<div class="it-news-sidebar__head">
-		<h2 class="it-news-sidebar__title">IT-новости</h2>
+		<p class="it-news-sidebar__title">IT-новости</p>
 		<span class="it-news-sidebar__badge">RSS</span>
 	</div>
-	<ul class="it-news-sidebar__list" data-it-news-list>
-		<li class="it-news-sidebar__state">Загрузка…</li>
-	</ul>
+	<ul class="it-news-sidebar__list" data-it-news-list></ul>
 	<p class="it-news-sidebar__note">Источники: Хабр, DevOps, IXBT</p>
 </aside>
 
@@ -61,7 +59,7 @@
 
 			const items = data.items ?? [];
 			if (items.length === 0) {
-				list.innerHTML = '<li class="it-news-sidebar__state">Новости временно недоступны</li>';
+				list.innerHTML = '';
 				return;
 			}
 
@@ -83,7 +81,7 @@
 				})
 				.join('');
 		} catch {
-			list.innerHTML = '<li class="it-news-sidebar__state">Не удалось загрузить ленту</li>';
+			list.innerHTML = '';
 		}
 	}
 

@@ -1,8 +1,7 @@
 ---
 title: "Sentry self-hosted на VPS: отслеживание ошибок в production"
 description: "Развёртывание Sentry на VPS: Docker Compose, алерты, интеграция с Node.js, Python, Go. Свой error tracking без облачной подписки."
-pubDate: 2026-07-10
-updatedDate: 2026-07-13
+pubDate: 2026-07-04
 category: DevOps
 keywords:
   - "Sentry VPS"

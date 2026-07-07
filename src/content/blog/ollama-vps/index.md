@@ -2,7 +2,6 @@
 title: "Ollama на своём VPS: локальные LLM без ChatGPT"
 description: "Как поднять Ollama на VPS и запускать Llama, Mistral и другие модели локально. Установка, выбор железа, API и интеграция без зависимости от облачных сервисов."
 pubDate: 2026-07-06
-updatedDate: 2026-07-13
 category: Разработка
 keywords:
   - "ollama vps"

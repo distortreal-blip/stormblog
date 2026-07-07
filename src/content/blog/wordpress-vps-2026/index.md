@@ -2,7 +2,6 @@
 title: "WordPress на VPS или хостинг: что выбрать в 2026"
 description: "WordPress на VPS или shared-хостинг в 2026: цена, скорость, безопасность и масштабирование. Критерии выбора для блога, магазина и корпоративного сайта."
 pubDate: 2026-07-06
-updatedDate: 2026-07-13
 category: VPS
 keywords:
   - "wordpress vps"

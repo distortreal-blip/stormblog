@@ -1,8 +1,7 @@
 ---
 title: "PHP-FPM на VPS: оптимизация пулов и производительности"
 description: "Тюнинг PHP-FPM на VPS: pm.max_children, opcache, пулы per site, расчёт RAM. WordPress и Laravel без тормозов на ограниченных ресурсах."
-pubDate: 2026-07-09
-updatedDate: 2026-07-13
+pubDate: 2026-07-05
 category: Разработка
 keywords:
   - "PHP-FPM VPS"
