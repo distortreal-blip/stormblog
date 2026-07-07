@@ -798,6 +798,66 @@ export const ARTICLE_FAQ: Record<string, FaqItem[]> = {
 			answer: 'Нет. nftables фильтрует трафик, Fail2ban банит IP по логам атак. Используйте оба слоя.',
 		},
 	],
+	'rocky-linux-9-nastroyka-vps': [
+		{
+			question: 'Rocky Linux 9 или AlmaLinux для VPS?',
+			answer: 'Оба — RHEL-клоны с долгой поддержкой. Rocky — community-преемник CentOS, популярен в enterprise и хостингах.',
+		},
+		{
+			question: 'Подходит ли Rocky Linux 9 для Docker и Kubernetes?',
+			answer: 'Да. Docker CE, Podman и k3s официально поддерживаются. Учитывайте SELinux при mount volumes.',
+		},
+	],
+	'podman-rootless-vps': [
+		{
+			question: 'Podman полностью заменяет Docker?',
+			answer: 'Для большинства OCI-образов — да. Docker Compose файлы часто работают через podman-compose. Swarm и Docker-specific фичи — нет.',
+		},
+		{
+			question: 'Зачем rootless Podman на VPS?',
+			answer: 'Контейнеры без root и без dockerd снижают риск: компрометация контейнера не даёт root на хосте через socket.',
+		},
+	],
+	'plausible-analytics-vps': [
+		{
+			question: 'Plausible CE или Google Analytics?',
+			answer: 'Plausible CE — privacy-first, self-hosted, без cookies. GA — мощнее для marketing, но данные у Google.',
+		},
+		{
+			question: 'Сколько RAM нужно для Plausible на VPS?',
+			answer: 'Минимум 2 GB: PostgreSQL + ClickHouse + приложение. Для высокого трафика — 4 GB.',
+		},
+	],
+	'bookstack-wiki-vps': [
+		{
+			question: 'BookStack или Notion для team wiki?',
+			answer: 'Notion — SaaS, быстрый старт. BookStack — self-hosted, данные на вашем VPS, LDAP/OAuth, без абонплаты.',
+		},
+		{
+			question: 'Сколько RAM нужно BookStack на VPS?',
+			answer: '1 GB для малой команды, 2 GB комфортно с MariaDB. WYSIWYG и поиск лёгкие.',
+		},
+	],
+	'postgresql-replication-vps': [
+		{
+			question: 'Нужна ли replica PostgreSQL на одном VPS?',
+			answer: 'Нет — replica на том же диске не защитит от hardware failure. Нужен второй VPS или другой AZ.',
+		},
+		{
+			question: 'Streaming replication или logical replication?',
+			answer: 'Streaming — полная копия БД, проще для HA и read replica. Logical — выборочные таблицы, миграции между версиями.',
+		},
+	],
+	'authentik-sso-vps': [
+		{
+			question: 'Authentik или Keycloak для SSO на VPS?',
+			answer: 'Authentik — современный UI, проще старт. Keycloak — больше enterprise-интеграций, тяжелее в администрировании.',
+		},
+		{
+			question: 'Можно ли защитить Grafana и Gitea через Authentik?',
+			answer: 'Да. OAuth2/OIDC provider в Authentik + forward auth outpost для Nginx — стандartный паттерн.',
+		},
+	],
 };
 
 /** Ручная перелинковка: slug → список slug для блока «Рекомендуем прочитать» */
@@ -943,6 +1003,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 	],
 	'postgresql-tuning-vps': [
 		'mysql-ili-postgresql-vps',
+		'postgresql-replication-vps',
 		'laravel-na-vps',
 		'fastapi-deploy-vps',
 		'backup-vps-3-2-1',
@@ -1280,6 +1341,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 	],
 	'debian-12-pervaya-nastroyka-vps': [
 		'ubuntu-24-04-pervaya-nastroyka-vps',
+		'rocky-linux-9-nastroyka-vps',
 		'linux-vps-dlya-novichka',
 		'cloud-init-avtomatizaciya-vps',
 		'vps-first-steps',
@@ -1312,6 +1374,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 	],
 	'vault-secrets-vps': [
 		'zashchita-vps-ot-vzloma',
+		'authentik-sso-vps',
 		'tailscale-vpn-vps',
 		'gitlab-runner-cicd-vps',
 		'github-actions-cicd',
@@ -1374,6 +1437,54 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'debian-12-pervaya-nastroyka-vps',
 		'tailscale-vpn-vps',
 	],
+	'rocky-linux-9-nastroyka-vps': [
+		'debian-12-pervaya-nastroyka-vps',
+		'ubuntu-24-04-pervaya-nastroyka-vps',
+		'cloud-init-avtomatizaciya-vps',
+		'nftables-firewall-vps',
+		'zashchita-vps-ot-vzloma',
+		'docker-compose-vps',
+	],
+	'podman-rootless-vps': [
+		'docker-compose-vps',
+		'portainer-docker-vps',
+		'systemd-linux-servisy',
+		'nginx-ili-caddy',
+		'k3s-klaster-na-vps',
+		'zashchita-vps-ot-vzloma',
+	],
+	'plausible-analytics-vps': [
+		'grafana-prometheus-vps',
+		'vps-monitoring',
+		'nginx-ili-caddy',
+		'ssl-letsencrypt-vps',
+		'backup-vps-3-2-1',
+		'cloudflare-i-vps',
+	],
+	'bookstack-wiki-vps': [
+		'authentik-sso-vps',
+		'gitea-git-server-vps',
+		'vault-secrets-vps',
+		'backup-vps-3-2-1',
+		'meilisearch-poisk-na-vps',
+		'ssl-letsencrypt-vps',
+	],
+	'postgresql-replication-vps': [
+		'postgresql-tuning-vps',
+		'mysql-ili-postgresql-vps',
+		'haproxy-load-balancer-vps',
+		'backup-vps-3-2-1',
+		'grafana-prometheus-vps',
+		'wireguard-vpn-na-vps',
+	],
+	'authentik-sso-vps': [
+		'vault-secrets-vps',
+		'gitea-git-server-vps',
+		'grafana-prometheus-vps',
+		'bookstack-wiki-vps',
+		'tailscale-vpn-vps',
+		'ssl-letsencrypt-vps',
+	],
 };
 
 export const GUIDES: GuideConfig[] = [
@@ -1411,6 +1522,7 @@ export const GUIDES: GuideConfig[] = [
 			'razvernut-sayt-na-vps-2026',
 			'ubuntu-24-04-pervaya-nastroyka-vps',
 			'debian-12-pervaya-nastroyka-vps',
+			'rocky-linux-9-nastroyka-vps',
 			'cloud-init-avtomatizaciya-vps',
 			'ssl-letsencrypt-vps',
 			'certbot-dns-ssl-vps',
@@ -1450,6 +1562,7 @@ export const GUIDES: GuideConfig[] = [
 			'Статьи для разработчиков и админов: от Docker и Nginx до Terraform, Kubernetes, Grafana и автоматизации деплоя.',
 		articleSlugs: [
 			'docker-compose-vps',
+			'podman-rootless-vps',
 			'docker-swarm-na-vps',
 			'portainer-docker-vps',
 			'coolify-na-vps',
@@ -1488,6 +1601,7 @@ export const GUIDES: GuideConfig[] = [
 			'meilisearch-poisk-na-vps',
 			'clickhouse-analytics-vps',
 			'postgresql-tuning-vps',
+			'postgresql-replication-vps',
 			'mariadb-optimizaciya-vps',
 			'mysql-ili-postgresql-vps',
 			'grafana-prometheus-vps',
@@ -1506,12 +1620,15 @@ export const GUIDES: GuideConfig[] = [
 			'nftables-firewall-vps',
 			'crowdsec-zashchita-vps',
 			'vault-secrets-vps',
+			'authentik-sso-vps',
 			'tailscale-vpn-vps',
 			'wireguard-vpn-na-vps',
 			'telegram-bot-vps',
 			'n8n-self-hosted',
 			'vscode-ssh-vps',
 			'ollama-vps',
+			'plausible-analytics-vps',
+			'bookstack-wiki-vps',
 			'dont-lose-code-rules',
 			'vps-first-steps',
 		],
