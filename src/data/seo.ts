@@ -758,6 +758,46 @@ export const ARTICLE_FAQ: Record<string, FaqItem[]> = {
 			answer: 'Telegram и Slack — самые популярные. Alertmanager поддерживает email, PagerDuty, webhook.',
 		},
 	],
+	'gitea-git-server-vps': [
+		{
+			question: 'Gitea или GitLab для self-hosted Git?',
+			answer: 'Gitea — от 512 MB RAM, быстрый старт. GitLab CE — тяжелее (4 GB+), но больше CI/CD из коробки.',
+		},
+		{
+			question: 'Можно ли заменить GitHub на Gitea?',
+			answer: 'Для команды и pet-проектов — да. Для open-source community и marketplace Actions — GitHub удобнее.',
+		},
+	],
+	'postfix-dovecot-pochta-vps': [
+		{
+			question: 'Стоит ли поднимать свой mail на VPS?',
+			answer: 'Для transactional-почты малого объёма — да при PTR, DKIM и DMARC. Для рассылок — лучше ESP (SendGrid, Mailgun).',
+		},
+		{
+			question: 'Почему письма с VPS попадают в spam?',
+			answer: 'Чаще всего: нет reverse DNS, не настроены SPF/DKIM/DMARC, «грязный» IP или shared IP без репутации.',
+		},
+	],
+	'meilisearch-poisk-na-vps': [
+		{
+			question: 'Meilisearch или Elasticsearch для поиска на сайте?',
+			answer: 'Meilisearch — проще и легче (1–2 GB RAM), typo-tolerance из коробки. Elasticsearch — для больших кластеров и log analytics.',
+		},
+		{
+			question: 'Сколько RAM нужно Meilisearch на VPS?',
+			answer: '512 MB для dev, 1–2 GB для production с сотнями тысяч документов. Зависит от размера индекса.',
+		},
+	],
+	'nftables-firewall-vps': [
+		{
+			question: 'nftables или UFW на VPS?',
+			answer: 'UFW проще для старта. nftables — больше контроля: rate limit, sets, единый inet для IPv4/IPv6.',
+		},
+		{
+			question: 'Заменяет ли nftables Fail2ban?',
+			answer: 'Нет. nftables фильтрует трафик, Fail2ban банит IP по логам атак. Используйте оба слоя.',
+		},
+	],
 };
 
 /** Ручная перелинковка: slug → список slug для блока «Рекомендуем прочитать» */
@@ -845,10 +885,10 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 	'laravel-na-vps': [
 		'mysql-ili-postgresql-vps',
 		'redis-kesh-vps',
+		'meilisearch-poisk-na-vps',
 		'nginx-ili-caddy',
 		'ssl-letsencrypt-vps',
 		'backup-vps-3-2-1',
-		'razvernut-sayt-na-vps-2026',
 	],
 	'ssl-letsencrypt-vps': [
 		'certbot-dns-ssl-vps',
@@ -944,10 +984,10 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 	'zashchita-vps-ot-vzloma': [
 		'fail2ban-ot-bruteforce-vps',
 		'crowdsec-zashchita-vps',
-		'wireguard-vpn-na-vps',
+		'nftables-firewall-vps',
 		'ubuntu-24-04-pervaya-nastroyka-vps',
 		'linux-vps-dlya-novichka',
-		'backup-vps-3-2-1',
+		'wireguard-vpn-na-vps',
 	],
 	'docker-multi-stage-builds': [
 		'docker-compose-vps',
@@ -993,10 +1033,10 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 	'fail2ban-ot-bruteforce-vps': [
 		'zashchita-vps-ot-vzloma',
 		'crowdsec-zashchita-vps',
+		'nftables-firewall-vps',
 		'ubuntu-24-04-pervaya-nastroyka-vps',
 		'linux-vps-dlya-novichka',
 		'nginx-logi-i-oshibki',
-		'wireguard-vpn-na-vps',
 	],
 	'nextjs-deploy-na-vps': [
 		'nodejs-pm2-deploy',
@@ -1048,11 +1088,11 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 	],
 	'gitlab-runner-cicd-vps': [
 		'github-actions-cicd',
+		'gitea-git-server-vps',
 		'docker-multi-stage-builds',
 		'nextjs-deploy-na-vps',
 		'nodejs-pm2-deploy',
 		'ansible-avtomatizaciya-servera',
-		'terraform-vps-infrastruktura',
 	],
 	'crowdsec-zashchita-vps': [
 		'fail2ban-ot-bruteforce-vps',
@@ -1302,6 +1342,38 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'zabbix-monitoring-vps',
 		'telegram-bot-vps',
 	],
+	'gitea-git-server-vps': [
+		'github-actions-cicd',
+		'gitlab-runner-cicd-vps',
+		'docker-compose-vps',
+		'ssl-letsencrypt-vps',
+		'vault-secrets-vps',
+		'backup-vps-3-2-1',
+	],
+	'postfix-dovecot-pochta-vps': [
+		'ssl-letsencrypt-vps',
+		'cloudflare-i-vps',
+		'zashchita-vps-ot-vzloma',
+		'nftables-firewall-vps',
+		'debian-12-pervaya-nastroyka-vps',
+		'fail2ban-ot-bruteforce-vps',
+	],
+	'meilisearch-poisk-na-vps': [
+		'laravel-na-vps',
+		'django-deploy-na-vps',
+		'nextjs-deploy-na-vps',
+		'postgresql-tuning-vps',
+		'redis-kesh-vps',
+		'docker-compose-vps',
+	],
+	'nftables-firewall-vps': [
+		'zashchita-vps-ot-vzloma',
+		'fail2ban-ot-bruteforce-vps',
+		'crowdsec-zashchita-vps',
+		'ubuntu-24-04-pervaya-nastroyka-vps',
+		'debian-12-pervaya-nastroyka-vps',
+		'tailscale-vpn-vps',
+	],
 };
 
 export const GUIDES: GuideConfig[] = [
@@ -1342,6 +1414,8 @@ export const GUIDES: GuideConfig[] = [
 			'cloud-init-avtomatizaciya-vps',
 			'ssl-letsencrypt-vps',
 			'certbot-dns-ssl-vps',
+			'postfix-dovecot-pochta-vps',
+			'nftables-firewall-vps',
 			'nginx-ili-caddy',
 			'cloudflare-i-vps',
 			'mysql-ili-postgresql-vps',
@@ -1389,6 +1463,7 @@ export const GUIDES: GuideConfig[] = [
 			'supervisor-python-vps',
 			'github-actions-cicd',
 			'gitlab-runner-cicd-vps',
+			'gitea-git-server-vps',
 			'ansible-avtomatizaciya-servera',
 			'terraform-vps-infrastruktura',
 			'kubernetes-minikube-vps',
@@ -1410,6 +1485,7 @@ export const GUIDES: GuideConfig[] = [
 			'rabbitmq-ocheredi-na-vps',
 			'emqx-mqtt-na-vps',
 			'mongodb-na-vps',
+			'meilisearch-poisk-na-vps',
 			'clickhouse-analytics-vps',
 			'postgresql-tuning-vps',
 			'mariadb-optimizaciya-vps',
@@ -1427,6 +1503,7 @@ export const GUIDES: GuideConfig[] = [
 			'haproxy-load-balancer-vps',
 			'zashchita-vps-ot-vzloma',
 			'fail2ban-ot-bruteforce-vps',
+			'nftables-firewall-vps',
 			'crowdsec-zashchita-vps',
 			'vault-secrets-vps',
 			'tailscale-vpn-vps',
