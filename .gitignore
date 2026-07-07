@@ -1,6 +1,7 @@
 # build output
 dist/
 public/og/*.webp
+public/sitemap-images.xml
 # generated types
 .astro/
 
