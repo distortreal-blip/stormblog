@@ -2,6 +2,7 @@
 title: "GitLab Runner на VPS: свой CI/CD pipeline"
 description: "Настройка GitLab Runner на VPS: shell и Docker executor, .gitlab-ci.yml, деплой на staging/production. Альтернатива GitHub Actions на своём железе."
 pubDate: 2026-07-09
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "GitLab Runner VPS"

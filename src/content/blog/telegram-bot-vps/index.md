@@ -2,6 +2,7 @@
 title: "Как развернуть Telegram-бота на VPS за 30 минут"
 description: "Пошаговый деплой Telegram-бота на VPS: Python, systemd, firewall и логирование. Разберём выбор сервера, настройку окружения и автозапуск — без лишней теории."
 pubDate: 2026-07-06
+updatedDate: 2026-07-13
 category: VPS
 keywords:
   - "telegram bot vps"

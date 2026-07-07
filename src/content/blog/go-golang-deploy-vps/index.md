@@ -2,6 +2,7 @@
 title: "Go на VPS: деплой бинарника без лишних зависимостей"
 description: "Деплой Go-приложения на VPS: кросс-компиляция, systemd, Nginx, graceful shutdown. Минимальный RAM и максимальная скорость."
 pubDate: 2026-07-10
+updatedDate: 2026-07-13
 category: Разработка
 keywords:
   - "Go VPS"

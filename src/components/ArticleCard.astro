@@ -14,8 +14,9 @@ interface Props {
 }
 
 const { post, featured = false } = Astro.props;
-const { title, description, pubDate, category, heroImage } = post.data;
+const { title, description, pubDate, category, heroImage, imageAlt } = post.data;
 const readingTime = formatReadingTime(getReadingTimeMinutes(post.body ?? ''));
+const cardAlt = imageAlt ?? `${title} — обложка, ${category}`;
 ---
 
 <li class:list={['article-card', { 'article-card--featured': featured }]}>
@@ -26,7 +27,7 @@ const readingTime = formatReadingTime(getReadingTimeMinutes(post.body ?? ''));
 			title={title}
 			heroImage={heroImage}
 			variant={featured ? 'featured' : 'card'}
-			imageAlt={title}
+			imageAlt={cardAlt}
 		/>
 		<div class="article-card__body">
 			<div class="article-card__meta">

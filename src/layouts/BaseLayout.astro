@@ -11,6 +11,7 @@ interface Props {
 	description: string;
 	type?: 'website' | 'article';
 	keywords?: string[];
+	robots?: string;
 	article?: ArticleMeta;
 	breadcrumbs?: BreadcrumbItem[];
 	itemList?: ItemListMeta;
@@ -22,6 +23,7 @@ const {
 	description,
 	type = 'website',
 	keywords,
+	robots,
 	article,
 	breadcrumbs,
 	itemList,
@@ -37,6 +39,7 @@ const {
 			description={description}
 			type={type}
 			keywords={keywords}
+			robots={robots}
 			article={article}
 			breadcrumbs={breadcrumbs}
 			itemList={itemList}

@@ -2,6 +2,7 @@
 title: "Логи Nginx: как читать ошибки и находить проблемы"
 description: "Разбираем access.log и error.log Nginx: коды 4xx/5xx, upstream timeout, медленные запросы. Команды grep и tail для диагностики."
 pubDate: 2026-07-07
+updatedDate: 2026-07-13
 category: Linux
 keywords:
   - "логи Nginx"

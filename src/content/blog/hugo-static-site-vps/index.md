@@ -2,6 +2,7 @@
 title: "Hugo на VPS: деплой статического сайта за 20 минут"
 description: "Как задеплоить Hugo на VPS: build, Nginx, SSL, CI/CD. Быстрый статический блог без базы данных и PHP."
 pubDate: 2026-07-11
+updatedDate: 2026-07-13
 category: Разработка
 keywords:
   - "Hugo VPS"

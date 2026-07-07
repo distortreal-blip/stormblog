@@ -33,6 +33,12 @@ export default defineConfig({
 				) {
 					item.priority = 0.8;
 					item.changefreq = 'monthly';
+				} else if (pathname.startsWith('/blog/guide/')) {
+					item.priority = 0.9;
+					item.changefreq = 'weekly';
+				} else if (pathname.startsWith('/blog/category/')) {
+					item.priority = 0.75;
+					item.changefreq = 'weekly';
 				} else if (pathname.startsWith('/tools/')) {
 					item.priority = 0.6;
 				}

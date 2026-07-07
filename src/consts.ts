@@ -12,6 +12,8 @@ export const INSTAGRAM_URL = 'https://www.instagram.com/stormnet_cloud';
 export const TIKTOK_URL = 'https://www.tiktok.com/@stormnetcloud';
 export const TELEGRAM_URL = 'https://t.me/stormnetofficial';
 export const OG_IMAGE = `${SITE_URL}/og-default.jpg`;
+/** Квадратный логотип для JSON-LD publisher.logo (Google Article) */
+export const SITE_LOGO = `${SITE_URL}/og-default.jpg`;
 export const INDEXNOW_KEY = 'stormblogindexnow2026';
 
 /** «Тема месяца» на главной — slug статьи из content/blog */

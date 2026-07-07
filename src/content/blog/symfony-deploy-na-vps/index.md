@@ -2,6 +2,7 @@
 title: "Symfony на VPS: деплой PHP-приложения"
 description: "Деплой Symfony на VPS: Composer, PHP-FPM, Nginx, Messenger, cache. Production checklist для enterprise PHP."
 pubDate: 2026-07-12
+updatedDate: 2026-07-13
 category: Разработка
 keywords:
   - "Symfony VPS"

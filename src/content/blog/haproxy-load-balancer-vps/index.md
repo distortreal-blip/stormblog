@@ -2,6 +2,7 @@
 title: "HAProxy на VPS: балансировка нагрузки между серверами"
 description: "Настройка HAProxy на VPS: round-robin, health checks, SSL termination, sticky sessions. Когда нужен load balancer перед приложением."
 pubDate: 2026-07-11
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "HAProxy VPS"

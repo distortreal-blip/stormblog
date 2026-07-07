@@ -2,6 +2,7 @@
 title: "Kubernetes на VPS: когда k3s и Minikube имеют смысл"
 description: "Нужен ли Kubernetes на одном VPS? Сравниваем k3s, Minikube и Docker Compose. Когда оркестратор оправдан, а когда — лишняя сложность."
 pubDate: 2026-07-07
+updatedDate: 2026-07-13
 category: Облака
 keywords:
   - "Kubernetes VPS"

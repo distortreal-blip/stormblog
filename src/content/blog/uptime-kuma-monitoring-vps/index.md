@@ -2,6 +2,7 @@
 title: "Uptime Kuma на VPS: мониторинг доступности сайтов"
 description: "Установка Uptime Kuma на VPS: HTTP/TCP/ping мониторы, алерты в Telegram, status page. Лёгкая альтернатива Grafana для uptime."
 pubDate: 2026-07-09
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "Uptime Kuma VPS"

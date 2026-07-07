@@ -2,6 +2,7 @@
 title: "MariaDB на VPS: оптимизация и тюнинг производительности"
 description: "Тюнинг MariaDB на VPS: innodb_buffer_pool, соединения, индексы, slow query log. WordPress и Laravel без тормозов на 2 GB RAM."
 pubDate: 2026-07-10
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "MariaDB VPS"

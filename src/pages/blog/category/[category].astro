@@ -1,11 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import ArticleCard from '../../../components/ArticleCard.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import CategoryTags from '../../../components/CategoryTags.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { BLOG_CATEGORIES } from '../../../consts';
 import {
 	filterPostsByCategory,
+	getCategoryPath,
 	getCategoryLabel,
 	sortPostsByDate,
 } from '../../../utils/blog';
@@ -24,13 +26,21 @@ if (!categoryLabel) {
 }
 
 const posts = filterPostsByCategory(sortPostsByDate(await getCollection('blog')), categoryLabel);
+const breadcrumbs = [
+	{ label: 'Главная', href: '/' },
+	{ label: 'Статьи', href: '/blog/' },
+	{ label: categoryLabel },
+];
 ---
 
 <BaseLayout
 	title={`${categoryLabel} — Статьи`}
 	description={`Статьи блога Storm Cloud в категории «${categoryLabel}»: практические материалы о VPS, DevOps, разработке и облачной инфраструктуре.`}
+	keywords={[categoryLabel, 'VPS', 'Storm Cloud', 'статьи', 'блог']}
+	breadcrumbs={breadcrumbs}
 >
 	<section class="hero">
+		<Breadcrumbs items={breadcrumbs} />
 		<h1 class="hero__title">{categoryLabel}</h1>
 		<p class="hero__subtitle">
 			{posts.length > 0

@@ -2,6 +2,7 @@
 title: "MCP для разработчиков: что это и зачем подключать к Cursor"
 description: "Model Context Protocol — стандарт подключения AI к вашим инструментам. Разбираем архитектуру MCP, настройку серверов в Cursor и реальные сценарии для разработки на VPS и в облаке."
 pubDate: 2026-07-06
+updatedDate: 2026-07-13
 category: Разработка
 keywords:
   - "mcp protocol"

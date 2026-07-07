@@ -2,6 +2,7 @@
 title: "Как уменьшить расходы на VPS и облако: 12 рабочих способов"
 description: "12 способов снизить расходы на VPS и облако: sizing, reserved instances, CDN, spot-серверы и аудит ресурсов. Оптимизация без потери производительности."
 pubDate: 2026-07-06
+updatedDate: 2026-07-13
 category: Облака
 keywords:
   - "экономия vps"

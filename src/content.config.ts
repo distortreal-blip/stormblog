@@ -14,6 +14,8 @@ const blog = defineCollection({
 			category: z.enum(BLOG_CATEGORY_LABELS).default('VPS'),
 			keywords: z.array(z.string()).optional(),
 			heroImage: z.optional(image()),
+			/** SEO: описательный alt для обложки (Google Images) */
+			imageAlt: z.string().optional(),
 		}),
 });
 

@@ -2,6 +2,7 @@
 title: "Netdata на VPS: мониторинг в реальном времени"
 description: "Установка Netdata на VPS: CPU, RAM, диск, сеть за 1 минуту. Красивый dashboard без настройки Prometheus."
 pubDate: 2026-07-12
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "Netdata VPS"

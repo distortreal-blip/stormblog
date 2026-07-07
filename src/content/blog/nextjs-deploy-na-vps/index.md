@@ -2,6 +2,7 @@
 title: "Next.js на VPS: деплой production-приложения"
 description: "Как задеплоить Next.js на VPS: build, PM2, Nginx reverse proxy, SSL, переменные окружения и zero-downtime. Standalone и Node.js режимы."
 pubDate: 2026-07-09
+updatedDate: 2026-07-13
 category: Разработка
 keywords:
   - "Next.js VPS"

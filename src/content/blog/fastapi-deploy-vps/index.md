@@ -2,6 +2,7 @@
 title: "FastAPI на VPS: деплой с Uvicorn, Nginx и systemd"
 description: "Полный гайд: FastAPI + Uvicorn + Nginx reverse proxy + systemd на Ubuntu VPS. От кода до production за вечер."
 pubDate: 2026-07-07
+updatedDate: 2026-07-13
 category: Разработка
 keywords:
   - "FastAPI VPS"

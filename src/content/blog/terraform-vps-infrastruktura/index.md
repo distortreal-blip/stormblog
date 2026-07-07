@@ -2,6 +2,7 @@
 title: "Terraform и VPS: инфраструктура как код"
 description: "Зачем Terraform при ручном VPS, как описать сервер в HCL, state-файл и воспроизводимые окружения dev/stage/prod."
 pubDate: 2026-07-08
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "Terraform VPS"

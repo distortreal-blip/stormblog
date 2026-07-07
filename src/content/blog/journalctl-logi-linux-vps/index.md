@@ -2,6 +2,7 @@
 title: "journalctl на VPS: работа с логами Linux и systemd"
 description: "Гайд по journalctl: просмотр логов сервисов, фильтры, ротация, экспорт. Диагностика падений Nginx, Docker и приложений на VPS."
 pubDate: 2026-07-10
+updatedDate: 2026-07-13
 category: Linux
 keywords:
   - "journalctl VPS"

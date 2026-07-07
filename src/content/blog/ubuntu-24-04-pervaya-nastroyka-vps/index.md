@@ -2,6 +2,7 @@
 title: "Ubuntu 24.04 на VPS: первая настройка с нуля"
 description: "Полный чек-лист первой настройки Ubuntu 24.04 на VPS: пользователь, SSH, UFW, обновления, swap, часовой пояс и hardening. Команды для production."
 pubDate: 2026-07-09
+updatedDate: 2026-07-13
 category: Linux
 keywords:
   - "Ubuntu 24.04 VPS"

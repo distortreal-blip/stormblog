@@ -2,6 +2,7 @@
 title: "MinIO на VPS: своё S3-хранилище для файлов и бэкапов"
 description: "Развёртывание MinIO на VPS: S3-совместимое хранилище, buckets, политики доступа, интеграция с приложениями и бэкапами. Docker и bare metal."
 pubDate: 2026-07-09
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "MinIO VPS"

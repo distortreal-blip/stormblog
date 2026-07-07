@@ -2,6 +2,7 @@
 title: "n8n на своём VPS: автоматизация без Zapier"
 description: "Self-hosted n8n на VPS: установка через Docker, webhooks, интеграции с Telegram и Google Sheets. Как заменить Zapier в pet-проекте и сохранить контроль над данными и бюджетом."
 pubDate: 2026-07-06
+updatedDate: 2026-07-13
 category: Облака
 keywords:
   - "n8n self hosted"

@@ -2,6 +2,7 @@
 title: "OpenLiteSpeed + WordPress на VPS: быстрый хостинг"
 description: "Установка OpenLiteSpeed и WordPress на VPS: LSCache, HTTP/3, SSL. Альтернатива Nginx+PHP-FPM для скорости WordPress."
 pubDate: 2026-07-12
+updatedDate: 2026-07-13
 category: Разработка
 keywords:
   - "OpenLiteSpeed VPS"

@@ -2,6 +2,7 @@
 title: "Loki на VPS: централизованные логи с Grafana"
 description: "Установка Grafana Loki на VPS: сбор логов приложений, Promtail, запросы LogQL, алерты. Лёгкая альтернатива ELK."
 pubDate: 2026-07-11
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "Loki VPS"

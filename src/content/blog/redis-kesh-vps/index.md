@@ -2,6 +2,7 @@
 title: "Redis на VPS: кэширование, сессии и очереди"
 description: "Как поднять Redis на VPS: установка, настройка памяти, persistence, безопасность. Кэш для API, сессии и фоновые задачи."
 pubDate: 2026-07-08
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "Redis VPS"

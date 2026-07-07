@@ -2,6 +2,7 @@
 title: "ClickHouse на VPS: аналитика и OLAP на своём сервере"
 description: "Установка ClickHouse на VPS: колоночная БД для логов и аналитики, запросы, интеграция с Grafana. Когда нужен OLAP."
 pubDate: 2026-07-11
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "ClickHouse VPS"

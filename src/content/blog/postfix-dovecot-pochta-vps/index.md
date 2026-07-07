@@ -2,6 +2,7 @@
 title: "Postfix + Dovecot на VPS: свой почтовый сервер"
 description: "Настройка почты на VPS: Postfix SMTP, Dovecot IMAP, SPF, DKIM, DMARC. Когда нужен свой mail и как не попасть в spam."
 pubDate: 2026-07-13
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "Postfix VPS"

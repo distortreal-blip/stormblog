@@ -2,6 +2,7 @@
 title: "Node.js на VPS: деплой с PM2 и Nginx"
 description: "Как запустить Node.js приложение на VPS: PM2 для автозапуска, кластеризация, логи и Nginx reverse proxy."
 pubDate: 2026-07-08
+updatedDate: 2026-07-13
 category: Разработка
 keywords:
   - "Node.js VPS"

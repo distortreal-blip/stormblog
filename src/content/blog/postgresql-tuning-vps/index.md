@@ -2,6 +2,7 @@
 title: "PostgreSQL на VPS: установка, тюнинг и безопасность"
 description: "Как установить PostgreSQL на VPS, настроить shared_buffers и work_mem под RAM, удалённый доступ и бэкапы."
 pubDate: 2026-07-07
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "PostgreSQL VPS"

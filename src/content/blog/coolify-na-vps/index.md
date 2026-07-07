@@ -2,6 +2,7 @@
 title: "Coolify на VPS: свой Heroku за один вечер"
 description: "Установка Coolify на VPS: деплой из Git, Docker, SSL, базы данных. Self-hosted PaaS для разработчиков без DevOps-команды."
 pubDate: 2026-07-10
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "Coolify VPS"

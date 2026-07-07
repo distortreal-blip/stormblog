@@ -2,6 +2,7 @@
 title: "Gitea на VPS: свой Git-сервер и CI за вечер"
 description: "Развёртывание Gitea на VPS: Docker, SSH-ключи, Actions runner, бэкапы репозиториев. Альтернатива GitHub для команды и pet-проектов."
 pubDate: 2026-07-13
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "Gitea VPS"

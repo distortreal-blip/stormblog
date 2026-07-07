@@ -2,6 +2,7 @@
 title: "Docker Compose на VPS: первый проект с нуля"
 description: "Первый проект на Docker Compose на VPS: установка Docker, compose-файл, volumes, сети и автозапуск. Практическое руководство для backend и DevOps-новичков."
 pubDate: 2026-07-06
+updatedDate: 2026-07-13
 category: Docker
 keywords:
   - "docker compose vps"

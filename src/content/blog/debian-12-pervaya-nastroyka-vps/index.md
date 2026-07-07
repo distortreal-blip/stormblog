@@ -2,6 +2,7 @@
 title: "Debian 12 на VPS: первая настройка сервера"
 description: "Чек-лист настройки Debian 12 Bookworm на VPS: SSH, UFW, обновления, sudo-пользователь. Альтернатива Ubuntu для production."
 pubDate: 2026-07-12
+updatedDate: 2026-07-13
 category: Linux
 keywords:
   - "Debian 12 VPS"

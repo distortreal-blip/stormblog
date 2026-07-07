@@ -8,6 +8,7 @@ import {
 	SITE_AUTHOR_URL,
 	SITE_DESCRIPTION,
 	SITE_KEYWORDS,
+	SITE_LOGO,
 	SITE_ORG_NAME,
 	SITE_ORG_URL,
 	SITE_TITLE,
@@ -29,8 +30,11 @@ export interface ArticleMeta {
 	category: string;
 	url: string;
 	image?: string;
+	imageAlt?: string;
 	keywords?: string[];
 	faq?: FaqItem[];
+	wordCount?: number;
+	timeRequiredMinutes?: number;
 }
 
 interface Props {
@@ -39,15 +43,26 @@ interface Props {
 	image?: ImageMetadata;
 	type?: 'website' | 'article';
 	keywords?: string[];
+	robots?: string;
 	article?: ArticleMeta;
 	breadcrumbs?: BreadcrumbItem[];
 	itemList?: ItemListMeta;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, type = 'website', keywords, article, breadcrumbs = [], itemList } = Astro.props;
+const {
+	title,
+	description,
+	type = 'website',
+	keywords,
+	robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
+	article,
+	breadcrumbs = [],
+	itemList,
+} = Astro.props;
 const fullTitle = title === SITE_TITLE ? title : `${title} — ${SITE_TITLE}`;
 const ogImage = article?.image ?? OG_IMAGE;
+const ogImageAlt = article?.imageAlt ?? title;
 const pageKeywords = (article?.keywords ?? keywords)?.join(', ') ?? SITE_KEYWORDS;
 const authorName = SITE_AUTHOR_NAME;
 ---
@@ -66,7 +81,7 @@ const authorName = SITE_AUTHOR_NAME;
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <meta name="keywords" content={pageKeywords} />
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<meta name="robots" content={robots} />
 <meta name="author" content={authorName} />
 <meta name="msvalidate.01" content={BING_WEBMASTER_VERIFY} />
 
@@ -78,7 +93,7 @@ const authorName = SITE_AUTHOR_NAME;
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={title} />
+<meta property="og:image:alt" content={ogImageAlt} />
 <meta property="og:locale" content="ru_RU" />
 {
 	article && (
@@ -96,6 +111,7 @@ const authorName = SITE_AUTHOR_NAME;
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
 
 <script type="application/ld+json" set:html={JSON.stringify({
 	'@context': 'https://schema.org',
@@ -108,6 +124,10 @@ const authorName = SITE_AUTHOR_NAME;
 		'@type': 'Organization',
 		name: SITE_ORG_NAME,
 		url: SITE_ORG_URL,
+		logo: {
+			'@type': 'ImageObject',
+			url: SITE_LOGO,
+		},
 	},
 })} />
 
@@ -117,9 +137,10 @@ const authorName = SITE_AUTHOR_NAME;
 			type="application/ld+json"
 			set:html={JSON.stringify({
 				'@context': 'https://schema.org',
-				'@type': 'Article',
+				'@type': 'BlogPosting',
 				headline: article.title,
 				description: article.description,
+				url: article.url,
 				datePublished: article.pubDate.toISOString(),
 				...(article.updatedDate
 					? { dateModified: article.updatedDate.toISOString() }
@@ -129,11 +150,17 @@ const authorName = SITE_AUTHOR_NAME;
 					'@type': 'WebPage',
 					'@id': article.url,
 				},
+				isPartOf: {
+					'@type': 'WebSite',
+					name: SITE_TITLE,
+					url: SITE_URL,
+				},
 				image: {
 					'@type': 'ImageObject',
 					url: ogImage,
 					width: 1200,
 					height: 630,
+					caption: ogImageAlt,
 				},
 				author: {
 					'@type': 'Organization',
@@ -144,9 +171,17 @@ const authorName = SITE_AUTHOR_NAME;
 					'@type': 'Organization',
 					name: SITE_ORG_NAME,
 					url: SITE_ORG_URL,
+					logo: {
+						'@type': 'ImageObject',
+						url: SITE_LOGO,
+					},
 				},
 				articleSection: article.category,
 				...(article.keywords?.length ? { keywords: article.keywords.join(', ') } : {}),
+				...(article.wordCount ? { wordCount: article.wordCount } : {}),
+				...(article.timeRequiredMinutes
+					? { timeRequired: `PT${article.timeRequiredMinutes}M` }
+					: {}),
 			})}
 		/>
 	)

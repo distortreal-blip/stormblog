@@ -2,6 +2,7 @@
 title: "Supervisor на VPS: управление Python-процессами"
 description: "Supervisor на VPS: автозапуск Celery, Gunicorn, workers. Альтернатива systemd для нескольких процессов одного приложения."
 pubDate: 2026-07-12
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "Supervisor VPS"

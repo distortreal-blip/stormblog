@@ -2,6 +2,7 @@
 title: "Fail2ban на VPS: защита от брутфорса SSH и веб-атак"
 description: "Настройка Fail2ban на Ubuntu VPS: jail для SSH, Nginx, защита от брутфорса, whitelist IP, уведомления. Пошаговый гайд с конфигами."
 pubDate: 2026-07-09
+updatedDate: 2026-07-13
 category: Безопасность
 keywords:
   - "Fail2ban VPS"

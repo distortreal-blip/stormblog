@@ -2,6 +2,7 @@
 title: "cloud-init на VPS: автоматизация первого запуска сервера"
 description: "cloud-init на VPS: user-data, SSH-ключи, пакеты, скрипты при создании. Воспроизводимая настройка без ручных шагов."
 pubDate: 2026-07-11
+updatedDate: 2026-07-13
 category: Linux
 keywords:
   - "cloud-init VPS"

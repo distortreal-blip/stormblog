@@ -4,3 +4,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://blog.stormnetcloud.com/sitemap-index.xml
+Sitemap: https://blog.stormnetcloud.com/sitemap-images.xml

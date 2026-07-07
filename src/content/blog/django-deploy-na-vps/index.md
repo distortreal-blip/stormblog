@@ -2,6 +2,7 @@
 title: "Django на VPS: деплой production-приложения"
 description: "Как задеплоить Django на VPS: Gunicorn, Nginx, PostgreSQL, static/media, systemd и SSL. Полный гайд для Python backend."
 pubDate: 2026-07-10
+updatedDate: 2026-07-13
 category: Разработка
 keywords:
   - "Django VPS"

@@ -15,11 +15,14 @@ import RelatedArticles from '../components/RelatedArticles.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import ItNewsSidebar from '../components/ItNewsSidebar.astro';
 import BaseLayout from './BaseLayout.astro';
+import { SITE_URL } from '../consts';
 import type { BlogPost } from '../utils/blog';
 import {
 	extractHeadings,
 	formatReadingTime,
 	getAdjacentPosts,
+	getCategoryPath,
+	getCategorySlug,
 	getPostPath,
 	getReadingTimeMinutes,
 	getRecommendedPosts,
@@ -33,26 +36,31 @@ interface Props {
 }
 
 const { post, allPosts } = Astro.props;
-const { title, description, pubDate, updatedDate, category, heroImage, keywords } = post.data;
-const readingTime = formatReadingTime(getReadingTimeMinutes(post.body ?? ''));
+const { title, description, pubDate, updatedDate, category, heroImage, keywords, imageAlt } = post.data;
+const readingMinutes = getReadingTimeMinutes(post.body ?? '');
+const readingTime = formatReadingTime(readingMinutes);
+const wordCount = post.body?.trim().split(/\s+/).filter(Boolean).length ?? 0;
 const headings = extractHeadings(post.body ?? '');
 const { prev, next } = getAdjacentPosts(post, allPosts);
 const related = getRelatedPosts(post, allPosts, 6);
 const recommended = getRecommendedPosts(post, allPosts, RECOMMENDED_LINKS[post.id] ?? [], 6);
 const faqItems = ARTICLE_FAQ[post.id] ?? [];
 const articleUrl = new URL(getPostPath(post.id), Astro.site).href;
-const optimizedCover = heroImage
-	? await getImage({ src: heroImage, width: 1200, height: 630 })
-	: null;
-const ogImage = optimizedCover
-	? new URL(optimizedCover.src, Astro.site).href
-	: `${Astro.site}favicon.svg`;
+const coverAlt =
+	imageAlt ?? `${title} — иллюстрация к статье Storm Cloud Blog, категория ${category}`;
+const stableOgImage = heroImage ? `${SITE_URL}/og/${post.id}.webp` : `${SITE_URL}favicon.svg`;
 
+const categorySlug = getCategorySlug(category);
 const breadcrumbs = [
 	{ label: 'Главная', href: '/' },
 	{ label: 'Статьи', href: '/blog/' },
+	...(categorySlug ? [{ label: category, href: getCategoryPath(categorySlug) }] : []),
 	{ label: title },
 ];
+
+const optimizedCover = heroImage
+	? await getImage({ src: heroImage, width: 1200, height: 630 })
+	: null;
 ---
 
 <BaseLayout
@@ -67,12 +75,26 @@ const breadcrumbs = [
 		updatedDate,
 		category,
 		url: articleUrl,
-		image: ogImage,
+		image: stableOgImage,
+		imageAlt: coverAlt,
 		keywords,
 		faq: faqItems,
+		wordCount,
+		timeRequiredMinutes: readingMinutes,
 	}}
 	breadcrumbs={breadcrumbs}
 >
+	{optimizedCover && (
+		<link
+			slot="head"
+			rel="preload"
+			as="image"
+			href={optimizedCover.src}
+			imagesrcset={`${optimizedCover.src} 1200w`}
+			imagesizes="(max-width: 768px) 100vw, 1200px"
+		/>
+	)}
+
 	<ReadingProgress slot="progress" />
 
 	<div class="article-shell">
@@ -84,7 +106,7 @@ const breadcrumbs = [
 			title={title}
 			heroImage={heroImage}
 			variant="hero"
-			imageAlt={title}
+			imageAlt={coverAlt}
 		/>
 
 		<div class="article-layout article-layout--with-news">

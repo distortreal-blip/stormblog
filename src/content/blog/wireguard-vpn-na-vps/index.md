@@ -2,6 +2,7 @@
 title: "WireGuard VPN на VPS: личный VPN за 15 минут"
 description: "Пошаговая настройка WireGuard на Ubuntu VPS: ключи, конфиг клиента, маршрутизация. Быстрее и проще OpenVPN."
 pubDate: 2026-07-08
+updatedDate: 2026-07-13
 category: Безопасность
 keywords:
   - "WireGuard VPS"

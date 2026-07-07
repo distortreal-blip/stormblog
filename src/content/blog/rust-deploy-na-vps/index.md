@@ -2,6 +2,7 @@
 title: "Rust на VPS: деплой production-бинарника"
 description: "Деплой Rust на VPS: cargo build --release, systemd, Nginx, кросс-компиляция. Максимальная производительность на минимальном RAM."
 pubDate: 2026-07-11
+updatedDate: 2026-07-13
 category: Разработка
 keywords:
   - "Rust VPS"

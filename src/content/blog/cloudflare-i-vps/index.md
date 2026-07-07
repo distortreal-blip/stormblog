@@ -2,6 +2,7 @@
 title: "Cloudflare перед VPS: CDN, SSL и защита от DDoS"
 description: "Как подключить Cloudflare к VPS: DNS, проксирование, Flexible/Full SSL, кэш статики. Плюсы и минусы для российских проектов."
 pubDate: 2026-07-07
+updatedDate: 2026-07-13
 category: Облака
 keywords:
   - "Cloudflare VPS"

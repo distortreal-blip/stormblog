@@ -2,6 +2,7 @@
 title: "GitHub Actions с нуля: CI/CD для pet-проекта"
 description: "Пошаговый CI/CD на GitHub Actions для pet-проекта: тесты, линтер, сборка Docker и деплой на VPS. Workflow YAML, секреты, кэш и типичные ошибки новичков."
 pubDate: 2026-07-06
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "github actions"

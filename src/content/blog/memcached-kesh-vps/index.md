@@ -2,6 +2,7 @@
 title: "Memcached на VPS: кэширование для ускорения сайта"
 description: "Установка Memcached на VPS: object cache для WordPress, Drupal, Laravel. Сравнение с Redis, настройка памяти и безопасность."
 pubDate: 2026-07-10
+updatedDate: 2026-07-13
 category: DevOps
 keywords:
   - "Memcached VPS"

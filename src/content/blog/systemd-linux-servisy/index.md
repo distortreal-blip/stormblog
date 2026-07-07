@@ -2,6 +2,7 @@
 title: "Systemd на Linux: автозапуск и управление сервисами на VPS"
 description: "Гайд по systemd: unit-файлы, systemctl, journalctl. Как настроить автозапуск приложения, Nginx и бота на VPS."
 pubDate: 2026-07-07
+updatedDate: 2026-07-13
 category: Linux
 keywords:
   - "systemd"
