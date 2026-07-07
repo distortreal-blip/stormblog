@@ -658,6 +658,106 @@ export const ARTICLE_FAQ: Record<string, FaqItem[]> = {
 			answer: 'MongoDB — гибкая схема, документы, MERN-стек. PostgreSQL — строгая целостность, SQL, сложные JOIN.',
 		},
 	],
+	'certbot-dns-ssl-vps': [
+		{
+			question: 'Когда нужен DNS challenge вместо HTTP?',
+			answer: 'Для wildcard-сертификатов (*.domain.com), когда порт 80 недоступен, или при Cloudflare Full proxy без origin HTTP.',
+		},
+		{
+			question: 'Можно ли автоматически обновлять wildcard SSL?',
+			answer: 'Да. Certbot renew с DNS plugin обновляет сертификат автоматически — настройте API token и проверьте certbot renew --dry-run.',
+		},
+	],
+	'supervisor-python-vps': [
+		{
+			question: 'Supervisor или systemd для Python на VPS?',
+			answer: 'systemd — стандарт для одного процесса. Supervisor удобнее когда web + celery + beat в одном конфиге.',
+		},
+		{
+			question: 'Нужен ли Supervisor для Gunicorn?',
+			answer: 'Не обязателен — Gunicorn можно запустить через systemd. Supervisor полезен при нескольких связанных workers.',
+		},
+	],
+	'debian-12-pervaya-nastroyka-vps': [
+		{
+			question: 'Debian 12 или Ubuntu 24.04 для VPS?',
+			answer: 'Ubuntu — больше туториалов и свежее пакеты. Debian — стабильнее и минималистичнее, preferred для conservative production.',
+		},
+		{
+			question: 'Подходит ли Debian 12 для Docker и Kubernetes?',
+			answer: 'Да. Docker, k3s и большинство DevOps-инструментов отлично работают на Debian 12 Bookworm.',
+		},
+	],
+	'openlitespeed-wordpress-vps': [
+		{
+			question: 'OpenLiteSpeed быстрее Nginx для WordPress?',
+			answer: 'Часто да за счёт LSCache и оптимизации под PHP. Разница заметна на высоком трафике и WooCommerce.',
+		},
+		{
+			question: 'Бесплатен ли OpenLiteSpeed?',
+			answer: 'OpenLiteSpeed — open-source и бесплатен. LiteSpeed Enterprise — платная версия с доп. функциями.',
+		},
+	],
+	'netdata-monitoring-vps': [
+		{
+			question: 'Netdata заменяет Prometheus?',
+			answer: 'Для одного VPS — часто да для старта. Prometheus лучше для долгого хранения метрик, кастомных алертов и больших кластеров.',
+		},
+		{
+			question: 'Безопасно ли открывать Netdata в интернет?',
+			answer: 'Нет без auth. Используйте Nginx + basic auth, VPN/Tailscale или Netdata Cloud с ограничением доступа.',
+		},
+	],
+	'zabbix-monitoring-vps': [
+		{
+			question: 'Zabbix или Prometheus в 2026?',
+			answer: 'Prometheus + Grafana — стандарт cloud-native. Zabbix — для enterprise с legacy, SNMP и большими командами NOC.',
+		},
+		{
+			question: 'Сколько RAM нужно для Zabbix server?',
+			answer: 'Минимум 2 ГБ для малой установки. При сотнях хостов — 4–8 ГБ и отдельная БД.',
+		},
+	],
+	'vault-secrets-vps': [
+		{
+			question: 'Нужен ли Vault на одном VPS?',
+			answer: 'Редко. Для solo-проекта достаточно .env с правами 600. Vault окупается при нескольких сервисах и ротации секретов.',
+		},
+		{
+			question: 'Vault или облачный Secrets Manager?',
+			answer: 'Self-hosted Vault — контроль и без vendor lock-in. Облачный — проще ops, но платно и данные у провайдера.',
+		},
+	],
+	'symfony-deploy-na-vps': [
+		{
+			question: 'Symfony или Laravel на VPS?',
+			answer: 'Laravel — быстрее старт. Symfony — гибче для enterprise, строже архитектура. Стек деплоя одинаковый: PHP-FPM + Nginx.',
+		},
+		{
+			question: 'Как запустить Symfony Messenger на VPS?',
+			answer: 'supervisor или systemd для messenger:consume. Transport — Redis или RabbitMQ.',
+		},
+	],
+	'emqx-mqtt-na-vps': [
+		{
+			question: 'EMQX или Mosquitto для MQTT на VPS?',
+			answer: 'Mosquitto — легче для home lab. EMQX — масштаб, dashboard, clustering для production IoT.',
+		},
+		{
+			question: 'Нужен ли TLS для MQTT?',
+			answer: 'Да в production. Порт 8883 (MQTTS) с Let\'s Encrypt. Не используйте plaintext 1883 в интернете.',
+		},
+	],
+	'prometheus-alertmanager-vps': [
+		{
+			question: 'Alertmanager обязателен с Prometheus?',
+			answer: 'Не обязателен, но без него алерты не группируются и не маршрутизируются. Для production — да, нужен.',
+		},
+		{
+			question: 'Куда слать алерты с VPS?',
+			answer: 'Telegram и Slack — самые популярные. Alertmanager поддерживает email, PagerDuty, webhook.',
+		},
+	],
 };
 
 /** Ручная перелинковка: slug → список slug для блока «Рекомендуем прочитать» */
@@ -751,6 +851,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'razvernut-sayt-na-vps-2026',
 	],
 	'ssl-letsencrypt-vps': [
+		'certbot-dns-ssl-vps',
 		'razvernut-sayt-na-vps-2026',
 		'nginx-ili-caddy',
 		'cloudflare-i-vps',
@@ -759,8 +860,9 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'vps-first-steps',
 	],
 	'grafana-prometheus-vps': [
+		'prometheus-alertmanager-vps',
+		'netdata-monitoring-vps',
 		'uptime-kuma-monitoring-vps',
-		'vps-monitoring',
 		'docker-compose-vps',
 		'nginx-logi-i-oshibki',
 		'backup-vps-3-2-1',
@@ -1115,10 +1217,90 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 	'mongodb-na-vps': [
 		'mysql-ili-postgresql-vps',
 		'nodejs-pm2-deploy',
+		'emqx-mqtt-na-vps',
 		'redis-kesh-vps',
 		'backup-vps-3-2-1',
 		'restic-backup-vps',
+	],
+	'certbot-dns-ssl-vps': [
+		'ssl-letsencrypt-vps',
+		'cloudflare-i-vps',
+		'nginx-ili-caddy',
+		'traefik-reverse-proxy-vps',
+		'razvernut-sayt-na-vps-2026',
+		'minio-s3-na-vps',
+	],
+	'supervisor-python-vps': [
+		'django-deploy-na-vps',
+		'flask-deploy-na-vps',
+		'systemd-linux-servisy',
+		'rabbitmq-ocheredi-na-vps',
+		'laravel-na-vps',
+		'php-fpm-tuning-vps',
+	],
+	'debian-12-pervaya-nastroyka-vps': [
+		'ubuntu-24-04-pervaya-nastroyka-vps',
+		'linux-vps-dlya-novichka',
+		'cloud-init-avtomatizaciya-vps',
+		'vps-first-steps',
+		'zashchita-vps-ot-vzloma',
 		'docker-compose-vps',
+	],
+	'openlitespeed-wordpress-vps': [
+		'wordpress-vps-2026',
+		'php-fpm-tuning-vps',
+		'mariadb-optimizaciya-vps',
+		'ssl-letsencrypt-vps',
+		'memcached-kesh-vps',
+		'cloudflare-i-vps',
+	],
+	'netdata-monitoring-vps': [
+		'grafana-prometheus-vps',
+		'uptime-kuma-monitoring-vps',
+		'vps-monitoring',
+		'journalctl-logi-linux-vps',
+		'prometheus-alertmanager-vps',
+		'choose-vps',
+	],
+	'zabbix-monitoring-vps': [
+		'grafana-prometheus-vps',
+		'prometheus-alertmanager-vps',
+		'netdata-monitoring-vps',
+		'uptime-kuma-monitoring-vps',
+		'vps-monitoring',
+		'loki-grafana-logi-vps',
+	],
+	'vault-secrets-vps': [
+		'zashchita-vps-ot-vzloma',
+		'tailscale-vpn-vps',
+		'gitlab-runner-cicd-vps',
+		'github-actions-cicd',
+		'restic-backup-vps',
+		'fail2ban-ot-bruteforce-vps',
+	],
+	'symfony-deploy-na-vps': [
+		'laravel-na-vps',
+		'php-fpm-tuning-vps',
+		'nginx-ili-caddy',
+		'supervisor-python-vps',
+		'redis-kesh-vps',
+		'ssl-letsencrypt-vps',
+	],
+	'emqx-mqtt-na-vps': [
+		'rabbitmq-ocheredi-na-vps',
+		'redis-kesh-vps',
+		'mongodb-na-vps',
+		'docker-compose-vps',
+		'nginx-ili-caddy',
+		'certbot-dns-ssl-vps',
+	],
+	'prometheus-alertmanager-vps': [
+		'grafana-prometheus-vps',
+		'uptime-kuma-monitoring-vps',
+		'loki-grafana-logi-vps',
+		'netdata-monitoring-vps',
+		'zabbix-monitoring-vps',
+		'telegram-bot-vps',
 	],
 };
 
@@ -1156,8 +1338,10 @@ export const GUIDES: GuideConfig[] = [
 		articleSlugs: [
 			'razvernut-sayt-na-vps-2026',
 			'ubuntu-24-04-pervaya-nastroyka-vps',
+			'debian-12-pervaya-nastroyka-vps',
 			'cloud-init-avtomatizaciya-vps',
 			'ssl-letsencrypt-vps',
+			'certbot-dns-ssl-vps',
 			'nginx-ili-caddy',
 			'cloudflare-i-vps',
 			'mysql-ili-postgresql-vps',
@@ -1200,7 +1384,9 @@ export const GUIDES: GuideConfig[] = [
 			'nginx-ili-caddy',
 			'nginx-logi-i-oshibki',
 			'ssl-letsencrypt-vps',
+			'certbot-dns-ssl-vps',
 			'systemd-linux-servisy',
+			'supervisor-python-vps',
 			'github-actions-cicd',
 			'gitlab-runner-cicd-vps',
 			'ansible-avtomatizaciya-servera',
@@ -1214,18 +1400,24 @@ export const GUIDES: GuideConfig[] = [
 			'rust-deploy-na-vps',
 			'flask-deploy-na-vps',
 			'laravel-na-vps',
+			'symfony-deploy-na-vps',
 			'php-fpm-tuning-vps',
+			'openlitespeed-wordpress-vps',
 			'fastapi-deploy-vps',
 			'redis-kesh-vps',
 			'memcached-kesh-vps',
 			'minio-s3-na-vps',
 			'rabbitmq-ocheredi-na-vps',
+			'emqx-mqtt-na-vps',
 			'mongodb-na-vps',
 			'clickhouse-analytics-vps',
 			'postgresql-tuning-vps',
 			'mariadb-optimizaciya-vps',
 			'mysql-ili-postgresql-vps',
 			'grafana-prometheus-vps',
+			'prometheus-alertmanager-vps',
+			'netdata-monitoring-vps',
+			'zabbix-monitoring-vps',
 			'loki-grafana-logi-vps',
 			'uptime-kuma-monitoring-vps',
 			'sentry-self-hosted-vps',
@@ -1236,6 +1428,7 @@ export const GUIDES: GuideConfig[] = [
 			'zashchita-vps-ot-vzloma',
 			'fail2ban-ot-bruteforce-vps',
 			'crowdsec-zashchita-vps',
+			'vault-secrets-vps',
 			'tailscale-vpn-vps',
 			'wireguard-vpn-na-vps',
 			'telegram-bot-vps',
