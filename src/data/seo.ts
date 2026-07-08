@@ -908,6 +908,56 @@ export const ARTICLE_FAQ: Record<string, FaqItem[]> = {
 			answer: 'Зависит от объёма фото/видео. Планируйте 2–3× текущего размера галереи + рост. ML metadata — доп. место на SSD.',
 		},
 	],
+	'vaultwarden-paroli-vps': [
+		{
+			question: 'Vaultwarden или HashiCorp Vault для паролей?',
+			answer: 'Vaultwarden — менеджер паролей для людей, совместим с Bitwarden-клиентами. HashiCorp Vault — secrets для приложений и CI, другой продукт.',
+		},
+		{
+			question: 'Сколько RAM нужно Vaultwarden на VPS?',
+			answer: '512 MB–1 GB достаточно для семьи или малой команды. Это один из самых лёгких self-hosted сервисов.',
+		},
+	],
+	'code-server-ide-vps': [
+		{
+			question: 'code-server или VS Code SSH — что выбрать?',
+			answer: 'VS Code SSH — для ежедневной работы с desktop VS Code. code-server — когда нужен IDE в браузере с любого устройства.',
+		},
+		{
+			question: 'Безопасно ли выставлять code-server в интернет?',
+			answer: 'Только с HTTPS, сильной auth и preferably Tailscale или Authentik SSO. code-server даёт полный shell на сервере.',
+		},
+	],
+	'syncthing-sync-vps': [
+		{
+			question: 'Syncthing или Nextcloud для синхронизации?',
+			answer: 'Syncthing — P2P sync папок без центрального облака. Nextcloud — UI, sharing, календарь. Часто используют оба.',
+		},
+		{
+			question: 'Нужен ли VPS для Syncthing?',
+			answer: 'Не обязателен — devices sync напрямую. VPS как always-on node полезен для backup hub и sync когда ноутбук offline.',
+		},
+	],
+	'harbor-docker-registry-vps': [
+		{
+			question: 'Harbor или простой Docker Registry?',
+			answer: 'registry:2 — минимальный push/pull. Harbor — UI, RBAC, CVE scanning, replication. Для production CI — Harbor.',
+		},
+		{
+			question: 'Сколько RAM нужно Harbor на VPS?',
+			answer: 'Минимум 4 GB для dev-команды со scanning. Production с большим числом образов — 8 GB+.',
+		},
+	],
+	'adguard-dns-vps': [
+		{
+			question: 'AdGuard Home или Pi-hole на VPS?',
+			answer: 'Оба self-hosted DNS filters. AdGuard Home — современный UI, DoH/DoT из коробки. Pi-hole — классика с большим community.',
+		},
+		{
+			question: 'Можно ли использовать VPS как DNS для домашней сети?',
+			answer: 'Да — укажите IP VPS в роутере как DNS. Важно: ограничьте доступ только вашими IP, иначе open resolver abuse.',
+		},
+	],
 };
 
 /** Ручная перелинковка: slug → список slug для блока «Рекомендуем прочитать» */
@@ -1425,6 +1475,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'loki-grafana-logi-vps',
 	],
 	'vault-secrets-vps': [
+		'vaultwarden-paroli-vps',
 		'zashchita-vps-ot-vzloma',
 		'authentik-sso-vps',
 		'tailscale-vpn-vps',
@@ -1538,6 +1589,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'ssl-letsencrypt-vps',
 	],
 	'nextcloud-oblako-vps': [
+		'syncthing-sync-vps',
 		'minio-s3-na-vps',
 		'authentik-sso-vps',
 		'ssl-letsencrypt-vps',
@@ -1576,6 +1628,46 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'minio-s3-na-vps',
 		'ssl-letsencrypt-vps',
 		'authentik-sso-vps',
+	],
+	'vaultwarden-paroli-vps': [
+		'vault-secrets-vps',
+		'authentik-sso-vps',
+		'ssl-letsencrypt-vps',
+		'backup-vps-3-2-1',
+		'restic-backup-vps',
+		'crowdsec-zashchita-vps',
+	],
+	'code-server-ide-vps': [
+		'vscode-ssh-vps',
+		'tailscale-vpn-vps',
+		'authentik-sso-vps',
+		'docker-compose-vps',
+		'gitea-git-server-vps',
+		'ssl-letsencrypt-vps',
+	],
+	'syncthing-sync-vps': [
+		'nextcloud-oblako-vps',
+		'immich-foto-bekap-vps',
+		'tailscale-vpn-vps',
+		'backup-vps-3-2-1',
+		'restic-backup-vps',
+		'nginx-ili-caddy',
+	],
+	'harbor-docker-registry-vps': [
+		'docker-compose-vps',
+		'github-actions-cicd',
+		'jenkins-ci-cd-vps',
+		'gitlab-runner-cicd-vps',
+		'minio-s3-na-vps',
+		'vault-secrets-vps',
+	],
+	'adguard-dns-vps': [
+		'tailscale-vpn-vps',
+		'wireguard-vpn-na-vps',
+		'nftables-firewall-vps',
+		'uptime-kuma-monitoring-vps',
+		'ssl-letsencrypt-vps',
+		'nginx-ili-caddy',
 	],
 };
 
@@ -1715,16 +1807,20 @@ export const GUIDES: GuideConfig[] = [
 			'nftables-firewall-vps',
 			'crowdsec-zashchita-vps',
 			'vault-secrets-vps',
+			'vaultwarden-paroli-vps',
 			'authentik-sso-vps',
 			'tailscale-vpn-vps',
 			'wireguard-vpn-na-vps',
+			'adguard-dns-vps',
 			'telegram-bot-vps',
 			'n8n-self-hosted',
 			'vscode-ssh-vps',
+			'code-server-ide-vps',
 			'ollama-vps',
 			'plausible-analytics-vps',
 			'bookstack-wiki-vps',
 			'nextcloud-oblako-vps',
+			'syncthing-sync-vps',
 			'immich-foto-bekap-vps',
 			'jellyfin-media-server-vps',
 			'dont-lose-code-rules',
