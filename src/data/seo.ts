@@ -855,7 +855,57 @@ export const ARTICLE_FAQ: Record<string, FaqItem[]> = {
 		},
 		{
 			question: 'Можно ли защитить Grafana и Gitea через Authentik?',
-			answer: 'Да. OAuth2/OIDC provider в Authentik + forward auth outpost для Nginx — стандartный паттерн.',
+			answer: 'Да. OAuth2/OIDC provider в Authentik + forward auth outpost для Nginx — стандартный паттерн.',
+		},
+	],
+	'nextcloud-oblako-vps': [
+		{
+			question: 'Nextcloud или MinIO для файлов на VPS?',
+			answer: 'Nextcloud — UI, sync-клиенты, sharing для людей. MinIO — S3 API для приложений. Часто используют оба: Nextcloud + MinIO backend.',
+		},
+		{
+			question: 'Сколько RAM нужно Nextcloud на VPS?',
+			answer: 'Минимум 2 GB для малой команды, 4 GB для OnlyOffice и 10+ пользователей. SQLite только для тестов.',
+		},
+	],
+	'jenkins-ci-cd-vps': [
+		{
+			question: 'Jenkins или GitHub Actions для CI/CD?',
+			answer: 'GitHub Actions проще для GitHub-проектов. Jenkins — когда нужен self-hosted, plugins и полный контроль над agents.',
+		},
+		{
+			question: 'Можно ли Jenkins controller держать на production VPS?',
+			answer: 'Не рекомендуется. Controller + build agents лучше на отдельных VPS: builds не конкурируют с prod за RAM/CPU.',
+		},
+	],
+	'jellyfin-media-server-vps': [
+		{
+			question: 'Jellyfin или Plex на VPS?',
+			answer: 'Jellyfin полностью бесплатен без подписок. Plex удобнее out-of-box, но mobile sync и часть фич — Plex Pass.',
+		},
+		{
+			question: 'Нужен ли GPU на VPS для Jellyfin?',
+			answer: 'Для direct play — нет. Для transcoding 1080p+ одновременно — желателен GPU или мощный CPU; на типичном VPS transcoding ограничен.',
+		},
+	],
+	'opensearch-logi-vps': [
+		{
+			question: 'OpenSearch или Loki для логов на VPS?',
+			answer: 'Loki легче и нативно в Grafana. OpenSearch — мощнее full-text search и rich analytics, но требует 4 GB+ RAM.',
+		},
+		{
+			question: 'Сколько RAM нужно OpenSearch single-node?',
+			answer: 'Минимум 4 GB VPS, heap 2 GB. Для production retention и Dashboards — 8 GB комфортнее.',
+		},
+	],
+	'immich-foto-bekap-vps': [
+		{
+			question: 'Immich или Nextcloud для фото с телефона?',
+			answer: 'Immich — лучший mobile UX и ML search как Google Photos. Nextcloud — универсальное облако, фото вторично.',
+		},
+		{
+			question: 'Сколько места нужно Immich на VPS?',
+			answer: 'Зависит от объёма фото/видео. Планируйте 2–3× текущего размера галереи + рост. ML metadata — доп. место на SSD.',
 		},
 	],
 };
@@ -1109,6 +1159,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 	],
 	'minio-s3-na-vps': [
 		'backup-vps-3-2-1',
+		'nextcloud-oblako-vps',
 		'docker-compose-vps',
 		'laravel-na-vps',
 		'wireguard-vpn-na-vps',
@@ -1149,6 +1200,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 	],
 	'gitlab-runner-cicd-vps': [
 		'github-actions-cicd',
+		'jenkins-ci-cd-vps',
 		'gitea-git-server-vps',
 		'docker-multi-stage-builds',
 		'nextjs-deploy-na-vps',
@@ -1485,6 +1537,46 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'tailscale-vpn-vps',
 		'ssl-letsencrypt-vps',
 	],
+	'nextcloud-oblako-vps': [
+		'minio-s3-na-vps',
+		'authentik-sso-vps',
+		'ssl-letsencrypt-vps',
+		'backup-vps-3-2-1',
+		'restic-backup-vps',
+		'nginx-ili-caddy',
+	],
+	'jenkins-ci-cd-vps': [
+		'github-actions-cicd',
+		'gitlab-runner-cicd-vps',
+		'docker-compose-vps',
+		'gitea-git-server-vps',
+		'vault-secrets-vps',
+		'ansible-avtomatizaciya-servera',
+	],
+	'jellyfin-media-server-vps': [
+		'nginx-ili-caddy',
+		'ssl-letsencrypt-vps',
+		'tailscale-vpn-vps',
+		'nextcloud-oblako-vps',
+		'docker-compose-vps',
+		'backup-vps-3-2-1',
+	],
+	'opensearch-logi-vps': [
+		'loki-grafana-logi-vps',
+		'grafana-prometheus-vps',
+		'nginx-logi-i-oshibki',
+		'journalctl-logi-linux-vps',
+		'minio-s3-na-vps',
+		'prometheus-alertmanager-vps',
+	],
+	'immich-foto-bekap-vps': [
+		'nextcloud-oblako-vps',
+		'backup-vps-3-2-1',
+		'restic-backup-vps',
+		'minio-s3-na-vps',
+		'ssl-letsencrypt-vps',
+		'authentik-sso-vps',
+	],
 };
 
 export const GUIDES: GuideConfig[] = [
@@ -1576,6 +1668,7 @@ export const GUIDES: GuideConfig[] = [
 			'supervisor-python-vps',
 			'github-actions-cicd',
 			'gitlab-runner-cicd-vps',
+			'jenkins-ci-cd-vps',
 			'gitea-git-server-vps',
 			'ansible-avtomatizaciya-servera',
 			'terraform-vps-infrastruktura',
@@ -1595,6 +1688,7 @@ export const GUIDES: GuideConfig[] = [
 			'redis-kesh-vps',
 			'memcached-kesh-vps',
 			'minio-s3-na-vps',
+			'nextcloud-oblako-vps',
 			'rabbitmq-ocheredi-na-vps',
 			'emqx-mqtt-na-vps',
 			'mongodb-na-vps',
@@ -1609,6 +1703,7 @@ export const GUIDES: GuideConfig[] = [
 			'netdata-monitoring-vps',
 			'zabbix-monitoring-vps',
 			'loki-grafana-logi-vps',
+			'opensearch-logi-vps',
 			'uptime-kuma-monitoring-vps',
 			'sentry-self-hosted-vps',
 			'vps-monitoring',
@@ -1629,6 +1724,9 @@ export const GUIDES: GuideConfig[] = [
 			'ollama-vps',
 			'plausible-analytics-vps',
 			'bookstack-wiki-vps',
+			'nextcloud-oblako-vps',
+			'immich-foto-bekap-vps',
+			'jellyfin-media-server-vps',
 			'dont-lose-code-rules',
 			'vps-first-steps',
 		],
