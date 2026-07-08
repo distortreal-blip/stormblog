@@ -958,6 +958,34 @@ export const ARTICLE_FAQ: Record<string, FaqItem[]> = {
 			answer: 'Да — укажите IP VPS в роутере как DNS. Важно: ограничьте доступ только вашими IP, иначе open resolver abuse.',
 		},
 	],
+	'matrix-synapse-chat-vps': [
+		{
+			question: 'Matrix Synapse или Telegram для команды?',
+			answer: 'Telegram проще и бесплатен в облаке. Matrix — self-hosted, E2E, federation, compliance и полный контроль данных на VPS.',
+		},
+		{
+			question: 'Сколько RAM нужно Synapse на VPS?',
+			answer: 'Минимум 2 GB для семьи, 4 GB для команды 20–100 человек. С SQLite в production не работайте — только PostgreSQL.',
+		},
+		{
+			question: 'Нужен ли TURN сервер для Matrix?',
+			answer: 'Да, если нужны видеозвонки Element Call. coturn на том же VPS — стандартная практика.',
+		},
+	],
+	'homeassistant-vps': [
+		{
+			question: 'Home Assistant на VPS или Raspberry Pi дома?',
+			answer: 'Zigbee/Z-Wave dongle физически дома — gateway на Pi. VPS — brain для remote access и тяжёлых интеграций. Часто используют split-архитектуру.',
+		},
+		{
+			question: 'Сколько RAM нужно Home Assistant на VPS?',
+			answer: '2 GB минимум для HA + MQTT. 4 GB для Node-RED + InfluxDB. 8 GB+ если Frigate NVR с камерами.',
+		},
+		{
+			question: 'Как безопасно открыть Home Assistant из интернета?',
+			answer: 'Лучше Tailscale VPN без public порта. Если домен — Nginx SSL + сильная auth, никогда не выставляйте 8123 напрямую.',
+		},
+	],
 };
 
 /** Ручная перелинковка: slug → список slug для блока «Рекомендуем прочитать» */
@@ -1493,6 +1521,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'ssl-letsencrypt-vps',
 	],
 	'emqx-mqtt-na-vps': [
+		'homeassistant-vps',
 		'rabbitmq-ocheredi-na-vps',
 		'redis-kesh-vps',
 		'mongodb-na-vps',
@@ -1581,6 +1610,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'wireguard-vpn-na-vps',
 	],
 	'authentik-sso-vps': [
+		'matrix-synapse-chat-vps',
 		'vault-secrets-vps',
 		'gitea-git-server-vps',
 		'grafana-prometheus-vps',
@@ -1668,6 +1698,22 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'uptime-kuma-monitoring-vps',
 		'ssl-letsencrypt-vps',
 		'nginx-ili-caddy',
+	],
+	'matrix-synapse-chat-vps': [
+		'authentik-sso-vps',
+		'ssl-letsencrypt-vps',
+		'nginx-ili-caddy',
+		'postgresql-tuning-vps',
+		'backup-vps-3-2-1',
+		'tailscale-vpn-vps',
+	],
+	'homeassistant-vps': [
+		'emqx-mqtt-na-vps',
+		'tailscale-vpn-vps',
+		'n8n-self-hosted',
+		'telegram-bot-vps',
+		'grafana-prometheus-vps',
+		'backup-vps-3-2-1',
 	],
 };
 
@@ -1783,6 +1829,7 @@ export const GUIDES: GuideConfig[] = [
 			'nextcloud-oblako-vps',
 			'rabbitmq-ocheredi-na-vps',
 			'emqx-mqtt-na-vps',
+			'homeassistant-vps',
 			'mongodb-na-vps',
 			'meilisearch-poisk-na-vps',
 			'clickhouse-analytics-vps',
@@ -1813,6 +1860,7 @@ export const GUIDES: GuideConfig[] = [
 			'wireguard-vpn-na-vps',
 			'adguard-dns-vps',
 			'telegram-bot-vps',
+			'matrix-synapse-chat-vps',
 			'n8n-self-hosted',
 			'vscode-ssh-vps',
 			'code-server-ide-vps',
@@ -1823,6 +1871,7 @@ export const GUIDES: GuideConfig[] = [
 			'syncthing-sync-vps',
 			'immich-foto-bekap-vps',
 			'jellyfin-media-server-vps',
+			'homeassistant-vps',
 			'dont-lose-code-rules',
 			'vps-first-steps',
 		],
