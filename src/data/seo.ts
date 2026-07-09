@@ -986,6 +986,106 @@ export const ARTICLE_FAQ: Record<string, FaqItem[]> = {
 			answer: 'Лучше Tailscale VPN без public порта. Если домен — Nginx SSL + сильная auth, никогда не выставляйте 8123 напрямую.',
 		},
 	],
+	'ghost-blog-vps': [
+		{
+			question: 'Ghost или WordPress для блога на VPS?',
+			answer: 'Ghost — минимализм, встроенный newsletter, Node.js. WordPress — экосистема плагинов. Для авторского блога и рассылки — Ghost.',
+		},
+		{
+			question: 'Сколько RAM нужно Ghost на VPS?',
+			answer: '2 GB для малого блога, 4 GB при активном newsletter и Members. MySQL + Node.js одновременно.',
+		},
+	],
+	'discourse-forum-vps': [
+		{
+			question: 'Discourse или phpBB для форума на VPS?',
+			answer: 'Discourse — modern UX, SSO, moderation, mobile-first. Требует 2 GB+ RAM. phpBB легче, но UX устарел.',
+		},
+		{
+			question: 'Сколько RAM нужно Discourse?',
+			answer: 'Минимум 2 GB официально, 4 GB комфортно для 100+ активных пользователей. Не ставьте на 1 GB.',
+		},
+	],
+	'rustdesk-remote-vps': [
+		{
+			question: 'RustDesk или TeamViewer для remote desktop?',
+			answer: 'TeamViewer проще out-of-box. RustDesk self-hosted — без лимитов, свои серверы, open source. Для IT-команд на VPS — RustDesk.',
+		},
+		{
+			question: 'Нужен ли публичный IP для RustDesk relay?',
+			answer: 'Да, relay/id server на VPS с белым IP. Клиенты подключаются к вашему серверу, не к rustdesk.com.',
+		},
+	],
+	'searxng-poisk-vps': [
+		{
+			question: 'SearXNG или Google для приватного поиска?',
+			answer: 'SearXNG агрегирует Google/Bing/DuckDuckGo без tracking и профилирования. Ваш VPS — ваши логи (или их отсутствие).',
+		},
+		{
+			question: 'Можно ли открыть SearXNG публично?',
+			answer: 'Технически да, но риск abuse и CAPTCHA от upstream. Лучше Tailscale или auth для личного/team use.',
+		},
+	],
+	'paperless-ngx-vps': [
+		{
+			question: 'Paperless-ngx или Nextcloud для документов?',
+			answer: 'Paperless-ngx — OCR, full-text search, теги для сканов и PDF. Nextcloud — универсальное файловое облако. Часто оба.',
+		},
+		{
+			question: 'Сколько места нужно Paperless-ngx?',
+			answer: 'Зависит от объёма сканов. Планируйте 2× текущего архива документов + рост. OCR metadata добавляет ~10–20%.',
+		},
+	],
+	'pocketbase-vps': [
+		{
+			question: 'PocketBase или Supabase/Firebase для backend?',
+			answer: 'PocketBase — один binary, SQLite, auth, realtime, admin UI. Идеален для MVP и малых проектов на VPS. Firebase — managed cloud.',
+		},
+		{
+			question: 'Сколько RAM нужно PocketBase?',
+			answer: '512 MB–1 GB для малых проектов. SQLite не для high-concurrency — при росте мигрируйте на PostgreSQL fork или другой backend.',
+		},
+	],
+	'ntfy-push-vps': [
+		{
+			question: 'ntfy или Telegram для уведомлений с сервера?',
+			answer: 'Telegram проще для людей. ntfy — HTTP push на телефон без мессенджера, идеален для cron, monitoring, CI alerts.',
+		},
+		{
+			question: 'Можно ли ntfy без публичного доступа?',
+			answer: 'Да — через Tailscale или LAN. Публичный ntfy нужен для push с внешних сервисов без VPN.',
+		},
+	],
+	'firefly-iii-vps': [
+		{
+			question: 'Firefly III или Excel для учёта финансов?',
+			answer: 'Firefly III — категории, бюджеты, multi-currency, API, rules. Self-hosted privacy. Excel гибче, но без автоматизации.',
+		},
+		{
+			question: 'Безопасно ли хранить финансы на VPS?',
+			answer: 'Да при HTTPS, strong auth, backup и VPS у доверенного провайдера. Включите 2FA, не открывайте без SSL.',
+		},
+	],
+	'woodpecker-ci-vps': [
+		{
+			question: 'Woodpecker или Jenkins для CI/CD?',
+			answer: 'Woodpecker — легче, YAML pipelines, Drone fork, Gitea/GitHub integration. Jenkins — plugins и enterprise, но тяжелее.',
+		},
+		{
+			question: 'Woodpecker работает с Gitea?',
+			answer: 'Да, native integration. Подключите OAuth app в Gitea — pipelines по .woodpecker.yml в репозитории.',
+		},
+	],
+	'freshrss-vps': [
+		{
+			question: 'FreshRSS или Feedly для чтения новостей?',
+			answer: 'Feedly — cloud, удобно. FreshRSS self-hosted — privacy, unlimited feeds, API, mobile apps через RSS readers.',
+		},
+		{
+			question: 'Сколько RAM нужно FreshRSS?',
+			answer: '512 MB–1 GB для сотен feeds. PostgreSQL предпочтительнее SQLite при 500+ источниках.',
+		},
+	],
 };
 
 /** Ручная перелинковка: slug → список slug для блока «Рекомендуем прочитать» */
@@ -1538,6 +1638,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'telegram-bot-vps',
 	],
 	'gitea-git-server-vps': [
+		'woodpecker-ci-vps',
 		'github-actions-cicd',
 		'gitlab-runner-cicd-vps',
 		'docker-compose-vps',
@@ -1715,6 +1816,86 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'grafana-prometheus-vps',
 		'backup-vps-3-2-1',
 	],
+	'ghost-blog-vps': [
+		'hugo-static-site-vps',
+		'wordpress-vps-2026',
+		'plausible-analytics-vps',
+		'ssl-letsencrypt-vps',
+		'nginx-ili-caddy',
+		'backup-vps-3-2-1',
+	],
+	'discourse-forum-vps': [
+		'ghost-blog-vps',
+		'authentik-sso-vps',
+		'postgresql-tuning-vps',
+		'ssl-letsencrypt-vps',
+		'nginx-ili-caddy',
+		'backup-vps-3-2-1',
+	],
+	'rustdesk-remote-vps': [
+		'tailscale-vpn-vps',
+		'wireguard-vpn-na-vps',
+		'ssl-letsencrypt-vps',
+		'nftables-firewall-vps',
+		'code-server-ide-vps',
+		'vscode-ssh-vps',
+	],
+	'searxng-poisk-vps': [
+		'adguard-dns-vps',
+		'tailscale-vpn-vps',
+		'nginx-ili-caddy',
+		'ssl-letsencrypt-vps',
+		'plausible-analytics-vps',
+		'nftables-firewall-vps',
+	],
+	'paperless-ngx-vps': [
+		'nextcloud-oblako-vps',
+		'backup-vps-3-2-1',
+		'restic-backup-vps',
+		'minio-s3-na-vps',
+		'ssl-letsencrypt-vps',
+		'syncthing-sync-vps',
+	],
+	'pocketbase-vps': [
+		'docker-compose-vps',
+		'nginx-ili-caddy',
+		'ssl-letsencrypt-vps',
+		'fastapi-deploy-vps',
+		'nextjs-deploy-na-vps',
+		'backup-vps-3-2-1',
+	],
+	'ntfy-push-vps': [
+		'uptime-kuma-monitoring-vps',
+		'prometheus-alertmanager-vps',
+		'telegram-bot-vps',
+		'tailscale-vpn-vps',
+		'nginx-ili-caddy',
+		'homeassistant-vps',
+	],
+	'firefly-iii-vps': [
+		'vaultwarden-paroli-vps',
+		'backup-vps-3-2-1',
+		'ssl-letsencrypt-vps',
+		'authentik-sso-vps',
+		'tailscale-vpn-vps',
+		'restic-backup-vps',
+	],
+	'woodpecker-ci-vps': [
+		'gitea-git-server-vps',
+		'github-actions-cicd',
+		'jenkins-ci-cd-vps',
+		'gitlab-runner-cicd-vps',
+		'docker-compose-vps',
+		'harbor-docker-registry-vps',
+	],
+	'freshrss-vps': [
+		'ghost-blog-vps',
+		'nginx-ili-caddy',
+		'ssl-letsencrypt-vps',
+		'plausible-analytics-vps',
+		'backup-vps-3-2-1',
+		'tailscale-vpn-vps',
+	],
 };
 
 export const GUIDES: GuideConfig[] = [
@@ -1774,6 +1955,7 @@ export const GUIDES: GuideConfig[] = [
 			'reduce-vps-costs',
 			'vps-evropa-ili-rossiya',
 			'hugo-static-site-vps',
+			'ghost-blog-vps',
 			'linux-vps-dlya-novichka',
 			'journalctl-logi-linux-vps',
 			'vps-first-steps',
@@ -1807,6 +1989,7 @@ export const GUIDES: GuideConfig[] = [
 			'github-actions-cicd',
 			'gitlab-runner-cicd-vps',
 			'jenkins-ci-cd-vps',
+			'woodpecker-ci-vps',
 			'gitea-git-server-vps',
 			'ansible-avtomatizaciya-servera',
 			'terraform-vps-infrastruktura',
@@ -1872,6 +2055,7 @@ export const GUIDES: GuideConfig[] = [
 			'immich-foto-bekap-vps',
 			'jellyfin-media-server-vps',
 			'homeassistant-vps',
+			'ntfy-push-vps',
 			'dont-lose-code-rules',
 			'vps-first-steps',
 		],
