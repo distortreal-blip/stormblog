@@ -1086,6 +1086,106 @@ export const ARTICLE_FAQ: Record<string, FaqItem[]> = {
 			answer: '512 MB–1 GB для сотен feeds. PostgreSQL предпочтительнее SQLite при 500+ источниках.',
 		},
 	],
+	'stirling-pdf-vps': [
+		{
+			question: 'Stirling PDF или Adobe Acrobat для работы с PDF?',
+			answer: 'Adobe — desktop + cloud подписка. Stirling PDF self-hosted — merge, split, OCR, sign в браузере на VPS без ежемесячной платы.',
+		},
+		{
+			question: 'Сколько RAM нужно Stirling PDF на VPS?',
+			answer: '2 GB для базовых операций, 4 GB при OCR больших документов. CPU важнее RAM для конвертации.',
+		},
+	],
+	'linkwarden-bookmarks-vps': [
+		{
+			question: 'Linkwarden или Raindrop для закладок?',
+			answer: 'Raindrop — cloud SaaS. Linkwarden self-hosted — архив страниц, теги, коллекции, полный контроль данных на VPS.',
+		},
+		{
+			question: 'Сколько места нужно Linkwarden?',
+			answer: 'Зависит от архивации snapshot страниц. Планируйте 1–5 GB на старт, рост с каждой сохранённой страницей.',
+		},
+	],
+	'wazuh-siem-vps': [
+		{
+			question: 'Wazuh или ELK/OpenSearch для безопасности?',
+			answer: 'Wazuh — SIEM + IDS из коробки, агенты, compliance. OpenSearch — гибкий log search. Для security monitoring VPS — Wazuh.',
+		},
+		{
+			question: 'Сколько RAM нужно Wazuh на VPS?',
+			answer: 'Минимум 4 GB для manager + indexer. 8 GB для production с несколькими агентами и retention.',
+		},
+	],
+	'mailcow-pochta-vps': [
+		{
+			question: 'Mailcow или Postfix+Dovecot для почты на VPS?',
+			answer: 'Postfix+Dovecot — ручная настройка, гибкость. Mailcow — Docker all-in-one с UI, SOGo, антиспам. Для корпоративной почты — Mailcow быстрее.',
+		},
+		{
+			question: 'Можно ли Mailcow на VPS с блокировкой порта 25?',
+			answer: 'Входящая почта требует порт 25. У многих VPS он закрыт — проверьте у провайдера или используйте relay.',
+		},
+	],
+	'audiobookshelf-vps': [
+		{
+			question: 'Audiobookshelf или Plex для аудиокниг?',
+			answer: 'Plex — универсальный медиасервер. Audiobookshelf — специализированный: прогресс, главы, podcasts, mobile sync.',
+		},
+		{
+			question: 'Сколько места нужно Audiobookshelf?',
+			answer: 'Зависит от библиотеки. Аудиокниги 500 MB–2 GB каждая. Планируйте диск под полную коллекцию + 20% рост.',
+		},
+	],
+	'shlink-url-shortener-vps': [
+		{
+			question: 'Shlink или Bitly для коротких ссылок?',
+			answer: 'Bitly — SaaS с лимитами. Shlink self-hosted — свой домен, analytics, API, без лимитов на VPS.',
+		},
+		{
+			question: 'Нужна ли база данных для Shlink?',
+			answer: 'Да, PostgreSQL или MariaDB. SQLite только для тестов.',
+		},
+	],
+	'plane-project-vps': [
+		{
+			question: 'Plane или Jira для управления проектами?',
+			answer: 'Jira — enterprise стандарт, дорого. Plane — open-source, kanban, cycles, issues. Self-hosted на VPS без per-user billing.',
+		},
+		{
+			question: 'Сколько RAM нужно Plane на VPS?',
+			answer: '4 GB минимум для малых команд. PostgreSQL + Redis + web workers одновременно.',
+		},
+	],
+	'budibase-lowcode-vps': [
+		{
+			question: 'Budibase или Appsmith для low-code?',
+			answer: 'Оба self-hosted. Budibase — быстрые CRUD apps, internal tools. Appsmith — больше кастомизации UI. Выбор по UX preference.',
+		},
+		{
+			question: 'Сколько RAM нужно Budibase?',
+			answer: '2 GB для dev, 4 GB для production с несколькими apps и PostgreSQL backend.',
+		},
+	],
+	'photoprism-foto-vps': [
+		{
+			question: 'PhotoPrism или Immich для фото на VPS?',
+			answer: 'Immich — лучший mobile backup как Google Photos. PhotoPrism — browse/search библиотеки, ML tags, RAW support. Разные use cases.',
+		},
+		{
+			question: 'Сколько RAM нужно PhotoPrism?',
+			answer: '4 GB минимум для ML indexing. 8 GB для больших библиотек и одновременного face recognition.',
+		},
+	],
+	'appsmith-dashboard-vps': [
+		{
+			question: 'Appsmith или Grafana для дашбордов?',
+			answer: 'Grafana — метрики и monitoring. Appsmith — CRUD apps, admin panels, forms поверх API/DB. Разные задачи, часто оба.',
+		},
+		{
+			question: 'Сколько RAM нужно Appsmith на VPS?',
+			answer: '4 GB для малых internal tools. 8 GB при нескольких apps и MongoDB + backend connections.',
+		},
+	],
 };
 
 /** Ручная перелинковка: slug → список slug для блока «Рекомендуем прочитать» */
@@ -1386,6 +1486,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'ansible-avtomatizaciya-servera',
 	],
 	'crowdsec-zashchita-vps': [
+		'wazuh-siem-vps',
 		'fail2ban-ot-bruteforce-vps',
 		'zashchita-vps-ot-vzloma',
 		'ubuntu-24-04-pervaya-nastroyka-vps',
@@ -1647,6 +1748,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'backup-vps-3-2-1',
 	],
 	'postfix-dovecot-pochta-vps': [
+		'mailcow-pochta-vps',
 		'ssl-letsencrypt-vps',
 		'cloudflare-i-vps',
 		'zashchita-vps-ot-vzloma',
@@ -1737,6 +1839,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'ansible-avtomatizaciya-servera',
 	],
 	'jellyfin-media-server-vps': [
+		'audiobookshelf-vps',
 		'nginx-ili-caddy',
 		'ssl-letsencrypt-vps',
 		'tailscale-vpn-vps',
@@ -1753,6 +1856,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'prometheus-alertmanager-vps',
 	],
 	'immich-foto-bekap-vps': [
+		'photoprism-foto-vps',
 		'nextcloud-oblako-vps',
 		'backup-vps-3-2-1',
 		'restic-backup-vps',
@@ -1849,6 +1953,7 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'nftables-firewall-vps',
 	],
 	'paperless-ngx-vps': [
+		'stirling-pdf-vps',
 		'nextcloud-oblako-vps',
 		'backup-vps-3-2-1',
 		'restic-backup-vps',
@@ -1857,6 +1962,8 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'syncthing-sync-vps',
 	],
 	'pocketbase-vps': [
+		'budibase-lowcode-vps',
+		'appsmith-dashboard-vps',
 		'docker-compose-vps',
 		'nginx-ili-caddy',
 		'ssl-letsencrypt-vps',
@@ -1895,6 +2002,86 @@ export const RECOMMENDED_LINKS: Record<string, string[]> = {
 		'plausible-analytics-vps',
 		'backup-vps-3-2-1',
 		'tailscale-vpn-vps',
+	],
+	'stirling-pdf-vps': [
+		'paperless-ngx-vps',
+		'nextcloud-oblako-vps',
+		'docker-compose-vps',
+		'nginx-ili-caddy',
+		'ssl-letsencrypt-vps',
+		'backup-vps-3-2-1',
+	],
+	'linkwarden-bookmarks-vps': [
+		'freshrss-vps',
+		'bookstack-wiki-vps',
+		'nextcloud-oblako-vps',
+		'vaultwarden-paroli-vps',
+		'ssl-letsencrypt-vps',
+		'backup-vps-3-2-1',
+	],
+	'wazuh-siem-vps': [
+		'crowdsec-zashchita-vps',
+		'opensearch-logi-vps',
+		'loki-grafana-logi-vps',
+		'fail2ban-ot-bruteforce-vps',
+		'zashchita-vps-ot-vzloma',
+		'grafana-prometheus-vps',
+	],
+	'mailcow-pochta-vps': [
+		'postfix-dovecot-pochta-vps',
+		'ssl-letsencrypt-vps',
+		'certbot-dns-ssl-vps',
+		'crowdsec-zashchita-vps',
+		'backup-vps-3-2-1',
+		'docker-compose-vps',
+	],
+	'audiobookshelf-vps': [
+		'jellyfin-media-server-vps',
+		'nextcloud-oblako-vps',
+		'nginx-ili-caddy',
+		'ssl-letsencrypt-vps',
+		'tailscale-vpn-vps',
+		'backup-vps-3-2-1',
+	],
+	'shlink-url-shortener-vps': [
+		'nginx-ili-caddy',
+		'ssl-letsencrypt-vps',
+		'plausible-analytics-vps',
+		'docker-compose-vps',
+		'postgresql-tuning-vps',
+		'backup-vps-3-2-1',
+	],
+	'plane-project-vps': [
+		'gitea-git-server-vps',
+		'bookstack-wiki-vps',
+		'authentik-sso-vps',
+		'postgresql-tuning-vps',
+		'ssl-letsencrypt-vps',
+		'matrix-synapse-chat-vps',
+	],
+	'budibase-lowcode-vps': [
+		'appsmith-dashboard-vps',
+		'pocketbase-vps',
+		'postgresql-tuning-vps',
+		'docker-compose-vps',
+		'nginx-ili-caddy',
+		'ssl-letsencrypt-vps',
+	],
+	'photoprism-foto-vps': [
+		'immich-foto-bekap-vps',
+		'nextcloud-oblako-vps',
+		'minio-s3-na-vps',
+		'backup-vps-3-2-1',
+		'ssl-letsencrypt-vps',
+		'syncthing-sync-vps',
+	],
+	'appsmith-dashboard-vps': [
+		'budibase-lowcode-vps',
+		'grafana-prometheus-vps',
+		'postgresql-tuning-vps',
+		'docker-compose-vps',
+		'nginx-ili-caddy',
+		'authentik-sso-vps',
 	],
 };
 
@@ -1938,6 +2125,7 @@ export const GUIDES: GuideConfig[] = [
 			'ssl-letsencrypt-vps',
 			'certbot-dns-ssl-vps',
 			'postfix-dovecot-pochta-vps',
+			'mailcow-pochta-vps',
 			'nftables-firewall-vps',
 			'nginx-ili-caddy',
 			'cloudflare-i-vps',
@@ -2036,6 +2224,7 @@ export const GUIDES: GuideConfig[] = [
 			'fail2ban-ot-bruteforce-vps',
 			'nftables-firewall-vps',
 			'crowdsec-zashchita-vps',
+			'wazuh-siem-vps',
 			'vault-secrets-vps',
 			'vaultwarden-paroli-vps',
 			'authentik-sso-vps',
@@ -2053,9 +2242,17 @@ export const GUIDES: GuideConfig[] = [
 			'nextcloud-oblako-vps',
 			'syncthing-sync-vps',
 			'immich-foto-bekap-vps',
+			'photoprism-foto-vps',
 			'jellyfin-media-server-vps',
+			'audiobookshelf-vps',
 			'homeassistant-vps',
 			'ntfy-push-vps',
+			'stirling-pdf-vps',
+			'linkwarden-bookmarks-vps',
+			'plane-project-vps',
+			'budibase-lowcode-vps',
+			'appsmith-dashboard-vps',
+			'shlink-url-shortener-vps',
 			'dont-lose-code-rules',
 			'vps-first-steps',
 		],
